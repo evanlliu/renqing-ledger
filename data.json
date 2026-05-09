@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:32:35",
+  "updatedAt": "2026-05-09 23:32:39",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -24,11 +24,11 @@
     "妈妈",
     "爸爸",
     "奶奶",
+    "外甥女",
     "同学",
     "朋友",
     "邻居",
-    "其他",
-    "外甥女"
+    "其他"
   ],
   "categoryTypes": [
     {
