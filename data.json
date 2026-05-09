@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:39:49",
+  "updatedAt": "2026-05-09 23:41:00",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -156,6 +156,11 @@
       "code": "other",
       "zh": "其他",
       "en": "Other"
+    },
+    {
+      "code": "one_year_old",
+      "zh": "宝宝一岁",
+      "en": "One year old"
     }
   ],
   "redPacketRules": [
