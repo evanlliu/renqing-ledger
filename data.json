@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:11:10",
+  "updatedAt": "2026-05-09 23:11:45",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -87,6 +87,14 @@
       "note": "",
       "birthDate": "",
       "birthCalendar": "solar"
+    },
+    {
+      "id": "p_1778357505281_d7302t",
+      "name": "陈菊文",
+      "relation": "妈妈",
+      "birthDate": "2026-05-09",
+      "birthCalendar": "lunar",
+      "note": ""
     }
   ],
   "eventTypes": [
@@ -157,7 +165,7 @@
       "category": "holiday",
       "direction": "given",
       "eventType": "birthday",
-      "personId": "p_1778354410871_nnhqx9",
+      "personId": "p_1778357505281_d7302t",
       "personName": "陈菊文",
       "relation": "妈妈",
       "ruleId": "",
@@ -210,5 +218,5 @@
       "deletedAt": "2026-05-09 22:26:03"
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 23:10:34"
+  "cloudConfigSavedAt": "2026-05-09 23:11:33"
 }
