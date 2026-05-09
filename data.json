@@ -1,6 +1,6 @@
 {
   "version": "1.1.7",
-  "updatedAt": "2026-05-09 22:37:32",
+  "updatedAt": "2026-05-09 22:39:51",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -157,7 +157,7 @@
   "records": [
     {
       "id": "r_1778354655421_k22pui",
-      "date": "2026-05-09",
+      "date": "2026-05-01",
       "category": "holiday",
       "direction": "given",
       "eventType": "small_birthday",
@@ -171,7 +171,7 @@
       "actualAmount": 500,
       "note": "",
       "createdAt": "2026-05-09 22:24:15",
-      "updatedAt": "2026-05-09 22:24:15"
+      "updatedAt": "2026-05-09 22:39:51"
     },
     {
       "id": "r_1778355452783_whopmc",
