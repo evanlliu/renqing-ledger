@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:15:41",
+  "updatedAt": "2026-05-09 23:21:09",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -219,5 +219,5 @@
       "deletedAt": "2026-05-09 22:26:03"
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 23:13:22"
+  "cloudConfigSavedAt": "2026-05-09 23:18:28"
 }
