@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:06:37",
+  "updatedAt": "2026-05-10 00:06:43",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -540,9 +540,9 @@
       "category": "given",
       "direction": "given",
       "eventType": "housewarming",
-      "personId": "p_1778357505281_d7302t",
-      "personName": "陈菊文",
-      "relation": "妈妈",
+      "personId": "p_1778360797090_do4vrz",
+      "personName": "陈丹",
+      "relation": "表哥",
       "ruleId": "",
       "amount": 328,
       "currency": "CNY",
@@ -555,7 +555,7 @@
       "age": "",
       "note": "",
       "createdAt": "2026-05-10 00:06:15",
-      "updatedAt": "2026-05-10 00:06:15"
+      "updatedAt": "2026-05-10 00:06:43"
     }
   ],
   "deletedRecords": [
