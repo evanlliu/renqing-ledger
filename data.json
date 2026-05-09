@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:07:14",
+  "updatedAt": "2026-05-10 00:07:39",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -565,6 +565,29 @@
       "note": "",
       "createdAt": "2026-05-10 00:06:15",
       "updatedAt": "2026-05-10 00:06:43"
+    },
+    {
+      "id": "r_1778360859262_8v3m8f",
+      "date": "2025-11-08",
+      "category": "given",
+      "direction": "given",
+      "eventType": "full_moon",
+      "personId": "p_1778360834397_o3um6b",
+      "personName": "刘江晶",
+      "relation": "堂妹",
+      "ruleId": "",
+      "amount": 306,
+      "currency": "CNY",
+      "returnAmount": 20,
+      "actualAmount": 286,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-11-08",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-10 00:07:39",
+      "updatedAt": "2026-05-10 00:07:39"
     }
   ],
   "deletedRecords": [
