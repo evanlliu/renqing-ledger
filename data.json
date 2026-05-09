@@ -1,6 +1,6 @@
 {
   "version": "1.1.7",
-  "updatedAt": "2026-05-09 22:46:33",
+  "updatedAt": "2026-05-09 22:46:36",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -111,7 +111,7 @@
     },
     {
       "code": "birthday",
-      "zh": "小生日",
+      "zh": "生日",
       "en": "Small Birthday"
     },
     {
