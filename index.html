@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="人情记账本" />
+  <meta name="theme-color" content="#f7f8fb" />
+  <title>人情记账本 · Gift Ledger</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    :root {
+      --bg:#f7f8fb; --card:rgba(255,255,255,.94); --solid:#fff; --text:#172033; --muted:#6f7787;
+      --line:#e7eaf0; --primary:#2563eb; --primary-soft:#e8f0ff; --green:#16a34a; --green-soft:#eaf8ef;
+      --red:#dc2626; --red-soft:#fff0f0; --yellow-soft:#fff7df; --shadow:0 10px 30px rgba(15,23,42,.08);
+      --radius:18px; --safe-top:env(safe-area-inset-top,0px); --safe-bottom:env(safe-area-inset-bottom,0px);
+    }
+    * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html, body { width:100%; min-height:100%; max-width:100%; overflow-x:hidden; background:var(--bg); color:var(--text); }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif; touch-action:pan-y; overscroll-behavior-x:none; }
+    body.modal-open { overflow:hidden; }
+    button,input,select,textarea { font:inherit; font-size:16px; min-width:0; }
+    button { border:none; cursor:pointer; }
+    .app-shell { width:100%; max-width:1240px; margin:0 auto; padding:calc(14px + var(--safe-top)) 16px calc(82px + var(--safe-bottom)); overflow-x:hidden; }
+    .topbar { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; position:relative; }
+    .brand { min-width:0; }
+    .brand-title { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+    .brand h1 { margin:0; font-size:24px; letter-spacing:-.03em; }
+    .version { color:var(--muted); font-size:13px; font-weight:800; }
+    .subtitle { color:var(--muted); font-size:13px; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .toolbar { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+    .btn { min-height:38px; padding:8px 12px; border-radius:12px; background:var(--solid); color:var(--text); border:1px solid var(--line); box-shadow:0 1px 0 rgba(15,23,42,.03); font-weight:800; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+    .btn.primary { background:var(--primary); color:#fff; border-color:var(--primary); }
+    .btn.soft { background:var(--primary-soft); color:var(--primary); border-color:#cfe0ff; }
+    .btn.danger { background:var(--red-soft); color:var(--red); border-color:#ffd6d6; }
+    .btn.ghost { background:transparent; border-color:transparent; box-shadow:none; }
+    .icon-btn { width:40px; min-width:40px; padding:0; font-size:18px; }
+    .more-menu { position:absolute; right:0; top:46px; width:240px; z-index:80; display:none; padding:8px; border:1px solid var(--line); background:var(--solid); border-radius:16px; box-shadow:var(--shadow); }
+    .more-menu.open { display:grid; gap:6px; }
+    .more-menu .btn { width:100%; justify-content:flex-start; }
+    .sync-line { display:flex; align-items:center; gap:8px; min-height:34px; padding:7px 10px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.75); color:var(--muted); font-size:13px; margin-bottom:10px; overflow:hidden; }
+    .sync-dot { width:8px; height:8px; border-radius:99px; background:#94a3b8; flex:0 0 auto; }
+    .sync-dot.ok{background:var(--green)} .sync-dot.warn{background:#f59e0b} .sync-dot.err{background:var(--red)}
+    .sync-text { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .cards { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; margin-bottom:12px; }
+    .stat-card { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:12px; box-shadow:0 6px 20px rgba(15,23,42,.04); min-height:82px; }
+    .stat-label { color:var(--muted); font-size:12px; font-weight:800; margin-bottom:8px; }
+    .stat-value { font-size:18px; line-height:1.2; font-weight:950; letter-spacing:-.02em; word-break:break-word; }
+    .stat-card.in .stat-value{color:var(--green)} .stat-card.out .stat-value{color:var(--red)} .stat-card.net .stat-value{color:var(--primary)}
+    .panel { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
+    .filter-panel { padding:12px; margin-bottom:12px; }
+    .filter-grid { display:grid; grid-template-columns:1.2fr .75fr .75fr .85fr .85fr auto; gap:8px; align-items:center; }
+    .field { display:grid; gap:5px; min-width:0; }
+    .field label { color:var(--muted); font-size:12px; font-weight:850; }
+    .input,.select,.textarea { width:100%; max-width:100%; border:1px solid var(--line); background:#fff; color:var(--text); border-radius:12px; padding:10px 11px; outline:none; min-height:42px; }
+    .input[readonly] { color:#475569; background:#f8fafc; }
+    .textarea { min-height:86px; resize:vertical; }
+    .input:focus,.select:focus,.textarea:focus { border-color:#93b4ff; box-shadow:0 0 0 3px rgba(37,99,235,.10); }
+    .table-card { overflow:hidden; }
+    .table-tools { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px; border-bottom:1px solid var(--line); }
+    .table-title { font-weight:950; }
+    .table-count { color:var(--muted); font-size:13px; }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; min-width:1100px; }
+    th,td { padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:middle; white-space:nowrap; }
+    th { color:var(--muted); font-size:12px; background:#fbfcff; position:sticky; top:0; z-index:1; }
+    td { font-size:14px; }
+    .badge { display:inline-flex; align-items:center; gap:4px; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:850; }
+    .badge.received{color:var(--green);background:var(--green-soft)} .badge.given{color:var(--red);background:var(--red-soft)} .badge.holiday{color:#9a6400;background:var(--yellow-soft)} .badge.red_packet{color:#be123c;background:#fff1f4}
+    .amount.in { color:var(--green); font-weight:950; } .amount.out { color:var(--red); font-weight:950; }
+    .row-actions { display:flex; gap:6px; flex-wrap:wrap; }
+    .mini-btn { padding:6px 8px; border-radius:10px; border:1px solid var(--line); background:#fff; color:var(--text); font-weight:850; }
+    .mini-btn.danger { color:var(--red); background:var(--red-soft); border-color:#ffd6d6; }
+    .mobile-list { display:none; gap:10px; width:100%; overflow-x:hidden; }
+    .mobile-card { width:100%; max-width:100%; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:12px; box-shadow:0 6px 20px rgba(15,23,42,.04); overflow:hidden; }
+    .mobile-card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px; }
+    .person-title { font-size:17px; font-weight:950; letter-spacing:-.02em; word-break:break-word; }
+    .mobile-meta { color:var(--muted); font-size:13px; margin-top:3px; word-break:break-word; }
+    .mobile-amount { font-size:18px; font-weight:950; white-space:nowrap; }
+    .mobile-info { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0; }
+    .info-box { border-radius:14px; background:#f8fafc; padding:8px; min-width:0; }
+    .info-label { color:var(--muted); font-size:11px; font-weight:850; margin-bottom:3px; }
+    .info-value { font-weight:850; font-size:13px; word-break:break-word; }
+    .empty { text-align:center; padding:32px 12px; color:var(--muted); }
+    .modal-mask { position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center; background:rgba(15,23,42,.45); padding:calc(16px + var(--safe-top)) 16px calc(16px + var(--safe-bottom)); }
+    .modal-mask.open { display:flex; }
+    .modal { width:min(780px,100%); max-height:min(88dvh,840px); overflow:hidden; background:var(--solid); border-radius:22px; box-shadow:0 20px 60px rgba(15,23,42,.25); display:grid; grid-template-rows:auto 1fr auto; }
+    .modal.large { width:min(1080px,100%); }
+    .modal-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line); }
+    .modal-title { font-size:18px; font-weight:950; }
+    .modal-body { padding:14px 16px; overflow:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; }
+    .modal-foot { display:flex; justify-content:flex-end; gap:8px; padding:12px 16px; border-top:1px solid var(--line); background:#fbfcff; flex-wrap:wrap; }
+    .form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .form-grid .full { grid-column:1/-1; }
+    .section-title { margin:18px 0 8px; font-size:15px; font-weight:950; color:#334155; }
+    .manager-list { display:grid; gap:8px; margin-top:12px; }
+    .manager-row { display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:8px; align-items:center; padding:8px; border:1px solid var(--line); border-radius:14px; background:#fbfcff; }
+    .event-row { grid-template-columns:.8fr 1fr 1fr auto; }
+    .rule-row { grid-template-columns:1fr .8fr .8fr auto; }
+    .option-row { grid-template-columns:1fr auto; }
+    .rate-row { grid-template-columns:1fr 1fr auto; }
+    .history-row,.trash-row { display:grid; grid-template-columns:.8fr 1fr 1fr .8fr .8fr auto; gap:8px; align-items:center; padding:8px; border:1px solid var(--line); border-radius:14px; background:#fbfcff; font-size:13px; }
+    .chart-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .chart-box { border:1px solid var(--line); border-radius:16px; padding:12px; background:#fbfcff; min-width:0; }
+    .chart-title { font-weight:950; margin-bottom:10px; }
+    .bar-row { display:grid; grid-template-columns:120px 1fr auto; gap:8px; align-items:center; margin:8px 0; font-size:13px; }
+    .bar-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#334155; }
+    .bar-track { height:12px; border-radius:99px; background:#e5e7eb; overflow:hidden; }
+    .bar-fill { height:100%; border-radius:99px; background:var(--primary); min-width:2px; }
+    .bar-value { color:var(--muted); white-space:nowrap; }
+    .float-actions { display:none; }
+    .mobile-filter-btn { display:none; }
+    .hidden { display:none!important; }
+    #importFile { display:none; }
+    @media (max-width:980px){ .cards{grid-template-columns:repeat(3,minmax(0,1fr));} .filter-grid{grid-template-columns:repeat(3,minmax(0,1fr));} .chart-grid{grid-template-columns:1fr;} }
+    @media (max-width:720px){
+      .app-shell { padding:calc(8px + var(--safe-top)) 10px calc(76px + var(--safe-bottom)); }
+      .topbar { align-items:flex-start; }
+      .brand h1 { font-size:20px; }
+      .subtitle { max-width:58vw; font-size:12px; }
+      .toolbar .text-label { display:none; } .toolbar{gap:6px;} .btn{min-height:36px;padding:7px 9px;border-radius:11px;} .icon-btn{width:38px;min-width:38px;}
+      .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+      .stat-card { padding:10px; min-height:72px; border-radius:16px; }
+      .stat-value { font-size:15px; }
+      .filter-panel { display:none; position:fixed; left:10px; right:10px; top:calc(62px + var(--safe-top)); z-index:50; box-shadow:0 20px 60px rgba(15,23,42,.22); }
+      .filter-panel.open { display:block; }
+      .filter-grid { grid-template-columns:1fr 1fr; }
+      .filter-grid .filter-keyword { grid-column:1/-1; }
+      .desktop-table { display:none; }
+      .mobile-list { display:grid; }
+      .table-card { background:transparent; border:none; box-shadow:none; width:100%; overflow-x:hidden; }
+      .table-tools { background:var(--card); border:1px solid var(--line); border-radius:18px; margin-bottom:10px; padding:10px; }
+      .mobile-filter-btn { display:inline-flex; }
+      .modal-mask { padding:0; align-items:stretch; }
+      .modal,.modal.large { width:100%; min-height:100dvh; max-height:100dvh; border-radius:0; }
+      .modal-head { padding-top:calc(12px + var(--safe-top)); }
+      .modal-foot { padding-bottom:calc(12px + var(--safe-bottom)); }
+      .form-grid { grid-template-columns:1fr; gap:10px; }
+      .manager-row,.event-row,.rule-row,.option-row,.rate-row,.history-row,.trash-row { grid-template-columns:1fr; }
+      .input[type="date"] { width:100%; min-width:0; max-width:100%; padding-left:10px; padding-right:6px; }
+      .float-actions { position:fixed; right:12px; bottom:calc(14px + var(--safe-bottom)); z-index:40; display:grid; gap:8px; }
+      .float-actions .btn { width:46px; height:46px; min-height:46px; border-radius:16px; font-size:20px; box-shadow:var(--shadow); }
+      .topbar .toolbar { display:none; }
+      .more-menu { position:fixed; right:12px; bottom:calc(216px + var(--safe-bottom)); top:auto; width:240px; max-height:56vh; overflow:auto; z-index:80; }
+      .bar-row { grid-template-columns:88px 1fr; }
+      .bar-value { grid-column:2; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-title"><h1 data-i18n="appTitle">人情记账本</h1><span class="version">v1.1.3</span></div>
+        <div class="subtitle" data-i18n="subtitle">收人情、封人情、节日红包统一记录</div>
+      </div>
+      <div class="toolbar">
+        <button class="btn soft" id="btnLang">🌐 <span class="text-label">中文</span></button>
+        <button class="btn soft" id="btnSync">↻ <span class="text-label" data-i18n="sync">同步</span></button>
+        <button class="btn primary" id="btnAdd">＋ <span class="text-label" data-i18n="addRecord">新增</span></button>
+        <button class="btn icon-btn" id="btnMore">⋯</button>
+      </div>
+      <div class="more-menu" id="moreMenu">
+        <button class="btn ghost" id="btnSettings">⚙️ <span data-i18n="settings">设置</span></button>
+        <button class="btn ghost" id="btnPeople">👥 <span data-i18n="peopleManage">人员管理</span></button>
+        <button class="btn ghost" id="btnOptions">🧩 <span data-i18n="optionManage">关系/分组</span></button>
+        <button class="btn ghost" id="btnEvents">🏷️ <span data-i18n="eventManage">类型管理</span></button>
+        <button class="btn ghost" id="btnRules">🧧 <span data-i18n="ruleManage">红包规则</span></button>
+        <button class="btn ghost" id="btnRates">💱 <span data-i18n="rateManage">汇率设置</span></button>
+        <button class="btn ghost" id="btnCharts">📊 <span data-i18n="chartStats">统计图表</span></button>
+        <button class="btn ghost" id="btnTrash">♻️ <span data-i18n="trash">回收站</span></button>
+        <button class="btn ghost" id="btnExportCsv">📤 <span data-i18n="exportCsv">导出CSV</span></button>
+        <button class="btn ghost" id="btnImportCsv">📥 <span data-i18n="importCsv">导入CSV</span></button>
+        <button class="btn ghost" id="btnDownloadJson">⬇️ <span data-i18n="downloadData">下载数据</span></button>
+      </div>
+    </header>
+
+    <div class="sync-line"><span class="sync-dot" id="syncDot"></span><span class="sync-text" id="syncText">Loading...</span></div>
+    <section class="cards" id="statsCards"></section>
+
+    <section class="filter-panel panel" id="filterPanel">
+      <div class="filter-grid">
+        <div class="field filter-keyword"><label data-i18n="keyword">关键词</label><input class="input" id="filterKeyword" placeholder="姓名 / 备注" /></div>
+        <div class="field"><label data-i18n="category">分类</label><select class="select" id="filterCategory"></select></div>
+        <div class="field"><label data-i18n="direction">方向</label><select class="select" id="filterDirection"></select></div>
+        <div class="field"><label data-i18n="startDate">开始日期</label><input class="input" type="date" id="filterStart" /></div>
+        <div class="field"><label data-i18n="endDate">结束日期</label><input class="input" type="date" id="filterEnd" /></div>
+        <div class="field"><label>&nbsp;</label><button class="btn" id="btnClearFilter" data-i18n="clear">清空</button></div>
+      </div>
+    </section>
+
+    <section class="table-card panel">
+      <div class="table-tools">
+        <div><div class="table-title" data-i18n="recordList">记录列表</div><div class="table-count" id="recordCount">0</div></div>
+        <button class="btn mobile-filter-btn" id="btnMobileFilter">🔎 <span data-i18n="filter">筛选</span></button>
+      </div>
+      <div class="table-wrap desktop-table">
+        <table>
+          <thead><tr>
+            <th data-i18n="date">日期</th><th data-i18n="person">姓名</th><th data-i18n="relation">关系</th><th data-i18n="group">分组</th><th data-i18n="category">分类</th><th data-i18n="eventType">事件类型</th><th data-i18n="direction">方向</th><th data-i18n="amount">金额</th><th data-i18n="returnAmount">回礼金额</th><th data-i18n="actualAmount">实际金额</th><th data-i18n="note">备注</th><th data-i18n="actions">操作</th>
+          </tr></thead>
+          <tbody id="recordsTbody"></tbody>
+        </table>
+      </div>
+      <div class="mobile-list" id="mobileList"></div>
+    </section>
+  </div>
+
+  <div class="float-actions">
+    <button class="btn soft" id="floatLang">🌐</button>
+    <button class="btn soft" id="floatSync">↻</button>
+    <button class="btn primary" id="floatAdd">＋</button>
+    <button class="btn" id="floatMore">⋯</button>
+  </div>
+
+  <input type="file" id="importFile" accept=".csv,text/csv" />
+
+  <div class="modal-mask" id="recordModal"><div class="modal">
+    <div class="modal-head"><div class="modal-title" id="recordModalTitle" data-i18n="addRecord">新增</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body"><form id="recordForm" class="form-grid">
+      <input type="hidden" id="recordId" />
+      <div class="field"><label data-i18n="date">日期</label><input class="input" type="date" id="recordDate" required /></div>
+      <div class="field"><label data-i18n="category">分类</label><select class="select" id="recordCategory" required></select></div>
+      <div class="field"><label data-i18n="direction">方向</label><select class="select" id="recordDirection" required></select></div>
+      <div class="field"><label data-i18n="eventType">事件类型</label><select class="select" id="recordEventType" required></select></div>
+      <div class="field"><label data-i18n="person">姓名</label><select class="select" id="recordPersonId" required></select></div>
+      <div class="field"><label data-i18n="relation">关系</label><input class="input" id="recordRelation" readonly /></div>
+      <div class="field"><label data-i18n="group">分组</label><input class="input" id="recordGroup" readonly /></div>
+      <div class="field"><label data-i18n="redPacketRule">红包规则</label><select class="select" id="recordRule"></select></div>
+      <div class="field"><label data-i18n="amount">金额</label><input class="input" type="number" step="0.01" id="recordAmount" required /></div>
+      <div class="field"><label data-i18n="currency">货币</label><input class="input" id="recordCurrency" maxlength="8" /></div>
+      <div class="field"><label data-i18n="returnAmount">回礼金额</label><input class="input" type="number" step="0.01" id="recordReturnAmount" /></div>
+      <div class="field"><label data-i18n="actualAmount">实际金额</label><input class="input" id="recordActual" readonly /></div>
+      <div class="field full"><label data-i18n="note">备注</label><textarea class="textarea" id="recordNote"></textarea></div>
+    </form></div>
+    <div class="modal-foot"><button class="btn close-modal" data-i18n="cancel">取消</button><button class="btn primary" id="btnSaveRecord" data-i18n="save">保存</button></div>
+  </div></div>
+
+  <div class="modal-mask" id="settingsModal"><div class="modal">
+    <div class="modal-head"><div class="modal-title" data-i18n="settings">设置</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body"><div class="form-grid">
+      <div class="field full"><label data-i18n="cloudflareUrl">Cloudflare Worker 地址</label><input class="input" id="settingCloudUrl" placeholder="https://xxx.workers.dev" /></div>
+      <div class="field full"><label data-i18n="accessPassword">访问密码</label><input class="input" id="settingPassword" type="password" placeholder="APP_PASSWORD" /></div>
+      <div class="field"><label data-i18n="defaultCurrency">默认货币</label><input class="input" id="settingCurrency" placeholder="CNY" /></div>
+      <div class="field"><label data-i18n="baseCurrency">折算基准货币</label><input class="input" id="settingBaseCurrency" placeholder="CNY" /></div>
+      <div class="field"><label data-i18n="language">语言</label><select class="select" id="settingLanguage"><option value="zh">中文</option><option value="en">English</option></select></div>
+    </div><p style="color:var(--muted);font-size:13px;line-height:1.6;margin:14px 0 0" data-i18n="settingsTip">设置会保存到 data.json，也会在本设备缓存一份，方便第一次打开时自动同步。</p></div>
+    <div class="modal-foot"><button class="btn close-modal" data-i18n="cancel">取消</button><button class="btn primary" id="btnSaveSettings" data-i18n="save">保存</button></div>
+  </div></div>
+
+  <div class="modal-mask" id="peopleModal"><div class="modal large">
+    <div class="modal-head"><div class="modal-title" data-i18n="peopleManage">人员管理</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label data-i18n="person">姓名</label><input class="input" id="personNameInput" /></div>
+        <div class="field"><label data-i18n="relation">关系</label><select class="select" id="personRelationInput"></select></div>
+        <div class="field"><label data-i18n="group">分组</label><select class="select" id="personGroupInput"></select></div>
+        <div class="field"><label>&nbsp;</label><button class="btn primary" id="btnAddPerson" data-i18n="add">添加</button></div>
+      </div>
+      <div class="manager-list" id="peopleList"></div>
+    </div>
+    <div class="modal-foot"><button class="btn close-modal" data-i18n="close">关闭</button></div>
+  </div></div>
+
+  <div class="modal-mask" id="optionsModal"><div class="modal large">
+    <div class="modal-head"><div class="modal-title" data-i18n="optionManage">关系/分组</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label data-i18n="newRelation">新增关系</label><input class="input" id="relationInput" /></div>
+        <div class="field"><label>&nbsp;</label><button class="btn primary" id="btnAddRelation" data-i18n="add">添加</button></div>
+        <div class="field"><label data-i18n="newGroup">新增分组</label><input class="input" id="groupInput" /></div>
+        <div class="field"><label>&nbsp;</label><button class="btn primary" id="btnAddGroup" data-i18n="add">添加</button></div>
+      </div>
+      <div class="section-title" data-i18n="relationOptions">关系配置</div><div class="manager-list" id="relationList"></div>
+      <div class="section-title" data-i18n="groupOptions">分组配置</div><div class="manager-list" id="groupList"></div>
+    </div>
+    <div class="modal-foot"><button class="btn close-modal" data-i18n="close">关闭</button></div>
+  </div></div>
+
+  <div class="modal-mask" id="eventsModal"><div class="modal large">
+    <div class="modal-head"><div class="modal-title" data-i18n="eventManage">类型管理</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label>Code</label><input class="input" id="eventCodeInput" placeholder="custom_event" /></div>
+        <div class="field"><label>中文</label><input class="input" id="eventZhInput" /></div>
+        <div class="field"><label>English</label><input class="input" id="eventEnInput" /></div>
+        <div class="field"><label>&nbsp;</label><button class="btn primary" id="btnAddEventType" data-i18n="add">添加</button></div>
+      </div>
+      <div class="manager-list" id="eventList"></div>
+    </div>
+    <div class="modal-foot"><button class="btn close-modal" data-i18n="close">关闭</button></div>
+  </div></div>
+
+  <div class="modal-mask" id="rulesModal"><div class="modal large">
+    <div class="modal-head"><div class="modal-title" data-i18n="ruleManage">红包规则</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label data-i18n="ruleName">规则名称</label><input class="input" id="ruleNameInput" /></div>
+        <div class="field"><label data-i18n="amount">金额</label><input class="input" type="number" step="0.01" id="ruleAmountInput" /></div>
+        <div class="field"><label data-i18n="currency">货币</label><input class="input" id="ruleCurrencyInput" placeholder="CNY" /></div>
+        <div class="field"><label>&nbsp;</label><button class="btn primary" id="btnAddRule" data-i18n="add">添加</button></div>
+      </div>
+      <div class="manager-list" id="ruleList"></div>
+    </div>
+    <div class="modal-foot"><button class="btn close-modal" data-i18n="close">关闭</button></div>
+  </div></div>
+
+  <div class="modal-mask" id="ratesModal"><div class="modal large">
+    <div class="modal-head"><div class="modal-title" data-i18n="rateManage">汇率设置</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body">
+      <p style="color:var(--muted);font-size:13px;margin-top:0" data-i18n="rateTip">汇率用于统计折算：1 外币 = 多少基准货币。例：1 TRY = 0.22 CNY。</p>
+      <div class="form-grid">
+        <div class="field"><label data-i18n="currency">货币</label><input class="input" id="rateCurrencyInput" placeholder="TRY" /></div>
+        <div class="field"><label data-i18n="rateToBase">折算汇率</label><input class="input" type="number" step="0.0001" id="rateValueInput" placeholder="0.22" /></div>
+        <div class="field"><label>&nbsp;</label><button class="btn primary" id="btnAddRate" data-i18n="add">添加</button></div>
+      </div>
+      <div class="manager-list" id="rateList"></div>
+    </div>
+    <div class="modal-foot"><button class="btn close-modal" data-i18n="close">关闭</button></div>
+  </div></div>
+
+  <div class="modal-mask" id="historyModal"><div class="modal large">
+    <div class="modal-head"><div class="modal-title" id="historyTitle" data-i18n="personHistory">个人历史</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body"><div id="historySummary" class="sync-line"></div><div class="manager-list" id="historyList"></div></div>
+    <div class="modal-foot"><button class="btn close-modal" data-i18n="close">关闭</button></div>
+  </div></div>
+
+  <div class="modal-mask" id="trashModal"><div class="modal large">
+    <div class="modal-head"><div class="modal-title" data-i18n="trash">回收站</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body"><div class="manager-list" id="trashList"></div></div>
+    <div class="modal-foot"><button class="btn danger" id="btnClearTrash" data-i18n="clearTrash">清空回收站</button><button class="btn close-modal" data-i18n="close">关闭</button></div>
+  </div></div>
+
+  <div class="modal-mask" id="chartsModal"><div class="modal large">
+    <div class="modal-head"><div class="modal-title" data-i18n="chartStats">统计图表</div><button class="btn icon-btn close-modal">×</button></div>
+    <div class="modal-body"><div class="chart-grid" id="chartGrid"></div></div>
+    <div class="modal-foot"><button class="btn close-modal" data-i18n="close">关闭</button></div>
+  </div></div>
+
+<script>
+(function(){
+  'use strict';
+  const APP_VERSION = '1.1.3';
+  const STORAGE_KEY = 'renqingLedgerData_v1';
+  const CLOUD_KEY = 'renqingLedgerCloudConfig_v1';
+  const DEFAULT_DATA = {
+    version: APP_VERSION, updatedAt: '',
+    settings: { language:'zh', defaultCurrency:'CNY', baseCurrency:'CNY', cloud:{ cloudflareWorkerUrl:'', accessPassword:'' }, exchangeRates:{ CNY:1, TRY:0.22, USD:7.2, EUR:7.8 } },
+    cloudConfig: { cloudflareWorkerUrl:'', accessPassword:'' },
+    relationOptions: ['家人','亲戚','朋友','同事','同学','邻居','其他'],
+    groupOptions: ['中国','土耳其','公司','朋友','家人','其他'],
+    people: [],
+    eventTypes: [
+      { code:'marriage', zh:'结婚', en:'Marriage' }, { code:'baby_birth', zh:'宝宝出生', en:'Baby Birth' },
+      { code:'full_moon', zh:'满月', en:'Full Moon' }, { code:'birthday', zh:'生日', en:'Birthday' },
+      { code:'small_birthday', zh:'小生日', en:'Small Birthday' }, { code:'holiday', zh:'节日', en:'Holiday' },
+      { code:'new_year', zh:'过年', en:'New Year' }, { code:'housewarming', zh:'乔迁 / 房子过火', en:'Housewarming' },
+      { code:'visit', zh:'探望', en:'Visit' }, { code:'other', zh:'其他', en:'Other' }
+    ],
+    redPacketRules: [ {id:'rp_adult', name:'大人', amount:200, currency:'CNY'}, {id:'rp_child', name:'小孩', amount:100, currency:'CNY'} ],
+    records: [], deletedRecords: []
+  };
+  const I18N = {
+    zh: { appTitle:'人情记账本', subtitle:'收人情、封人情、节日红包统一记录', sync:'同步', addRecord:'新增', editRecord:'编辑记录', settings:'设置', peopleManage:'人员管理', optionManage:'关系/分组', eventManage:'类型管理', ruleManage:'红包规则', rateManage:'汇率设置', chartStats:'统计图表', trash:'回收站', exportCsv:'导出CSV', importCsv:'导入CSV', downloadData:'下载数据', keyword:'关键词', category:'分类', direction:'方向', startDate:'开始日期', endDate:'结束日期', clear:'清空', filter:'筛选', recordList:'记录列表', date:'日期', person:'姓名', relation:'关系', group:'分组', eventType:'事件类型', amount:'金额', returnAmount:'回礼金额', actualAmount:'实际金额', note:'备注', actions:'操作', currency:'货币', redPacketRule:'红包规则', cancel:'取消', save:'保存', close:'关闭', add:'添加', language:'语言', cloudflareUrl:'Cloudflare Worker 地址', accessPassword:'访问密码', defaultCurrency:'默认货币', baseCurrency:'折算基准货币', settingsTip:'设置会保存到 data.json，也会在本设备缓存一份。iOS 主屏幕应用和 Safari 的缓存是分开的，所以新设备/主屏幕主要依赖 data.json 中的云配置。访问密码必须和 Cloudflare Worker 变量 APP_PASSWORD 一致。', ruleName:'规则名称', newRelation:'新增关系', newGroup:'新增分组', relationOptions:'关系配置', groupOptions:'分组配置', rateToBase:'折算汇率', rateTip:'汇率用于统计折算：1 外币 = 多少基准货币。例：1 TRY = 0.22 CNY。', personHistory:'个人历史', restore:'恢复', permanentDelete:'彻底删除', clearTrash:'清空回收站', all:'全部', received:'收人情', given:'封人情', holiday:'节日人情', red_packet:'过年红包', income:'收入', expense:'支出', net:'净额', totalRecords:'记录数', thisYearNet:'本年净额', convertedNet:'折算净额', noRecords:'暂无记录', edit:'编辑', delete:'删除', history:'历史', confirmDelete:'确定删除这条记录吗？会放入回收站。', confirmPermanent:'确定彻底删除吗？', confirmClearTrash:'确定清空回收站吗？', saved:'已保存', syncOk:'云端同步成功', syncFailed:'云端同步失败', loadingLocal:'正在重新加载 data.json...', loadingCloud:'正在加载云端 data.json...', noCloud:'未配置 Cloudflare，同步已跳过', staticOk:'data.json 加载完成', staticFailed:'data.json 加载失败，已使用本地缓存或默认数据', countSuffix:'条记录', autoLoadedCloud:'已自动加载云端 data.json', selectRule:'不使用规则', allCategory:'全部分类', allDirection:'全部方向', directionReceived:'收入', directionGiven:'支出', selectPerson:'请选择姓名', addPeopleFirst:'请先在人员管理中添加姓名', byPerson:'按人统计', byType:'按类型统计', byYear:'按年份统计', byCurrency:'按货币统计', importDone:'导入完成', importFailed:'导入失败', noRate:'缺少汇率', savingCloudConfig:'正在保存云配置到 data.json...', cloudConfigSaved:'云配置已写入 data.json', cloudConfigSavedVerified:'云配置已写入 data.json，并验证成功', cloudConfigSavedButNotVerified:'Worker 返回成功，但未验证到远端 data.json 中的云配置，请检查 GH_REPO / DATA_PATH 是否指向当前仓库', cloudConfigVerifyFailed:'云配置验证失败', noCloudBootstrap:'未从 data.json 读取到 Cloudflare 配置；iOS 主屏幕与 Safari 缓存隔离，请先在已配置设备点一次保存/同步，且不要用空白 data.json 覆盖线上文件。' },
+    en: { appTitle:'Gift Ledger', subtitle:'Track received gifts, given gifts, holidays, and red packets', sync:'Sync', addRecord:'Add', editRecord:'Edit Record', settings:'Settings', peopleManage:'People', optionManage:'Relations / Groups', eventManage:'Event Types', ruleManage:'Red Packet Rules', rateManage:'Exchange Rates', chartStats:'Charts', trash:'Trash', exportCsv:'Export CSV', importCsv:'Import CSV', downloadData:'Download Data', keyword:'Keyword', category:'Category', direction:'Direction', startDate:'Start Date', endDate:'End Date', clear:'Clear', filter:'Filter', recordList:'Records', date:'Date', person:'Name', relation:'Relation', group:'Group', eventType:'Event Type', amount:'Amount', returnAmount:'Return Amount', actualAmount:'Actual Amount', note:'Note', actions:'Actions', currency:'Currency', redPacketRule:'Red Packet Rule', cancel:'Cancel', save:'Save', close:'Close', add:'Add', language:'Language', cloudflareUrl:'Cloudflare Worker URL', accessPassword:'Access Password', defaultCurrency:'Default Currency', baseCurrency:'Base Currency', settingsTip:'Settings are saved to data.json and cached locally. iOS Home Screen apps use separate storage from Safari, so new devices mainly rely on the cloud config in data.json. The access password must match the Cloudflare Worker APP_PASSWORD variable.', ruleName:'Rule Name', newRelation:'New Relation', newGroup:'New Group', relationOptions:'Relation Options', groupOptions:'Group Options', rateToBase:'Rate to Base', rateTip:'Rates are used for converted stats: 1 foreign currency = how much base currency. Example: 1 TRY = 0.22 CNY.', personHistory:'Person History', restore:'Restore', permanentDelete:'Delete Forever', clearTrash:'Clear Trash', all:'All', received:'Received Gifts', given:'Given Gifts', holiday:'Holiday Gifts', red_packet:'New Year Red Packets', income:'Income', expense:'Expense', net:'Net', totalRecords:'Records', thisYearNet:'This Year Net', convertedNet:'Converted Net', noRecords:'No records', edit:'Edit', delete:'Delete', history:'History', confirmDelete:'Move this record to Trash?', confirmPermanent:'Delete forever?', confirmClearTrash:'Clear all trash?', saved:'Saved', syncOk:'Cloud sync successful', syncFailed:'Cloud sync failed', loadingLocal:'Reloading data.json...', loadingCloud:'Loading cloud data.json...', noCloud:'Cloudflare not configured; sync skipped', staticOk:'data.json loaded', staticFailed:'Failed to load data.json; using cache or default data', countSuffix:'records', autoLoadedCloud:'Cloud data.json loaded automatically', selectRule:'No rule', allCategory:'All Categories', allDirection:'All Directions', directionReceived:'Income', directionGiven:'Expense', selectPerson:'Select a person', addPeopleFirst:'Add people first', byPerson:'By Person', byType:'By Type', byYear:'By Year', byCurrency:'By Currency', importDone:'Import completed', importFailed:'Import failed', noRate:'Missing rate', savingCloudConfig:'Saving cloud config to data.json...', cloudConfigSaved:'Cloud config saved to data.json', cloudConfigSavedVerified:'Cloud config saved to data.json and verified', cloudConfigSavedButNotVerified:'Worker returned success, but cloud config was not verified in remote data.json. Check GH_REPO / DATA_PATH.', cloudConfigVerifyFailed:'Cloud config verification failed', noCloudBootstrap:'No Cloudflare config was found in data.json. iOS Home Screen storage is separate from Safari; save/sync once on a configured device and do not overwrite the online data.json with a blank file.' }
+  };
+  const state = { data: clone(DEFAULT_DATA) };
+  function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+  function t(k){ const lang = state.data.settings.language || 'zh'; return (I18N[lang] && I18N[lang][k]) || I18N.zh[k] || k; }
+  function nowText(){ const d=new Date(), p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`; }
+  function today(){ const d=new Date(), p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
+  function uid(p){ return `${p}_${Date.now()}_${Math.random().toString(36).slice(2,8)}`; }
+  function num(v){ const n=Number(v); return Number.isFinite(n)?n:0; }
+  function esc(s){ return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+  function money(n,cur){ const v=Math.round(num(n)*100)/100; return `${cur || state.data.settings.defaultCurrency || 'CNY'} ${v.toLocaleString(undefined,{maximumFractionDigits:2})}`; }
+  function mergeCloudConfig(){
+    const out={cloudflareWorkerUrl:'',accessPassword:''};
+    Array.from(arguments).forEach(c=>{
+      c=c||{};
+      const url=String(c.cloudflareWorkerUrl||c.workerUrl||c.url||'').trim();
+      const pwd=String(c.accessPassword||c.password||'');
+      if(url) out.cloudflareWorkerUrl=url;
+      if(pwd) out.accessPassword=pwd;
+    });
+    return out;
+  }
+  function syncCloudMirror(){
+    state.data.settings=state.data.settings||{};
+    // settings.cloud is the primary source; cloudConfig is only a mirror for old versions / easy reading in data.json.
+    const cloud=mergeCloudConfig(state.data.cloudConfig,state.data.settings.cloud);
+    state.data.settings.cloud={...cloud};
+    state.data.cloudConfig={...cloud};
+  }
+  function setCloudConfigExact(cfg){
+    const cloud=mergeCloudConfig(cfg);
+    state.data.settings=state.data.settings||{};
+    state.data.settings.cloud={...cloud};
+    state.data.cloudConfig={...cloud};
+    state.data.cloudConfigSavedAt=nowText();
+    state.data.settings.cloud.savedAt=state.data.cloudConfigSavedAt;
+  }
+  function mergeData(incoming){
+    const base=clone(DEFAULT_DATA), src=incoming&&typeof incoming==='object'?incoming:{};
+    const m=Object.assign(base,src); m.settings=Object.assign({},base.settings,src.settings||{});
+    const srcCloud=mergeCloudConfig(base.cloudConfig,base.settings.cloud,src.cloudConfig,(src.settings&&src.settings.cloud)||{});
+    m.settings.cloud={...srcCloud};
+    m.cloudConfig={...srcCloud};
+    m.cloudConfigSavedAt=src.cloudConfigSavedAt||((src.settings&&src.settings.cloud&&src.settings.cloud.savedAt)||'');
+    m.settings.exchangeRates=Object.assign({},base.settings.exchangeRates,(src.settings&&src.settings.exchangeRates)||{});
+    m.relationOptions=Array.isArray(src.relationOptions)&&src.relationOptions.length?src.relationOptions:base.relationOptions;
+    m.groupOptions=Array.isArray(src.groupOptions)&&src.groupOptions.length?src.groupOptions:base.groupOptions;
+    m.people=Array.isArray(src.people)?src.people:[]; m.eventTypes=Array.isArray(src.eventTypes)&&src.eventTypes.length?src.eventTypes:base.eventTypes; m.redPacketRules=Array.isArray(src.redPacketRules)?src.redPacketRules:base.redPacketRules; m.records=Array.isArray(src.records)?src.records:[]; m.deletedRecords=Array.isArray(src.deletedRecords)?src.deletedRecords:[];
+    m.version=src.version||APP_VERSION; normalizeData(m); return m;
+  }
+  function normalizeData(d){
+    d.records.forEach(r=>{ if(!r.personId && r.personName){ const p=findOrCreatePersonIn(d,r.personName,r.relation,r.group); r.personId=p.id; } const p=d.people.find(x=>x.id===r.personId)||d.people.find(x=>x.name===r.personName); if(p){ r.personId=p.id; r.personName=p.name; r.relation=p.relation||r.relation||''; r.group=p.group||r.group||''; } r.actualAmount=Math.max(0,num(r.amount)-num(r.returnAmount)); });
+    [...d.people].forEach(p=>{ if(p.relation && !d.relationOptions.includes(p.relation)) d.relationOptions.push(p.relation); if(p.group && !d.groupOptions.includes(p.group)) d.groupOptions.push(p.group); });
+  }
+  function findOrCreatePersonIn(d,name,relation,group){ let p=d.people.find(x=>x.name===name); if(!p){ p={id:uid('p'),name,relation:relation||'其他',group:group||'其他',note:''}; d.people.push(p); } return p; }
+  function setStatus(msg,kind){ $('#syncText').text(msg); $('#syncDot').removeClass('ok warn err').addClass(kind||''); }
+  function saveCache(){ syncCloudMirror(); localStorage.setItem(STORAGE_KEY,JSON.stringify(state.data)); localStorage.setItem(CLOUD_KEY,JSON.stringify(state.data.settings.cloud||{})); }
+  function getSavedCloudConfig(){ try{return JSON.parse(localStorage.getItem(CLOUD_KEY)||'{}')}catch(e){return{}} }
+  function getUrlCloudConfig(){ const q=new URLSearchParams(location.search); return { cloudflareWorkerUrl:q.get('worker')||q.get('cloud')||'', accessPassword:q.get('password')||q.get('pwd')||'' }; }
+  function getEmbeddedCloudConfig(){ return (window.RENQING_CLOUD_CONFIG&&typeof window.RENQING_CLOUD_CONFIG==='object')?window.RENQING_CLOUD_CONFIG:{}; }
+  function hasConfigObj(c){ return !!(c&&String(c.cloudflareWorkerUrl||c.workerUrl||c.url||'').trim()&&String(c.accessPassword||c.password||'')); }
+  function applySavedCloudIfEmpty(){ const dataCloud=mergeCloudConfig(state.data.cloudConfig,(state.data.settings&&state.data.settings.cloud)||{}); const saved=getSavedCloudConfig(); const embedded=getEmbeddedCloudConfig(); const urlCfg=getUrlCloudConfig(); const fallback=mergeCloudConfig(embedded,saved,urlCfg); const finalCloud=hasConfigObj(dataCloud)?dataCloud:mergeCloudConfig(dataCloud,fallback); setCloudConfigExact(finalCloud); }
+  function hasCloudConfig(){ syncCloudMirror(); const c=state.data.settings.cloud||{}; return hasConfigObj(c); }
+  function cloudUrl(){ return String((state.data.settings.cloud||{}).cloudflareWorkerUrl||'').trim().replace(/\/+$/,''); }
+  async function loadStaticDataJson(){ setStatus(t('loadingLocal'),'warn'); try{ const res=await fetch(`./data.json?t=${Date.now()}`,{cache:'no-store'}); if(!res.ok) throw new Error(`HTTP ${res.status}`); state.data=mergeData(await res.json()); applySavedCloudIfEmpty(); saveCache(); setStatus(t('staticOk')+' · '+nowText(),'ok'); return true; }catch(e){ const cached=localStorage.getItem(STORAGE_KEY); if(cached){ try{ state.data=mergeData(JSON.parse(cached)); }catch(_){ state.data=clone(DEFAULT_DATA); } } else state.data=clone(DEFAULT_DATA); applySavedCloudIfEmpty(); setStatus(t('staticFailed'),'warn'); return false; } }
+  async function loadCloudData(silent){ if(!hasCloudConfig()){ if(!silent) setStatus(t('noCloud'),'warn'); return false; } setStatus(t('loadingCloud'),'warn'); try{ const res=await fetch(`${cloudUrl()}?t=${Date.now()}`,{method:'GET',cache:'no-store',headers:{'X-App-Password':state.data.settings.cloud.accessPassword}}); const json=await res.json(); if(!res.ok||json.ok===false) throw new Error(json.error||`HTTP ${res.status}`); const localCloud=clone(state.data.settings.cloud||{}); state.data=mergeData(json.data||json); const finalCloud=mergeCloudConfig(state.data.cloudConfig,state.data.settings.cloud,localCloud); setCloudConfigExact(finalCloud); saveCache(); setStatus((silent?t('autoLoadedCloud'):t('syncOk'))+' · '+nowText(),'ok'); renderAll(); return true; }catch(e){ setStatus(`${t('syncFailed')}: ${e.message}`,'err'); return false; } }
+  async function syncToCloud(silent){ if(!hasCloudConfig()){ if(!silent) openSettings(); else setStatus(t('noCloud'),'warn'); return false; } syncCloudMirror(); state.data.updatedAt=nowText(); state.data.version=APP_VERSION; saveCache(); try{ setStatus(t('sync')+'...','warn'); const payload=JSON.parse(JSON.stringify(state.data)); const res=await fetch(cloudUrl(),{method:'POST',headers:{'Content-Type':'application/json','X-App-Password':state.data.settings.cloud.accessPassword},body:JSON.stringify({data:payload})}); const json=await res.json(); if(!res.ok||json.ok===false) throw new Error(json.error||`HTTP ${res.status}`); setStatus(t('syncOk')+' · '+nowText(),'ok'); return true; }catch(e){ setStatus(`${t('syncFailed')}: ${e.message}`,'err'); return false; } }
+  async function verifyCloudConfigSaved(expected){
+    try{
+      await new Promise(r=>setTimeout(r,800));
+      const res=await fetch(`${cloudUrl()}?t=${Date.now()}`,{method:'GET',cache:'no-store',headers:{'X-App-Password':expected.accessPassword}});
+      const json=await res.json();
+      if(!res.ok||json.ok===false) throw new Error(json.error||`HTTP ${res.status}`);
+      const remote=json.data||json;
+      const rc=mergeCloudConfig(remote.cloudConfig,(remote.settings&&remote.settings.cloud)||{});
+      return rc.cloudflareWorkerUrl===expected.cloudflareWorkerUrl && rc.accessPassword===expected.accessPassword;
+    }catch(e){
+      setStatus(`${t('cloudConfigVerifyFailed')}: ${e.message}`,'err');
+      return false;
+    }
+  }
+  async function saveSettings(){ const inputCloud={cloudflareWorkerUrl:$('#settingCloudUrl').val().trim(),accessPassword:$('#settingPassword').val()}; setCloudConfigExact(inputCloud); state.data.settings.defaultCurrency=($('#settingCurrency').val()||'CNY').trim().toUpperCase(); state.data.settings.baseCurrency=($('#settingBaseCurrency').val()||'CNY').trim().toUpperCase(); state.data.settings.language=$('#settingLanguage').val()||'zh'; if(!state.data.settings.exchangeRates[state.data.settings.baseCurrency]) state.data.settings.exchangeRates[state.data.settings.baseCurrency]=1; closeModal(); normalizeData(state.data); setCloudConfigExact(inputCloud); state.data.updatedAt=nowText(); state.data.version=APP_VERSION; saveCache(); renderAll(); setStatus(t('savingCloudConfig'),'warn'); const ok=await syncToCloud(false); if(ok){ const verified=await verifyCloudConfigSaved(inputCloud); setStatus((verified?t('cloudConfigSavedVerified'):t('cloudConfigSavedButNotVerified'))+' · '+nowText(),verified?'ok':'warn'); } }
+  function saveAndRender(autoSync=true){ normalizeData(state.data); syncCloudMirror(); state.data.updatedAt=nowText(); state.data.version=APP_VERSION; saveCache(); renderAll(); setStatus(t('saved')+' · '+nowText(),'ok'); if(autoSync) syncToCloud(true); }
+  function optHtml(arr,selected,placeholder){ let html=placeholder?`<option value="">${esc(placeholder)}</option>`:''; return html+arr.map(v=>`<option value="${esc(v)}" ${selected===v?'selected':''}>${esc(v)}</option>`).join(''); }
+  function categoryOptions(selected){ return [['all',t('allCategory')],['received',t('received')],['given',t('given')],['holiday',t('holiday')],['red_packet',t('red_packet')]].map(([v,l])=>`<option value="${v}" ${selected===v?'selected':''}>${l}</option>`).join(''); }
+  function categoryFormOptions(selected){ return [['received',t('received')],['given',t('given')],['holiday',t('holiday')],['red_packet',t('red_packet')]].map(([v,l])=>`<option value="${v}" ${selected===v?'selected':''}>${l}</option>`).join(''); }
+  function directionOptions(selected,all){ const o=all?[['all',t('allDirection')]]:[]; o.push(['received',t('directionReceived')],['given',t('directionGiven')]); return o.map(([v,l])=>`<option value="${v}" ${selected===v?'selected':''}>${l}</option>`).join(''); }
+  function eventOptions(selected){ const lang=state.data.settings.language||'zh'; return state.data.eventTypes.map(e=>`<option value="${esc(e.code)}" ${selected===e.code?'selected':''}>${esc(e[lang]||e.zh||e.code)}</option>`).join(''); }
+  function eventLabel(code){ const lang=state.data.settings.language||'zh'; const e=state.data.eventTypes.find(x=>x.code===code); return e?(e[lang]||e.zh||e.code):(code||''); }
+  function ruleOptions(selected){ return `<option value="">${t('selectRule')}</option>`+state.data.redPacketRules.map(r=>`<option value="${esc(r.id)}" ${selected===r.id?'selected':''}>${esc(r.name)} · ${money(r.amount,r.currency)}</option>`).join(''); }
+  function peopleOptions(selected){ if(!state.data.people.length) return `<option value="">${t('addPeopleFirst')}</option>`; return `<option value="">${t('selectPerson')}</option>`+state.data.people.map(p=>`<option value="${esc(p.id)}" ${selected===p.id?'selected':''}>${esc(p.name)}</option>`).join(''); }
+  function calcActual(r){ return Math.max(0,num(r.amount)-num(r.returnAmount)); }
+  function netSigned(r){ return r.direction==='received'?calcActual(r):-calcActual(r); }
+  function rate(cur){ cur=(cur||state.data.settings.defaultCurrency||'CNY').toUpperCase(); return num((state.data.settings.exchangeRates||{})[cur]) || (cur===(state.data.settings.baseCurrency||'CNY')?1:0); }
+  function converted(r){ return netSigned(r)*rate(r.currency); }
+  function catClass(r){ return r.category||r.direction||'received'; }
+  function catLabel(r){ return t(r.category||r.direction||'received'); }
+  function dirLabel(r){ return r.direction==='received'?t('directionReceived'):t('directionGiven'); }
+  function getPerson(id){ return state.data.people.find(p=>p.id===id); }
+  function getFilteredRecords(){ const kw=String($('#filterKeyword').val()||'').trim().toLowerCase(), cat=$('#filterCategory').val()||'all', dir=$('#filterDirection').val()||'all', st=$('#filterStart').val(), en=$('#filterEnd').val(); return state.data.records.filter(r=>{ const text=`${r.personName||''} ${r.relation||''} ${r.group||''} ${eventLabel(r.eventType)||''} ${r.note||''}`.toLowerCase(); if(kw&&!text.includes(kw))return false; if(cat!=='all'&&r.category!==cat)return false; if(dir!=='all'&&r.direction!==dir)return false; if(st&&r.date<st)return false; if(en&&r.date>en)return false; return true; }).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))||String(b.updatedAt||'').localeCompare(String(a.updatedAt||''))); }
+  function sumByCurrency(records,fn){ const m={}; records.filter(fn).forEach(r=>{ const c=r.currency||state.data.settings.defaultCurrency||'CNY'; m[c]=(m[c]||0)+calcActual(r); }); return m; }
+  function mapMoney(m){ const ks=Object.keys(m); if(!ks.length) return money(0,state.data.settings.defaultCurrency||'CNY'); return ks.map(k=>money(m[k],k)).join(' / '); }
+  function yearOf(d){ return String(d||'').slice(0,4); }
+  function renderStats(){ const rs=state.data.records, y=String(new Date().getFullYear()), base=state.data.settings.baseCurrency||'CNY'; const income=sumByCurrency(rs,r=>r.direction==='received'), expense=sumByCurrency(rs,r=>r.direction==='given'), net={}; rs.forEach(r=>{const c=r.currency||state.data.settings.defaultCurrency||'CNY'; net[c]=(net[c]||0)+netSigned(r);}); const convertedNet=rs.reduce((s,r)=>s+converted(r),0), thisYear=rs.filter(r=>yearOf(r.date)===y).reduce((s,r)=>s+converted(r),0); const cards=[['income',t('income'),mapMoney(income),'in'],['expense',t('expense'),mapMoney(expense),'out'],['net',t('net'),mapMoney(net),'net'],['convertedNet',t('convertedNet'),money(convertedNet,base),'net'],['thisYearNet',t('thisYearNet'),money(thisYear,base),thisYear>=0?'in':'out'],['totalRecords',t('totalRecords'),String(rs.length),'']]; $('#statsCards').html(cards.map(c=>`<div class="stat-card ${c[3]}"><div class="stat-label">${esc(c[1])}</div><div class="stat-value">${esc(c[2])}</div></div>`).join('')); }
+  function renderRecords(){ const records=getFilteredRecords(); $('#recordCount').text(`${records.length} ${t('countSuffix')}`); if(!records.length){ $('#recordsTbody').html(`<tr><td colspan="12" class="empty">${t('noRecords')}</td></tr>`); $('#mobileList').html(`<div class="empty">${t('noRecords')}</div>`); return; } $('#recordsTbody').html(records.map(r=>{ const cls=r.direction==='received'?'in':'out'; return `<tr><td>${esc(r.date)}</td><td><b>${esc(r.personName)}</b></td><td>${esc(r.relation||'')}</td><td>${esc(r.group||'')}</td><td><span class="badge ${catClass(r)}">${esc(catLabel(r))}</span></td><td>${esc(eventLabel(r.eventType))}</td><td>${esc(dirLabel(r))}</td><td class="amount ${cls}">${esc(money(r.amount,r.currency))}</td><td>${esc(money(r.returnAmount||0,r.currency))}</td><td class="amount ${cls}">${esc(money(calcActual(r),r.currency))}</td><td title="${esc(r.note||'')}">${esc(r.note||'')}</td><td><div class="row-actions"><button class="mini-btn btn-history" data-person="${esc(r.personId)}">${t('history')}</button><button class="mini-btn btn-edit" data-id="${esc(r.id)}">${t('edit')}</button><button class="mini-btn danger btn-delete" data-id="${esc(r.id)}">${t('delete')}</button></div></td></tr>`; }).join('')); $('#mobileList').html(records.map(r=>{ const cls=r.direction==='received'?'in':'out'; return `<article class="mobile-card"><div class="mobile-card-top"><div><div class="person-title">${esc(r.personName)}</div><div class="mobile-meta">${esc(r.date)} · ${esc(eventLabel(r.eventType))}</div></div><div class="mobile-amount amount ${cls}">${esc(money(calcActual(r),r.currency))}</div></div><span class="badge ${catClass(r)}">${esc(catLabel(r))}</span><div class="mobile-info"><div class="info-box"><div class="info-label">${t('amount')}</div><div class="info-value">${esc(money(r.amount,r.currency))}</div></div><div class="info-box"><div class="info-label">${t('returnAmount')}</div><div class="info-value">${esc(money(r.returnAmount||0,r.currency))}</div></div><div class="info-box"><div class="info-label">${t('relation')}</div><div class="info-value">${esc(r.relation||'-')}</div></div><div class="info-box"><div class="info-label">${t('group')}</div><div class="info-value">${esc(r.group||'-')}</div></div></div>${r.note?`<div class="mobile-meta">${esc(r.note)}</div>`:''}<div class="row-actions" style="margin-top:10px"><button class="mini-btn btn-history" data-person="${esc(r.personId)}">${t('history')}</button><button class="mini-btn btn-edit" data-id="${esc(r.id)}">${t('edit')}</button><button class="mini-btn danger btn-delete" data-id="${esc(r.id)}">${t('delete')}</button></div></article>`; }).join('')); }
+  function renderI18n(){ document.documentElement.lang=state.data.settings.language==='en'?'en':'zh-CN'; $('[data-i18n]').each(function(){ $(this).text(t($(this).data('i18n'))); }); $('#btnLang .text-label').text(state.data.settings.language==='zh'?'中文':'EN'); $('#filterCategory').html(categoryOptions($('#filterCategory').val()||'all')); $('#filterDirection').html(directionOptions($('#filterDirection').val()||'all',true)); $('#recordCategory').html(categoryFormOptions($('#recordCategory').val()||'received')); $('#recordDirection').html(directionOptions($('#recordDirection').val()||'received',false)); $('#recordEventType').html(eventOptions($('#recordEventType').val())); $('#recordRule').html(ruleOptions($('#recordRule').val())); $('#recordPersonId').html(peopleOptions($('#recordPersonId').val())); $('#personRelationInput').html(optHtml(state.data.relationOptions,$('#personRelationInput').val())); $('#personGroupInput').html(optHtml(state.data.groupOptions,$('#personGroupInput').val())); }
+  function renderAll(){ renderI18n(); renderStats(); renderRecords(); }
+  function openModal(id){ $(id).addClass('open'); $('body').addClass('modal-open'); setTimeout(()=>$(id).find('input,select,textarea').filter(':visible:first').trigger('focus'),80); }
+  function closeModal(){ $('.modal-mask').removeClass('open'); $('body').removeClass('modal-open'); }
+  function openSettings(){ syncCloudMirror(); $('#settingCloudUrl').val(state.data.settings.cloud.cloudflareWorkerUrl||''); $('#settingPassword').val(state.data.settings.cloud.accessPassword||''); $('#settingCurrency').val(state.data.settings.defaultCurrency||'CNY'); $('#settingBaseCurrency').val(state.data.settings.baseCurrency||'CNY'); $('#settingLanguage').val(state.data.settings.language||'zh'); openModal('#settingsModal'); }
+  function fillPersonReadonly(){ const p=getPerson($('#recordPersonId').val()); $('#recordRelation').val(p?p.relation:''); $('#recordGroup').val(p?p.group:''); }
+  function resetRecordForm(){ $('#recordId').val(''); $('#recordDate').val(today()); $('#recordCategory').val('received'); $('#recordDirection').val('received'); $('#recordEventType').html(eventOptions('other')).val('other'); $('#recordPersonId').html(peopleOptions('')).val(''); $('#recordRelation').val(''); $('#recordGroup').val(''); $('#recordRule').html(ruleOptions('')).val(''); $('#recordAmount').val(''); $('#recordCurrency').val(state.data.settings.defaultCurrency||'CNY'); $('#recordReturnAmount').val('0'); $('#recordActual').val(''); $('#recordNote').val(''); $('#recordModalTitle').text(t('addRecord')); }
+  function openAddRecord(){ resetRecordForm(); calcRecordPreview(); openModal('#recordModal'); }
+  function openEditRecord(id){ const r=state.data.records.find(x=>x.id===id); if(!r)return; $('#recordModalTitle').text(t('editRecord')); $('#recordId').val(r.id); $('#recordDate').val(r.date||today()); $('#recordCategory').html(categoryFormOptions(r.category)).val(r.category||'received'); $('#recordDirection').html(directionOptions(r.direction,false)).val(r.direction||'received'); $('#recordEventType').html(eventOptions(r.eventType)).val(r.eventType||'other'); $('#recordPersonId').html(peopleOptions(r.personId)).val(r.personId||''); fillPersonReadonly(); $('#recordRule').html(ruleOptions(r.ruleId||'')).val(r.ruleId||''); $('#recordAmount').val(r.amount||0); $('#recordCurrency').val(r.currency||state.data.settings.defaultCurrency||'CNY'); $('#recordReturnAmount').val(r.returnAmount||0); $('#recordNote').val(r.note||''); calcRecordPreview(); openModal('#recordModal'); }
+  function calcRecordPreview(){ $('#recordActual').val(money(Math.max(0,num($('#recordAmount').val())-num($('#recordReturnAmount').val())),$('#recordCurrency').val()||state.data.settings.defaultCurrency||'CNY')); }
+  function syncDirectionByCategory(){ const cat=$('#recordCategory').val(); if(cat==='received') $('#recordDirection').val('received'); if(cat==='given'||cat==='holiday'||cat==='red_packet') $('#recordDirection').val('given'); }
+  function saveRecord(){ const p=getPerson($('#recordPersonId').val()); if(!p){ $('#recordPersonId').focus(); return; } const id=$('#recordId').val()||uid('r'), existing=state.data.records.find(x=>x.id===id); const r={ id, date:$('#recordDate').val()||today(), category:$('#recordCategory').val(), direction:$('#recordDirection').val(), eventType:$('#recordEventType').val(), personId:p.id, personName:p.name, relation:p.relation||'', group:p.group||'', ruleId:$('#recordRule').val(), amount:num($('#recordAmount').val()), currency:($('#recordCurrency').val()||state.data.settings.defaultCurrency||'CNY').trim().toUpperCase(), returnAmount:num($('#recordReturnAmount').val()), actualAmount:Math.max(0,num($('#recordAmount').val())-num($('#recordReturnAmount').val())), note:$('#recordNote').val().trim(), createdAt:existing?existing.createdAt:nowText(), updatedAt:nowText() }; if(existing) Object.assign(existing,r); else state.data.records.push(r); closeModal(); saveAndRender(true); }
+  function deleteRecord(id){ const idx=state.data.records.findIndex(r=>r.id===id); if(idx<0)return; if(!confirm(t('confirmDelete')))return; const [rm]=state.data.records.splice(idx,1); rm.deletedAt=nowText(); state.data.deletedRecords.push(rm); saveAndRender(true); }
+  function renderPeopleManager(){ $('#personRelationInput').html(optHtml(state.data.relationOptions)); $('#personGroupInput').html(optHtml(state.data.groupOptions)); $('#peopleList').html(state.data.people.map(p=>`<div class="manager-row"><input class="input person-name" data-id="${esc(p.id)}" value="${esc(p.name)}"><select class="select person-relation" data-id="${esc(p.id)}">${optHtml(state.data.relationOptions,p.relation)}</select><select class="select person-group" data-id="${esc(p.id)}">${optHtml(state.data.groupOptions,p.group)}</select><button class="btn danger btn-remove-person" data-id="${esc(p.id)}">${t('delete')}</button></div>`).join('')||`<div class="empty">${t('noRecords')}</div>`); }
+  function renderOptionsManager(){ $('#relationList').html(state.data.relationOptions.map(v=>`<div class="manager-row option-row"><input class="input relation-option" data-old="${esc(v)}" value="${esc(v)}"><button class="btn danger btn-remove-relation" data-value="${esc(v)}">${t('delete')}</button></div>`).join('')); $('#groupList').html(state.data.groupOptions.map(v=>`<div class="manager-row option-row"><input class="input group-option" data-old="${esc(v)}" value="${esc(v)}"><button class="btn danger btn-remove-group" data-value="${esc(v)}">${t('delete')}</button></div>`).join('')); }
+  function renderEventManager(){ $('#eventList').html(state.data.eventTypes.map(e=>`<div class="manager-row event-row"><input class="input event-code" data-code="${esc(e.code)}" value="${esc(e.code)}"><input class="input event-zh" data-code="${esc(e.code)}" value="${esc(e.zh||'')}"><input class="input event-en" data-code="${esc(e.code)}" value="${esc(e.en||'')}"><button class="btn danger btn-remove-event" data-code="${esc(e.code)}">${t('delete')}</button></div>`).join('')); }
+  function renderRuleManager(){ $('#ruleList').html(state.data.redPacketRules.map(r=>`<div class="manager-row rule-row"><input class="input rule-name" data-id="${esc(r.id)}" value="${esc(r.name)}"><input class="input rule-amount" type="number" step="0.01" data-id="${esc(r.id)}" value="${esc(r.amount)}"><input class="input rule-currency" data-id="${esc(r.id)}" value="${esc(r.currency||'CNY')}"><button class="btn danger btn-remove-rule" data-id="${esc(r.id)}">${t('delete')}</button></div>`).join('')); }
+  function renderRates(){ const rates=state.data.settings.exchangeRates||{}; $('#rateList').html(Object.keys(rates).sort().map(c=>`<div class="manager-row rate-row"><input class="input rate-currency" data-old="${esc(c)}" value="${esc(c)}"><input class="input rate-value" type="number" step="0.0001" data-old="${esc(c)}" value="${esc(rates[c])}"><button class="btn danger btn-remove-rate" data-currency="${esc(c)}">${t('delete')}</button></div>`).join('')); }
+  function openHistory(personId){ const p=getPerson(personId); if(!p)return; const rs=state.data.records.filter(r=>r.personId===personId).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))); $('#historyTitle').text(`${t('personHistory')} · ${p.name}`); const income=sumByCurrency(rs,r=>r.direction==='received'), expense=sumByCurrency(rs,r=>r.direction==='given'); $('#historySummary').html(`<span class="sync-dot ok"></span><span>${t('income')}: ${esc(mapMoney(income))} · ${t('expense')}: ${esc(mapMoney(expense))} · ${t('totalRecords')}: ${rs.length}</span>`); $('#historyList').html(rs.map(r=>`<div class="history-row"><div>${esc(r.date)}</div><div>${esc(eventLabel(r.eventType))}</div><div>${esc(catLabel(r))}</div><div>${esc(money(r.amount,r.currency))}</div><div>${esc(money(calcActual(r),r.currency))}</div><button class="btn btn-edit" data-id="${esc(r.id)}">${t('edit')}</button></div>`).join('')||`<div class="empty">${t('noRecords')}</div>`); openModal('#historyModal'); }
+  function renderTrash(){ $('#trashList').html(state.data.deletedRecords.map(r=>`<div class="trash-row"><div>${esc(r.deletedAt||'')}</div><div><b>${esc(r.personName)}</b></div><div>${esc(eventLabel(r.eventType))}</div><div>${esc(money(calcActual(r),r.currency))}</div><div>${esc(r.note||'')}</div><div class="row-actions"><button class="mini-btn btn-restore" data-id="${esc(r.id)}">${t('restore')}</button><button class="mini-btn danger btn-permanent" data-id="${esc(r.id)}">${t('permanentDelete')}</button></div></div>`).join('')||`<div class="empty">${t('noRecords')}</div>`); }
+  function groupSum(records,keyFn){ const m={}; records.forEach(r=>{ const k=keyFn(r)||'-'; m[k]=(m[k]||0)+converted(r); }); return m; }
+  function chartBox(title,map){ const entries=Object.entries(map).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,12), max=Math.max(1,...entries.map(x=>Math.abs(x[1]))), base=state.data.settings.baseCurrency||'CNY'; return `<div class="chart-box"><div class="chart-title">${esc(title)}</div>${entries.length?entries.map(([k,v])=>`<div class="bar-row"><div class="bar-name" title="${esc(k)}">${esc(k)}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(2,Math.abs(v)/max*100)}%"></div></div><div class="bar-value">${esc(money(v,base))}</div></div>`).join(''):`<div class="empty">${t('noRecords')}</div>`}</div>`; }
+  function renderCharts(){ const rs=state.data.records; const byPerson=groupSum(rs,r=>r.personName), byType=groupSum(rs,r=>eventLabel(r.eventType)), byYear=groupSum(rs,r=>yearOf(r.date)||'-'), byCur={}; rs.forEach(r=>{ const c=r.currency||state.data.settings.defaultCurrency||'CNY'; byCur[c]=(byCur[c]||0)+netSigned(r); }); $('#chartGrid').html(chartBox(t('byPerson'),byPerson)+chartBox(t('byType'),byType)+chartBox(t('byYear'),byYear)+chartBox(t('byCurrency'),byCur)); }
+  function csvEscape(v){ v=String(v??''); return /[",\n]/.test(v)?`"${v.replace(/"/g,'""')}"`:v; }
+  function exportCsv(){ const headers=['date','personName','relation','group','category','direction','eventType','amount','currency','returnAmount','note']; const rows=[headers.join(',')].concat(state.data.records.map(r=>headers.map(h=>csvEscape(r[h]||'')).join(','))); const blob=new Blob(['\ufeff'+rows.join('\n')],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='renqing-ledger-records.csv'; a.click(); URL.revokeObjectURL(a.href); }
+  function parseCsv(text){ const rows=[]; let row=[], cur='', q=false; for(let i=0;i<text.length;i++){ const ch=text[i], nx=text[i+1]; if(q){ if(ch==='"'&&nx==='"'){cur+='"';i++;} else if(ch==='"') q=false; else cur+=ch; } else { if(ch==='"') q=true; else if(ch===','){row.push(cur);cur='';} else if(ch==='\n'){row.push(cur);rows.push(row);row=[];cur='';} else if(ch!=='\r') cur+=ch; } } row.push(cur); rows.push(row); return rows.filter(r=>r.some(c=>String(c).trim()!=='')); }
+  function importCsvFile(file){ const reader=new FileReader(); reader.onload=()=>{ try{ const rows=parseCsv(String(reader.result||'').replace(/^\ufeff/,'')); const head=rows.shift().map(h=>h.trim()); rows.forEach(cols=>{ const o={}; head.forEach((h,i)=>o[h]=cols[i]||''); const p=findOrCreatePersonIn(state.data,o.personName||o.name||'',o.relation||'其他',o.group||'其他'); if(!p.name)return; state.data.records.push({id:uid('r'),date:o.date||today(),personId:p.id,personName:p.name,relation:p.relation,group:p.group,category:o.category||'given',direction:o.direction||((o.category==='received')?'received':'given'),eventType:o.eventType||'other',amount:num(o.amount),currency:(o.currency||state.data.settings.defaultCurrency||'CNY').toUpperCase(),returnAmount:num(o.returnAmount),actualAmount:Math.max(0,num(o.amount)-num(o.returnAmount)),note:o.note||'',createdAt:nowText(),updatedAt:nowText()}); }); saveAndRender(true); setStatus(t('importDone')+' · '+nowText(),'ok'); }catch(e){ setStatus(t('importFailed')+': '+e.message,'err'); } }; reader.readAsText(file,'UTF-8'); }
+  function bindEvents(){
+    $('#btnAdd,#floatAdd').on('click',openAddRecord); $('#btnMore,#floatMore').on('click',e=>{e.stopPropagation();$('#moreMenu').toggleClass('open');}); $(document).on('click',e=>{if(!$(e.target).closest('#moreMenu,#btnMore,#floatMore').length)$('#moreMenu').removeClass('open');});
+    $('#btnLang,#floatLang').on('click',()=>{state.data.settings.language=state.data.settings.language==='zh'?'en':'zh';saveAndRender(true);}); $('#btnSync,#floatSync').on('click',()=>loadCloudData(false));
+    $('#btnSettings').on('click',openSettings); $('#btnPeople').on('click',()=>{renderPeopleManager();openModal('#peopleModal');}); $('#btnOptions').on('click',()=>{renderOptionsManager();openModal('#optionsModal');}); $('#btnEvents').on('click',()=>{renderEventManager();openModal('#eventsModal');}); $('#btnRules').on('click',()=>{renderRuleManager();openModal('#rulesModal');}); $('#btnRates').on('click',()=>{renderRates();openModal('#ratesModal');}); $('#btnCharts').on('click',()=>{renderCharts();openModal('#chartsModal');}); $('#btnTrash').on('click',()=>{renderTrash();openModal('#trashModal');});
+    $('#btnExportCsv').on('click',exportCsv); $('#btnImportCsv').on('click',()=>$('#importFile').click()); $('#importFile').on('change',function(){ if(this.files&&this.files[0]) importCsvFile(this.files[0]); this.value=''; });
+    $('#btnMobileFilter').on('click',()=>$('#filterPanel').toggleClass('open')); $('.close-modal').on('click',closeModal); $('.modal-mask').on('click',function(e){if(e.target===this)closeModal();});
+    $('#btnSaveRecord').on('click',saveRecord); $('#recordAmount,#recordReturnAmount,#recordCurrency').on('input change',calcRecordPreview); $('#recordPersonId').on('change',fillPersonReadonly); $('#recordCategory').on('change',function(){ syncDirectionByCategory(); if(this.value==='red_packet'&&state.data.redPacketRules.length&&!$('#recordRule').val()) $('#recordRule').val(state.data.redPacketRules[0].id).trigger('change'); }); $('#recordRule').on('change',function(){ const r=state.data.redPacketRules.find(x=>x.id===this.value); if(r){$('#recordAmount').val(r.amount);$('#recordCurrency').val(r.currency||state.data.settings.defaultCurrency||'CNY');calcRecordPreview();} });
+    $('#filterKeyword,#filterCategory,#filterDirection,#filterStart,#filterEnd').on('input change',renderRecords); $('#btnClearFilter').on('click',()=>{$('#filterKeyword').val('');$('#filterCategory').val('all');$('#filterDirection').val('all');$('#filterStart').val('');$('#filterEnd').val('');renderRecords();});
+    $(document).on('click','.btn-edit',function(){ openEditRecord($(this).data('id')); }); $(document).on('click','.btn-delete',function(){ deleteRecord($(this).data('id')); }); $(document).on('click','.btn-history',function(){ openHistory($(this).data('person')); });
+    $('#btnSaveSettings').on('click',saveSettings);
+    $('#btnDownloadJson').on('click',()=>{ const blob=new Blob([JSON.stringify(state.data,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='data.json'; a.click(); URL.revokeObjectURL(a.href); });
+    $('#btnAddPerson').on('click',()=>{ const name=$('#personNameInput').val().trim(); if(!name)return; const p=findOrCreatePersonIn(state.data,name,$('#personRelationInput').val(),$('#personGroupInput').val()); p.relation=$('#personRelationInput').val(); p.group=$('#personGroupInput').val(); $('#personNameInput').val(''); renderPeopleManager(); saveAndRender(true); });
+    $(document).on('input change','.person-name,.person-relation,.person-group',function(){ const id=$(this).data('id'), p=state.data.people.find(x=>x.id===id); if(!p)return; const oldName=p.name; p.name=$(`.person-name[data-id="${id}"]`).val(); p.relation=$(`.person-relation[data-id="${id}"]`).val(); p.group=$(`.person-group[data-id="${id}"]`).val(); state.data.records.forEach(r=>{ if(r.personId===id||r.personName===oldName){r.personId=id;r.personName=p.name;r.relation=p.relation;r.group=p.group;} }); saveAndRender(false); });
+    $(document).on('click','.btn-remove-person',function(){ const id=$(this).data('id'); state.data.people=state.data.people.filter(p=>p.id!==id); renderPeopleManager(); saveAndRender(true); });
+    $('#btnAddRelation').on('click',()=>{ const v=$('#relationInput').val().trim(); if(v&&!state.data.relationOptions.includes(v)) state.data.relationOptions.push(v); $('#relationInput').val(''); renderOptionsManager(); saveAndRender(true); }); $('#btnAddGroup').on('click',()=>{ const v=$('#groupInput').val().trim(); if(v&&!state.data.groupOptions.includes(v)) state.data.groupOptions.push(v); $('#groupInput').val(''); renderOptionsManager(); saveAndRender(true); });
+    $(document).on('change','.relation-option',function(){ const old=$(this).data('old'), val=$(this).val().trim(); if(!val)return; const i=state.data.relationOptions.indexOf(old); if(i>=0)state.data.relationOptions[i]=val; state.data.people.forEach(p=>{if(p.relation===old)p.relation=val;}); state.data.records.forEach(r=>{if(r.relation===old)r.relation=val;}); renderOptionsManager(); saveAndRender(true); }); $(document).on('change','.group-option',function(){ const old=$(this).data('old'), val=$(this).val().trim(); if(!val)return; const i=state.data.groupOptions.indexOf(old); if(i>=0)state.data.groupOptions[i]=val; state.data.people.forEach(p=>{if(p.group===old)p.group=val;}); state.data.records.forEach(r=>{if(r.group===old)r.group=val;}); renderOptionsManager(); saveAndRender(true); });
+    $(document).on('click','.btn-remove-relation',function(){ const v=$(this).data('value'); state.data.relationOptions=state.data.relationOptions.filter(x=>x!==v); renderOptionsManager(); saveAndRender(true); }); $(document).on('click','.btn-remove-group',function(){ const v=$(this).data('value'); state.data.groupOptions=state.data.groupOptions.filter(x=>x!==v); renderOptionsManager(); saveAndRender(true); });
+    $('#btnAddEventType').on('click',()=>{ const zh=$('#eventZhInput').val().trim(), en=$('#eventEnInput').val().trim(); let code=$('#eventCodeInput').val().trim()||'event_'+Date.now(); if(!zh&&!en)return; state.data.eventTypes.push({code,zh:zh||code,en:en||zh||code}); $('#eventCodeInput,#eventZhInput,#eventEnInput').val(''); renderEventManager(); saveAndRender(true); });
+    $(document).on('change','.event-code,.event-zh,.event-en',function(){ const old=$(this).data('code'), e=state.data.eventTypes.find(x=>x.code===old); if(!e)return; const newCode=$(`.event-code[data-code="${old}"]`).val().trim()||old; if(newCode!==old){ state.data.records.forEach(r=>{if(r.eventType===old)r.eventType=newCode;}); e.code=newCode; } e.zh=$(`.event-zh[data-code="${old}"]`).val(); e.en=$(`.event-en[data-code="${old}"]`).val(); renderEventManager(); saveAndRender(true); }); $(document).on('click','.btn-remove-event',function(){ const code=$(this).data('code'); state.data.eventTypes=state.data.eventTypes.filter(e=>e.code!==code); renderEventManager(); saveAndRender(true); });
+    $('#btnAddRule').on('click',()=>{ const name=$('#ruleNameInput').val().trim(); if(!name)return; state.data.redPacketRules.push({id:uid('rp'),name,amount:num($('#ruleAmountInput').val()),currency:($('#ruleCurrencyInput').val()||state.data.settings.defaultCurrency||'CNY').toUpperCase()}); $('#ruleNameInput,#ruleAmountInput,#ruleCurrencyInput').val(''); renderRuleManager(); saveAndRender(true); }); $(document).on('input change','.rule-name,.rule-amount,.rule-currency',function(){ const id=$(this).data('id'), r=state.data.redPacketRules.find(x=>x.id===id); if(!r)return; r.name=$(`.rule-name[data-id="${id}"]`).val(); r.amount=num($(`.rule-amount[data-id="${id}"]`).val()); r.currency=($(`.rule-currency[data-id="${id}"]`).val()||'CNY').toUpperCase(); saveAndRender(false); }); $(document).on('click','.btn-remove-rule',function(){ const id=$(this).data('id'); state.data.redPacketRules=state.data.redPacketRules.filter(r=>r.id!==id); renderRuleManager(); saveAndRender(true); });
+    $('#btnAddRate').on('click',()=>{ const c=($('#rateCurrencyInput').val()||'').trim().toUpperCase(), v=num($('#rateValueInput').val()); if(c&&v>0)state.data.settings.exchangeRates[c]=v; $('#rateCurrencyInput,#rateValueInput').val(''); renderRates(); saveAndRender(true); }); $(document).on('change','.rate-currency,.rate-value',function(){ const old=$(this).data('old'), c=($(`.rate-currency[data-old="${old}"]`).val()||old).trim().toUpperCase(), v=num($(`.rate-value[data-old="${old}"]`).val()); delete state.data.settings.exchangeRates[old]; if(c&&v>0)state.data.settings.exchangeRates[c]=v; renderRates(); saveAndRender(true); }); $(document).on('click','.btn-remove-rate',function(){ delete state.data.settings.exchangeRates[$(this).data('currency')]; renderRates(); saveAndRender(true); });
+    $(document).on('click','.btn-restore',function(){ const id=$(this).data('id'), i=state.data.deletedRecords.findIndex(r=>r.id===id); if(i<0)return; const [r]=state.data.deletedRecords.splice(i,1); delete r.deletedAt; state.data.records.push(r); renderTrash(); saveAndRender(true); }); $(document).on('click','.btn-permanent',function(){ if(!confirm(t('confirmPermanent')))return; const id=$(this).data('id'); state.data.deletedRecords=state.data.deletedRecords.filter(r=>r.id!==id); renderTrash(); saveAndRender(true); }); $('#btnClearTrash').on('click',()=>{ if(!confirm(t('confirmClearTrash')))return; state.data.deletedRecords=[]; renderTrash(); saveAndRender(true); });
+    let lastTouchEnd=0; document.addEventListener('touchend',e=>{const n=Date.now(); if(n-lastTouchEnd<=300)e.preventDefault(); lastTouchEnd=n;},{passive:false});
+  }
+  async function init(){ bindEvents(); await loadStaticDataJson(); renderAll(); if(hasCloudConfig()) await loadCloudData(true); else { renderAll(); setStatus(t('noCloudBootstrap'),'warn'); } }
+  init();
+})();
+</script>
+</body>
+</html>
