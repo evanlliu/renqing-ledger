@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:23:02",
+  "updatedAt": "2026-05-09 23:23:50",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -142,6 +142,11 @@
       "code": "other",
       "zh": "其他",
       "en": "Other"
+    },
+    {
+      "code": "fathers_day",
+      "zh": "父亲节",
+      "en": "Father's Day"
     }
   ],
   "redPacketRules": [
