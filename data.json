@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:02:42",
+  "updatedAt": "2026-05-10 00:03:22",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -127,6 +127,14 @@
       "id": "p_1778359632983_hr8lh9",
       "name": "易联 Vinson",
       "relation": "朋友",
+      "birthDate": "",
+      "birthCalendar": "solar",
+      "note": ""
+    },
+    {
+      "id": "p_1778360602556_c03kwq",
+      "name": "刘琳",
+      "relation": "姐姐",
       "birthDate": "",
       "birthCalendar": "solar",
       "note": ""
@@ -519,5 +527,5 @@
       "exchangeRate": 1
     }
   ],
-  "cloudConfigSavedAt": "2026-05-10 00:01:10"
+  "cloudConfigSavedAt": "2026-05-10 00:03:08"
 }
