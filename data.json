@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:03:41",
+  "updatedAt": "2026-05-10 00:06:15",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -524,6 +524,29 @@
       "note": "",
       "createdAt": "2026-05-10 00:03:41",
       "updatedAt": "2026-05-10 00:03:41"
+    },
+    {
+      "id": "r_1778360775252_lyt8dt",
+      "date": "2025-11-08",
+      "category": "given",
+      "direction": "given",
+      "eventType": "housewarming",
+      "personId": "p_1778357505281_d7302t",
+      "personName": "陈菊文",
+      "relation": "妈妈",
+      "ruleId": "",
+      "amount": 328,
+      "currency": "CNY",
+      "returnAmount": 120,
+      "actualAmount": 208,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-11-08",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-10 00:06:15",
+      "updatedAt": "2026-05-10 00:06:15"
     }
   ],
   "deletedRecords": [
