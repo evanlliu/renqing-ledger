@@ -1,13 +1,14 @@
 {
-  "version": "1.1.4",
-  "updatedAt": "2026-05-09 22:12:25",
+  "version": "1.1.5",
+  "updatedAt": "",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
     "baseCurrency": "CNY",
     "cloud": {
-      "cloudflareWorkerUrl": "https://renqing-ledger-data-worker.287418456.workers.dev/",
-      "accessPassword": "1123"
+      "cloudflareWorkerUrl": "",
+      "accessPassword": "",
+      "savedAt": ""
     },
     "exchangeRates": {
       "CNY": 1,
@@ -15,10 +16,6 @@
       "USD": 7.2,
       "EUR": 7.8
     }
-  },
-  "cloudConfig": {
-    "cloudflareWorkerUrl": "https://renqing-ledger-data-worker.287418456.workers.dev/",
-    "accessPassword": "1123"
   },
   "relationOptions": [
     "家人",
@@ -29,37 +26,7 @@
     "邻居",
     "其他"
   ],
-  "groupOptions": [
-    "亲属",
-    "朋友",
-    "公司",
-    "朋友",
-    "家人",
-    "其他"
-  ],
-  "people": [
-    {
-      "id": "p_1778353600973_8axghq",
-      "name": "陈菊文",
-      "relation": "家人",
-      "group": "亲属",
-      "note": ""
-    },
-    {
-      "id": "p_1778353613625_soris8",
-      "name": "刘吉成",
-      "relation": "家人",
-      "group": "亲属",
-      "note": ""
-    },
-    {
-      "id": "p_1778353622705_vuxuxr",
-      "name": "钟修平",
-      "relation": "朋友",
-      "group": "亲属",
-      "note": ""
-    }
-  ],
+  "people": [],
   "eventTypes": [
     {
       "code": "marriage",
@@ -128,5 +95,9 @@
   ],
   "records": [],
   "deletedRecords": [],
-  "cloudConfigSavedAt": "2026-05-09 22:11:02"
+  "cloudConfig": {
+    "cloudflareWorkerUrl": "",
+    "accessPassword": ""
+  },
+  "cloudConfigSavedAt": ""
 }

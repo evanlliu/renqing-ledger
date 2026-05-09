@@ -1,4 +1,4 @@
-# 人情记账本 / Gift Ledger v1.1.4
+# 人情记账本 / Gift Ledger v1.1.5
 
 一个用于记录收人情、封人情、节日人情、过年红包的人情往来系统。
 
@@ -11,18 +11,17 @@
 - 支持 PC 和移动端，重点兼容 iOS Safari 添加到主屏幕
 - 支持中文 / English
 
-## v1.1.4 更新内容
+## v1.1.5 更新内容
 
-### 本次重点修复：data.json 只更新，不新建
+### 本次调整：去除“分组”，只保留“关系”
 
-1. 重新检查并调整 `data.json` 更新逻辑。
-2. Cloudflare Worker 现在会先读取 GitHub 中已经存在的 `data.json`。
-3. Worker 获取到现有文件 `sha` 后，再用 GitHub Contents API 更新同一个文件。
-4. 如果 GitHub 中不存在 `data.json`，Worker 会直接报错，不会再自动创建一个新的 `data.json`。
-5. 如果 `GH_REPO`、`GH_BRANCH`、`DATA_PATH` 配错，页面会收到明确错误，避免误以为保存成功。
-6. 更新成功后 Worker 会返回：`repo`、`branch`、`path`、`oldSha`、`newSha`，方便确认到底更新了哪个仓库、哪个文件。
-7. 前端保存时会记录远端 `sha`，后续同步会继续按“更新已有文件”的方式写入。
-8. 保留保存设置后的远端验证逻辑，确认 `settings.cloud` / `cloudConfig` 确实写入远端 `data.json`。
+1. 删除人员管理里的“分组”字段，只保留姓名 + 关系。
+2. 删除“分组配置”，更多菜单中只保留“关系配置”。
+3. 新增 / 编辑记录时，只自动带出关系，不再显示分组。
+4. 记录列表、移动端卡片、关键词搜索、CSV 导入导出都去除了分组字段。
+5. 兼容旧 data.json：读取旧数据时会自动忽略并删除 `groupOptions`、人员 `group`、记录 `group`。
+6. 如果云端旧 `data.json` 里还存在分组字段，页面会在加载后静默同步一次，把清理后的结构写回同一个 `data.json`。
+7. 保留 v1.1.4 的 Worker 更新逻辑：只更新 GitHub 中已经存在的 `data.json`，不自动新建。
 
 ### 正确的数据更新逻辑
 
@@ -54,7 +53,7 @@ Cloudflare Worker 本版本需要更新：
 
 - `worker.js`
 
-因为 v1.1.4 的核心修复包含 Worker 的“只更新已有 data.json，不自动新建”逻辑。
+因为 v1.1.5 的核心修复包含 Worker 的“只更新已有 data.json，不自动新建”逻辑。
 
 ## Cloudflare Variables and Secrets
 
@@ -101,13 +100,13 @@ Worker 需要配置：
 CSV 第一行建议使用以下字段：
 
 ```csv
-date,personName,relation,group,category,direction,eventType,amount,currency,returnAmount,note
+date,personName,relation,category,direction,eventType,amount,currency,returnAmount,note
 ```
 
 示例：
 
 ```csv
-2026-01-01,丹哥,朋友,中国,given,given,housewarming,320,CNY,120,房子过火
+2026-01-01,丹哥,朋友,given,given,housewarming,320,CNY,120,房子过火
 ```
 
 `category` 可选值：
