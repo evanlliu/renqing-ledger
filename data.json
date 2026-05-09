@@ -1,6 +1,6 @@
 {
   "version": "1.1.4",
-  "updatedAt": "2026-05-09 22:03:55",
+  "updatedAt": "2026-05-09 22:06:40",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -37,7 +37,15 @@
     "家人",
     "其他"
   ],
-  "people": [],
+  "people": [
+    {
+      "id": "p_1778353600973_8axghq",
+      "name": "陈菊文",
+      "relation": "家人",
+      "group": "中国",
+      "note": ""
+    }
+  ],
   "eventTypes": [
     {
       "code": "marriage",
@@ -106,5 +114,5 @@
   ],
   "records": [],
   "deletedRecords": [],
-  "cloudConfigSavedAt": "2026-05-09 22:03:55"
+  "cloudConfigSavedAt": "2026-05-09 22:05:46"
 }
