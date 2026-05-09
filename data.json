@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:46:11",
+  "updatedAt": "2026-05-09 23:46:43",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -104,6 +104,14 @@
       "note": "",
       "birthDate": "",
       "birthCalendar": "solar"
+    },
+    {
+      "id": "p_1778359603953_xqjaf0",
+      "name": "黄超",
+      "relation": "朋友",
+      "birthDate": "",
+      "birthCalendar": "solar",
+      "note": ""
     }
   ],
   "eventTypes": [
