@@ -1,6 +1,6 @@
 {
   "version": "1.1.8",
-  "updatedAt": "2026-05-09 22:57:12",
+  "updatedAt": "2026-05-09 22:58:05",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -57,14 +57,6 @@
     }
   ],
   "people": [
-    {
-      "id": "p_1778354410871_nnhqx9",
-      "name": "陈菊文",
-      "relation": "妈妈",
-      "note": "",
-      "birthDate": "2026-05-09",
-      "birthCalendar": "solar"
-    },
     {
       "id": "p_1778354423964_qe2hhh",
       "name": "奶奶",
@@ -177,7 +169,7 @@
       "note": "",
       "createdAt": "2026-05-09 22:24:15",
       "updatedAt": "2026-05-09 22:57:12",
-      "age": ""
+      "age": 54
     },
     {
       "id": "r_1778355452783_whopmc",
