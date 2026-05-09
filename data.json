@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:06:15",
+  "updatedAt": "2026-05-10 00:06:25",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -30,7 +30,8 @@
     "朋友",
     "堂弟",
     "其他",
-    "姐姐"
+    "姐姐",
+    "表哥"
   ],
   "categoryTypes": [
     {
