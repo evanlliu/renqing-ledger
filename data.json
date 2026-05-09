@@ -1,6 +1,6 @@
 {
   "version": "1.1.4",
-  "updatedAt": "2026-05-09 22:07:02",
+  "updatedAt": "2026-05-09 22:12:12",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -30,7 +30,7 @@
     "其他"
   ],
   "groupOptions": [
-    "中国",
+    "亲属",
     "土耳其",
     "公司",
     "朋友",
@@ -42,21 +42,21 @@
       "id": "p_1778353600973_8axghq",
       "name": "陈菊文",
       "relation": "家人",
-      "group": "中国",
+      "group": "亲属",
       "note": ""
     },
     {
       "id": "p_1778353613625_soris8",
       "name": "刘吉成",
       "relation": "家人",
-      "group": "中国",
+      "group": "亲属",
       "note": ""
     },
     {
       "id": "p_1778353622705_vuxuxr",
       "name": "钟修平",
       "relation": "朋友",
-      "group": "中国",
+      "group": "亲属",
       "note": ""
     }
   ],
@@ -128,5 +128,5 @@
   ],
   "records": [],
   "deletedRecords": [],
-  "cloudConfigSavedAt": "2026-05-09 22:05:46"
+  "cloudConfigSavedAt": "2026-05-09 22:11:02"
 }
