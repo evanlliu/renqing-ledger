@@ -1,6 +1,6 @@
 {
-  "version": "1.1.8",
-  "updatedAt": "2026-05-09 22:58:34",
+  "version": "1.1.9",
+  "updatedAt": "2026-05-09 23:03:30",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -170,6 +170,24 @@
       "createdAt": "2026-05-09 22:24:15",
       "updatedAt": "2026-05-09 22:57:12",
       "age": 54
+    },
+    {
+      "id": "r_1778355452783_whopmc",
+      "date": "2026-05-09",
+      "category": "holiday",
+      "direction": "given",
+      "eventType": "birthday",
+      "personId": "p_1778356571974_jphjwd",
+      "personName": "刘吉成",
+      "relation": "爸爸",
+      "ruleId": "",
+      "amount": 500,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 500,
+      "note": "",
+      "createdAt": "2026-05-09 22:37:32",
+      "updatedAt": "2026-05-09 22:37:32"
     }
   ],
   "deletedRecords": [
@@ -191,26 +209,7 @@
       "createdAt": "2026-05-09 22:25:38",
       "updatedAt": "2026-05-09 22:25:38",
       "deletedAt": "2026-05-09 22:26:03"
-    },
-    {
-      "id": "r_1778355452783_whopmc",
-      "date": "2026-05-09",
-      "category": "holiday",
-      "direction": "given",
-      "eventType": "birthday",
-      "personId": "p_1778356571974_jphjwd",
-      "personName": "刘吉成",
-      "relation": "爸爸",
-      "ruleId": "",
-      "amount": 500,
-      "currency": "CNY",
-      "returnAmount": 0,
-      "actualAmount": 500,
-      "note": "",
-      "createdAt": "2026-05-09 22:37:32",
-      "updatedAt": "2026-05-09 22:37:32",
-      "deletedAt": "2026-05-09 22:58:34"
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 22:56:40"
+  "cloudConfigSavedAt": "2026-05-09 23:03:21"
 }
