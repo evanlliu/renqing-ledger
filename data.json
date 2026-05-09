@@ -1,6 +1,6 @@
 {
   "version": "1.1.7",
-  "updatedAt": "2026-05-09 22:39:51",
+  "updatedAt": "2026-05-09 22:46:33",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -110,7 +110,7 @@
       "en": "Big Birthday"
     },
     {
-      "code": "small_birthday",
+      "code": "birthday",
       "zh": "小生日",
       "en": "Small Birthday"
     },
@@ -160,7 +160,7 @@
       "date": "2026-05-01",
       "category": "holiday",
       "direction": "given",
-      "eventType": "small_birthday",
+      "eventType": "birthday",
       "personId": "p_1778354410871_nnhqx9",
       "personName": "陈菊文",
       "relation": "妈妈",
@@ -178,7 +178,7 @@
       "date": "2026-05-09",
       "category": "holiday",
       "direction": "given",
-      "eventType": "small_birthday",
+      "eventType": "birthday",
       "personId": "p_1778354418906_1jehfc",
       "personName": "刘吉成",
       "relation": "爸爸",
