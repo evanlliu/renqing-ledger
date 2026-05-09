@@ -22,7 +22,14 @@ export default {
 
       if (request.method === 'GET') {
         const file = await getGitHubFile(env);
-        return json({ ok: true, data: file.data, sha: file.sha }, 200, corsHeaders);
+        return json({
+          ok: true,
+          data: file.data,
+          sha: file.sha,
+          path: normalizedDataPath(env),
+          repo: `${env.GH_OWNER}/${env.GH_REPO}`,
+          branch: env.GH_BRANCH
+        }, 200, corsHeaders);
       }
 
       if (request.method === 'POST' || request.method === 'PUT') {
@@ -30,9 +37,33 @@ export default {
         if (!body) return json({ ok: false, error: 'Invalid JSON body' }, 400, corsHeaders);
 
         const data = body.data || body;
-        const current = await getGitHubFile(env).catch(() => ({ sha: undefined }));
-        const result = await putGitHubFile(env, data, current.sha);
-        return json({ ok: true, message: 'data.json updated', sha: result.content && result.content.sha }, 200, corsHeaders);
+        const current = await getGitHubFile(env).catch((err) => {
+          throw new Error(`Existing data.json was not found or cannot be read. Upload data.json to GitHub first and check GH_REPO / GH_BRANCH / DATA_PATH. Detail: ${err.message}`);
+        });
+
+        let result;
+        let oldSha = current.sha;
+        try {
+          result = await putGitHubFile(env, data, current.sha);
+        } catch (err) {
+          // If GitHub reports a conflict because the file changed between GET and PUT,
+          // fetch the latest sha and retry once. This still updates the existing file only.
+          if (!/409|sha|does not match|conflict/i.test(String(err.message || err))) throw err;
+          const latest = await getGitHubFile(env);
+          oldSha = latest.sha;
+          result = await putGitHubFile(env, data, latest.sha);
+        }
+
+        return json({
+          ok: true,
+          message: 'Existing data.json updated',
+          oldSha,
+          newSha: result.content && result.content.sha,
+          sha: result.content && result.content.sha,
+          path: normalizedDataPath(env),
+          repo: `${env.GH_OWNER}/${env.GH_REPO}`,
+          branch: env.GH_BRANCH
+        }, 200, corsHeaders);
       }
 
       return json({ ok: false, error: 'Method not allowed' }, 405, corsHeaders);
@@ -49,8 +80,12 @@ function checkEnv(env) {
   return { ok: true };
 }
 
+function normalizedDataPath(env) {
+  return String(env.DATA_PATH || 'data.json').trim().replace(/^\/+/, '') || 'data.json';
+}
+
 function githubApiUrl(env) {
-  const path = String(env.DATA_PATH || 'data.json').replace(/^\/+/, '');
+  const path = normalizedDataPath(env);
   return `https://api.github.com/repos/${env.GH_OWNER}/${env.GH_REPO}/contents/${encodeURIComponent(path).replace(/%2F/g, '/')}?ref=${encodeURIComponent(env.GH_BRANCH)}`;
 }
 
@@ -71,13 +106,14 @@ async function getGitHubFile(env) {
 }
 
 async function putGitHubFile(env, data, sha) {
+  if (!sha) throw new Error('Missing existing file sha. Refusing to create a new data.json.');
   const url = githubApiUrl(env).replace(/\?ref=.*/, '');
   const payload = {
-    message: `Update data.json ${new Date().toISOString()}`,
+    message: `Update existing data.json ${new Date().toISOString()}`,
     content: utf8ToBase64(JSON.stringify(data, null, 2)),
-    branch: env.GH_BRANCH
+    branch: env.GH_BRANCH,
+    sha
   };
-  if (sha) payload.sha = sha;
 
   const res = await fetch(url, {
     method: 'PUT',

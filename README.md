@@ -1,4 +1,4 @@
-# 人情记账本 / Gift Ledger v1.1.3
+# 人情记账本 / Gift Ledger v1.1.4
 
 一个用于记录收人情、封人情、节日人情、过年红包的人情往来系统。
 
@@ -6,78 +6,34 @@
 
 - HTML + jQuery
 - GitHub Pages 部署前端
-- Cloudflare Worker 读写 GitHub `data.json`
+- Cloudflare Worker 读写 GitHub 仓库中已经存在的 `data.json`
 - `data.json` 保存数据、设置、Cloudflare 自定义同步地址和访问密码
 - 支持 PC 和移动端，重点兼容 iOS Safari 添加到主屏幕
 - 支持中文 / English
 
+## v1.1.4 更新内容
 
-## v1.1.3 更新内容
+### 本次重点修复：data.json 只更新，不新建
 
-### 本次修复
+1. 重新检查并调整 `data.json` 更新逻辑。
+2. Cloudflare Worker 现在会先读取 GitHub 中已经存在的 `data.json`。
+3. Worker 获取到现有文件 `sha` 后，再用 GitHub Contents API 更新同一个文件。
+4. 如果 GitHub 中不存在 `data.json`，Worker 会直接报错，不会再自动创建一个新的 `data.json`。
+5. 如果 `GH_REPO`、`GH_BRANCH`、`DATA_PATH` 配错，页面会收到明确错误，避免误以为保存成功。
+6. 更新成功后 Worker 会返回：`repo`、`branch`、`path`、`oldSha`、`newSha`，方便确认到底更新了哪个仓库、哪个文件。
+7. 前端保存时会记录远端 `sha`，后续同步会继续按“更新已有文件”的方式写入。
+8. 保留保存设置后的远端验证逻辑，确认 `settings.cloud` / `cloudConfig` 确实写入远端 `data.json`。
 
-1. 修复保存设置时 `cloudConfig` 旧值可能覆盖新输入 Cloudflare 地址 / 访问密码的问题。
-2. 保存设置时现在会把 Cloudflare Worker 地址和访问密码同时强制写入：
-   - `settings.cloud.cloudflareWorkerUrl`
-   - `settings.cloud.accessPassword`
-   - `cloudConfig.cloudflareWorkerUrl`
-   - `cloudConfig.accessPassword`
-3. 新增保存后验证：页面会重新通过 Worker 读取远端 `data.json`，确认云配置确实已经写入。
-4. 如果 Worker 返回成功，但远端 `data.json` 没有验证到配置，页面会提示检查 `GH_REPO` / `DATA_PATH` 是否指向当前仓库。
-5. 启动时优先使用 `data.json` 中的云配置，只有 `data.json` 没有配置时，才用本设备缓存作为兜底。
-6. 保留可选 URL 引导参数：`?worker=你的Worker地址&password=你的访问密码`，用于极端情况下快速给新设备写入配置。
+### 正确的数据更新逻辑
 
-### 重要说明
+页面打开或刷新时：
 
-从 v1.1.3 开始，后续已经有线上数据时，不建议直接覆盖 GitHub 上的 `data.json`。
-
-因为 `data.json` 里保存了：
-
-- 人情记录数据
-- 人员配置
-- 关系 / 分组配置
-- Cloudflare Worker 地址
-- 访问密码
-
-如果上传一个空白模板 `data.json`，新设备和 iOS 主屏幕应用就无法从 `data.json` 读取 Cloudflare 配置。
-
-推荐更新方式：
-
-- 已经部署过：只更新 `index.html` 和 `README.md`
-- 第一次部署：才上传模板 `data.json`
-- Cloudflare Worker：本版本不需要更新 `worker.js`
-
-## v1.1.1 更新内容
-
-### 本次修复
-
-1. 修复更换设备后，Cloudflare Worker 地址和访问密码需要重新配置的问题。
-2. 页面第一次加载 `data.json` 后，会优先从 `data.json` 的 `settings.cloud` 和 `cloudConfig` 读取同步配置，并自动填充到设置页面。
-3. 新增 `cloudConfig` 镜像字段，保存设置时会同时写入 `settings.cloud` 和 `cloudConfig`，提升多设备同步兼容性。
-4. 云端返回的 `data.json` 如果同步配置为空，不会再覆盖本设备已有的 Cloudflare 地址和访问密码。
-
-## v1.1.0 更新内容
-
-### 新增功能
-
-1. CSV 导入 / 导出，可用 Excel 打开和编辑。
-2. 按人查看历史记录。
-3. 回收站恢复和彻底删除。
-4. 汇率折算统计，可设置基准货币和各币种汇率。
-5. 统计图表：按人、按类型、按年份、按货币统计。
-6. 关系配置和分组配置。
-7. 人员管理中的关系、分组只能从配置项下拉选择。
-
-### 优化内容
-
-1. 新增 / 编辑记录时，姓名只能从人员管理中选择。
-2. 新增 / 编辑记录时，事件类型只能从类型管理中选择。
-3. 选择姓名后，关系和分组自动带出，并且不可编辑。
-4. 旧数据如果存在手动输入姓名，会自动迁移为人员数据。
-5. 移动端禁止页面左右晃动。
-6. 优化 iOS Safari 日期输入宽度，避免日期框过长。
-7. 保留第一次加载时重新读取 `data.json` 的逻辑。
-8. 保留 Cloudflare 自定义配置地址和访问密码写入 `data.json` 的逻辑，方便多设备同步。
+1. 先读取 GitHub Pages 同目录下的 `./data.json`。
+2. 如果 `data.json` 里有 Cloudflare Worker 地址和访问密码，就继续调用 Worker。
+3. Worker 从 GitHub 仓库读取最新的 `data.json`，并返回文件 `sha`。
+4. 页面使用 Worker 返回的云端数据覆盖本地数据。
+5. 之后新增、编辑、删除、配置修改，都会通过 Worker 更新 GitHub 中同一个 `data.json`。
+6. Worker 不再负责新建 `data.json`。第一次部署时，你手动把模板 `data.json` 上传到 GitHub。
 
 ## 文件说明
 
@@ -94,11 +50,11 @@ GitHub 首次部署需要上传：
 
 不要直接覆盖线上 `data.json`，除非你确认要重置所有数据和云配置。
 
-Cloudflare Worker：
+Cloudflare Worker 本版本需要更新：
 
 - `worker.js`
 
-本版本的核心修复在 `index.html`。`worker.js` 与旧版本保持兼容，如果你已经部署过 v1.0.0 之后的 Worker，可以不更新 Cloudflare；如果是第一次部署，请粘贴本目录中的 `worker.js`。
+因为 v1.1.4 的核心修复包含 Worker 的“只更新已有 data.json，不自动新建”逻辑。
 
 ## Cloudflare Variables and Secrets
 
@@ -113,7 +69,32 @@ Worker 需要配置：
 | GH_BRANCH | Plaintext | main |
 | DATA_PATH | Plaintext | data.json |
 
-注意：如果你的 GitHub 仓库是公开的，`data.json` 中保存的 Cloudflare 地址和访问密码可能被看到。建议仓库设置为 Private，或者不要使用重要密码。
+注意：
+
+- `GH_REPO` 必须是当前人情系统仓库，不要写成其他系统的仓库名。
+- `DATA_PATH` 如果你的 `data.json` 在仓库根目录，就填 `data.json`。
+- `GH_TOKEN` 需要有读取和写入仓库内容的权限，一般需要 `Contents: Read and write`。
+- 如果你的 GitHub 仓库是公开的，`data.json` 中保存的 Cloudflare 地址和访问密码可能被看到。建议仓库设置为 Private，或者不要使用重要密码。
+
+## 部署顺序
+
+1. 第一次部署时，上传 `index.html`、`data.json`、`README.md` 到 GitHub。
+2. Cloudflare Worker 粘贴 `worker.js`。
+3. 在 Cloudflare 配置 Variables and Secrets。
+4. 打开页面，进入 `设置`。
+5. 填写 Cloudflare Worker 地址和访问密码。
+6. 保存后页面会通过 Worker 更新 GitHub 中已有的 `data.json`。
+7. 其他设备或 iOS 主屏幕打开时，会直接从 `data.json` 读取并自动填充。
+
+## 如果保存后 GitHub data.json 没变化，按这个顺序检查
+
+1. Cloudflare Worker 地址是否填对。
+2. 页面访问密码是否等于 Worker 的 `APP_PASSWORD`。
+3. `GH_REPO` 是否是人情系统仓库。
+4. `GH_BRANCH` 是否是你 GitHub Pages 使用的分支，例如 `main`。
+5. `DATA_PATH` 是否是 `data.json`，且仓库中已经存在这个文件。
+6. `GH_TOKEN` 是否有当前仓库 Contents 读写权限。
+7. GitHub Pages 可能有延迟，建议直接到 GitHub 仓库页面查看 `data.json` 文件内容是否更新。
 
 ## CSV 导入字段
 
@@ -162,13 +143,3 @@ date,personName,relation,group,category,direction,eventType,amount,currency,retu
 - 1 CNY = 1 CNY
 - 1 TRY = 0.22 CNY
 - 1 USD = 7.2 CNY
-
-## 部署顺序
-
-1. 上传 `index.html`、`data.json`、`README.md` 到 GitHub。
-2. 如果第一次部署，Cloudflare Worker 粘贴 `worker.js`。
-3. 在 Cloudflare 配置 Variables and Secrets。
-4. 打开页面，进入 `设置`。
-5. 填写 Cloudflare Worker 地址和访问密码。
-6. 保存后页面会提示“云配置已写入 data.json，并验证成功”。
-7. 其他设备或 iOS 主屏幕打开时，会直接从 `data.json` 读取并自动填充。

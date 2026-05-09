@@ -152,7 +152,7 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-title"><h1 data-i18n="appTitle">人情记账本</h1><span class="version">v1.1.3</span></div>
+        <div class="brand-title"><h1 data-i18n="appTitle">人情记账本</h1><span class="version">v1.1.4</span></div>
         <div class="subtitle" data-i18n="subtitle">收人情、封人情、节日红包统一记录</div>
       </div>
       <div class="toolbar">
@@ -341,7 +341,7 @@
 <script>
 (function(){
   'use strict';
-  const APP_VERSION = '1.1.3';
+  const APP_VERSION = '1.1.4';
   const STORAGE_KEY = 'renqingLedgerData_v1';
   const CLOUD_KEY = 'renqingLedgerCloudConfig_v1';
   const DEFAULT_DATA = {
@@ -365,7 +365,7 @@
     zh: { appTitle:'人情记账本', subtitle:'收人情、封人情、节日红包统一记录', sync:'同步', addRecord:'新增', editRecord:'编辑记录', settings:'设置', peopleManage:'人员管理', optionManage:'关系/分组', eventManage:'类型管理', ruleManage:'红包规则', rateManage:'汇率设置', chartStats:'统计图表', trash:'回收站', exportCsv:'导出CSV', importCsv:'导入CSV', downloadData:'下载数据', keyword:'关键词', category:'分类', direction:'方向', startDate:'开始日期', endDate:'结束日期', clear:'清空', filter:'筛选', recordList:'记录列表', date:'日期', person:'姓名', relation:'关系', group:'分组', eventType:'事件类型', amount:'金额', returnAmount:'回礼金额', actualAmount:'实际金额', note:'备注', actions:'操作', currency:'货币', redPacketRule:'红包规则', cancel:'取消', save:'保存', close:'关闭', add:'添加', language:'语言', cloudflareUrl:'Cloudflare Worker 地址', accessPassword:'访问密码', defaultCurrency:'默认货币', baseCurrency:'折算基准货币', settingsTip:'设置会保存到 data.json，也会在本设备缓存一份。iOS 主屏幕应用和 Safari 的缓存是分开的，所以新设备/主屏幕主要依赖 data.json 中的云配置。访问密码必须和 Cloudflare Worker 变量 APP_PASSWORD 一致。', ruleName:'规则名称', newRelation:'新增关系', newGroup:'新增分组', relationOptions:'关系配置', groupOptions:'分组配置', rateToBase:'折算汇率', rateTip:'汇率用于统计折算：1 外币 = 多少基准货币。例：1 TRY = 0.22 CNY。', personHistory:'个人历史', restore:'恢复', permanentDelete:'彻底删除', clearTrash:'清空回收站', all:'全部', received:'收人情', given:'封人情', holiday:'节日人情', red_packet:'过年红包', income:'收入', expense:'支出', net:'净额', totalRecords:'记录数', thisYearNet:'本年净额', convertedNet:'折算净额', noRecords:'暂无记录', edit:'编辑', delete:'删除', history:'历史', confirmDelete:'确定删除这条记录吗？会放入回收站。', confirmPermanent:'确定彻底删除吗？', confirmClearTrash:'确定清空回收站吗？', saved:'已保存', syncOk:'云端同步成功', syncFailed:'云端同步失败', loadingLocal:'正在重新加载 data.json...', loadingCloud:'正在加载云端 data.json...', noCloud:'未配置 Cloudflare，同步已跳过', staticOk:'data.json 加载完成', staticFailed:'data.json 加载失败，已使用本地缓存或默认数据', countSuffix:'条记录', autoLoadedCloud:'已自动加载云端 data.json', selectRule:'不使用规则', allCategory:'全部分类', allDirection:'全部方向', directionReceived:'收入', directionGiven:'支出', selectPerson:'请选择姓名', addPeopleFirst:'请先在人员管理中添加姓名', byPerson:'按人统计', byType:'按类型统计', byYear:'按年份统计', byCurrency:'按货币统计', importDone:'导入完成', importFailed:'导入失败', noRate:'缺少汇率', savingCloudConfig:'正在保存云配置到 data.json...', cloudConfigSaved:'云配置已写入 data.json', cloudConfigSavedVerified:'云配置已写入 data.json，并验证成功', cloudConfigSavedButNotVerified:'Worker 返回成功，但未验证到远端 data.json 中的云配置，请检查 GH_REPO / DATA_PATH 是否指向当前仓库', cloudConfigVerifyFailed:'云配置验证失败', noCloudBootstrap:'未从 data.json 读取到 Cloudflare 配置；iOS 主屏幕与 Safari 缓存隔离，请先在已配置设备点一次保存/同步，且不要用空白 data.json 覆盖线上文件。' },
     en: { appTitle:'Gift Ledger', subtitle:'Track received gifts, given gifts, holidays, and red packets', sync:'Sync', addRecord:'Add', editRecord:'Edit Record', settings:'Settings', peopleManage:'People', optionManage:'Relations / Groups', eventManage:'Event Types', ruleManage:'Red Packet Rules', rateManage:'Exchange Rates', chartStats:'Charts', trash:'Trash', exportCsv:'Export CSV', importCsv:'Import CSV', downloadData:'Download Data', keyword:'Keyword', category:'Category', direction:'Direction', startDate:'Start Date', endDate:'End Date', clear:'Clear', filter:'Filter', recordList:'Records', date:'Date', person:'Name', relation:'Relation', group:'Group', eventType:'Event Type', amount:'Amount', returnAmount:'Return Amount', actualAmount:'Actual Amount', note:'Note', actions:'Actions', currency:'Currency', redPacketRule:'Red Packet Rule', cancel:'Cancel', save:'Save', close:'Close', add:'Add', language:'Language', cloudflareUrl:'Cloudflare Worker URL', accessPassword:'Access Password', defaultCurrency:'Default Currency', baseCurrency:'Base Currency', settingsTip:'Settings are saved to data.json and cached locally. iOS Home Screen apps use separate storage from Safari, so new devices mainly rely on the cloud config in data.json. The access password must match the Cloudflare Worker APP_PASSWORD variable.', ruleName:'Rule Name', newRelation:'New Relation', newGroup:'New Group', relationOptions:'Relation Options', groupOptions:'Group Options', rateToBase:'Rate to Base', rateTip:'Rates are used for converted stats: 1 foreign currency = how much base currency. Example: 1 TRY = 0.22 CNY.', personHistory:'Person History', restore:'Restore', permanentDelete:'Delete Forever', clearTrash:'Clear Trash', all:'All', received:'Received Gifts', given:'Given Gifts', holiday:'Holiday Gifts', red_packet:'New Year Red Packets', income:'Income', expense:'Expense', net:'Net', totalRecords:'Records', thisYearNet:'This Year Net', convertedNet:'Converted Net', noRecords:'No records', edit:'Edit', delete:'Delete', history:'History', confirmDelete:'Move this record to Trash?', confirmPermanent:'Delete forever?', confirmClearTrash:'Clear all trash?', saved:'Saved', syncOk:'Cloud sync successful', syncFailed:'Cloud sync failed', loadingLocal:'Reloading data.json...', loadingCloud:'Loading cloud data.json...', noCloud:'Cloudflare not configured; sync skipped', staticOk:'data.json loaded', staticFailed:'Failed to load data.json; using cache or default data', countSuffix:'records', autoLoadedCloud:'Cloud data.json loaded automatically', selectRule:'No rule', allCategory:'All Categories', allDirection:'All Directions', directionReceived:'Income', directionGiven:'Expense', selectPerson:'Select a person', addPeopleFirst:'Add people first', byPerson:'By Person', byType:'By Type', byYear:'By Year', byCurrency:'By Currency', importDone:'Import completed', importFailed:'Import failed', noRate:'Missing rate', savingCloudConfig:'Saving cloud config to data.json...', cloudConfigSaved:'Cloud config saved to data.json', cloudConfigSavedVerified:'Cloud config saved to data.json and verified', cloudConfigSavedButNotVerified:'Worker returned success, but cloud config was not verified in remote data.json. Check GH_REPO / DATA_PATH.', cloudConfigVerifyFailed:'Cloud config verification failed', noCloudBootstrap:'No Cloudflare config was found in data.json. iOS Home Screen storage is separate from Safari; save/sync once on a configured device and do not overwrite the online data.json with a blank file.' }
   };
-  const state = { data: clone(DEFAULT_DATA) };
+  const state = { data: clone(DEFAULT_DATA), remoteSha: '', remoteMeta: null };
   function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
   function t(k){ const lang = state.data.settings.language || 'zh'; return (I18N[lang] && I18N[lang][k]) || I18N.zh[k] || k; }
   function nowText(){ const d=new Date(), p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`; }
@@ -427,9 +427,67 @@
   function applySavedCloudIfEmpty(){ const dataCloud=mergeCloudConfig(state.data.cloudConfig,(state.data.settings&&state.data.settings.cloud)||{}); const saved=getSavedCloudConfig(); const embedded=getEmbeddedCloudConfig(); const urlCfg=getUrlCloudConfig(); const fallback=mergeCloudConfig(embedded,saved,urlCfg); const finalCloud=hasConfigObj(dataCloud)?dataCloud:mergeCloudConfig(dataCloud,fallback); setCloudConfigExact(finalCloud); }
   function hasCloudConfig(){ syncCloudMirror(); const c=state.data.settings.cloud||{}; return hasConfigObj(c); }
   function cloudUrl(){ return String((state.data.settings.cloud||{}).cloudflareWorkerUrl||'').trim().replace(/\/+$/,''); }
-  async function loadStaticDataJson(){ setStatus(t('loadingLocal'),'warn'); try{ const res=await fetch(`./data.json?t=${Date.now()}`,{cache:'no-store'}); if(!res.ok) throw new Error(`HTTP ${res.status}`); state.data=mergeData(await res.json()); applySavedCloudIfEmpty(); saveCache(); setStatus(t('staticOk')+' · '+nowText(),'ok'); return true; }catch(e){ const cached=localStorage.getItem(STORAGE_KEY); if(cached){ try{ state.data=mergeData(JSON.parse(cached)); }catch(_){ state.data=clone(DEFAULT_DATA); } } else state.data=clone(DEFAULT_DATA); applySavedCloudIfEmpty(); setStatus(t('staticFailed'),'warn'); return false; } }
-  async function loadCloudData(silent){ if(!hasCloudConfig()){ if(!silent) setStatus(t('noCloud'),'warn'); return false; } setStatus(t('loadingCloud'),'warn'); try{ const res=await fetch(`${cloudUrl()}?t=${Date.now()}`,{method:'GET',cache:'no-store',headers:{'X-App-Password':state.data.settings.cloud.accessPassword}}); const json=await res.json(); if(!res.ok||json.ok===false) throw new Error(json.error||`HTTP ${res.status}`); const localCloud=clone(state.data.settings.cloud||{}); state.data=mergeData(json.data||json); const finalCloud=mergeCloudConfig(state.data.cloudConfig,state.data.settings.cloud,localCloud); setCloudConfigExact(finalCloud); saveCache(); setStatus((silent?t('autoLoadedCloud'):t('syncOk'))+' · '+nowText(),'ok'); renderAll(); return true; }catch(e){ setStatus(`${t('syncFailed')}: ${e.message}`,'err'); return false; } }
-  async function syncToCloud(silent){ if(!hasCloudConfig()){ if(!silent) openSettings(); else setStatus(t('noCloud'),'warn'); return false; } syncCloudMirror(); state.data.updatedAt=nowText(); state.data.version=APP_VERSION; saveCache(); try{ setStatus(t('sync')+'...','warn'); const payload=JSON.parse(JSON.stringify(state.data)); const res=await fetch(cloudUrl(),{method:'POST',headers:{'Content-Type':'application/json','X-App-Password':state.data.settings.cloud.accessPassword},body:JSON.stringify({data:payload})}); const json=await res.json(); if(!res.ok||json.ok===false) throw new Error(json.error||`HTTP ${res.status}`); setStatus(t('syncOk')+' · '+nowText(),'ok'); return true; }catch(e){ setStatus(`${t('syncFailed')}: ${e.message}`,'err'); return false; } }
+  async function loadStaticDataJson(){
+    setStatus(t('loadingLocal'),'warn');
+    try{
+      const res=await fetch(`./data.json?t=${Date.now()}`,{cache:'no-store'});
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      state.data=mergeData(await res.json());
+      state.remoteSha=''; state.remoteMeta=null;
+      applySavedCloudIfEmpty();
+      saveCache();
+      setStatus(t('staticOk')+' · '+nowText(),'ok');
+      return true;
+    }catch(e){
+      const cached=localStorage.getItem(STORAGE_KEY);
+      if(cached){ try{ state.data=mergeData(JSON.parse(cached)); }catch(_){ state.data=clone(DEFAULT_DATA); } }
+      else state.data=clone(DEFAULT_DATA);
+      state.remoteSha=''; state.remoteMeta=null;
+      applySavedCloudIfEmpty();
+      setStatus(t('staticFailed'),'warn');
+      return false;
+    }
+  }
+  function rememberRemoteMeta(json){
+    state.remoteSha=json.sha||json.newSha||json.contentSha||'';
+    state.remoteMeta={ repo:json.repo||'', branch:json.branch||'', path:json.path||'', oldSha:json.oldSha||'', newSha:json.newSha||json.sha||'' };
+  }
+  async function loadCloudData(silent){
+    if(!hasCloudConfig()){ if(!silent) setStatus(t('noCloud'),'warn'); return false; }
+    setStatus(t('loadingCloud'),'warn');
+    try{
+      const res=await fetch(`${cloudUrl()}?t=${Date.now()}`,{method:'GET',cache:'no-store',headers:{'X-App-Password':state.data.settings.cloud.accessPassword}});
+      const json=await res.json();
+      if(!res.ok||json.ok===false) throw new Error(json.error||`HTTP ${res.status}`);
+      rememberRemoteMeta(json);
+      const localCloud=clone(state.data.settings.cloud||{});
+      state.data=mergeData(json.data||json);
+      const finalCloud=mergeCloudConfig(state.data.cloudConfig,state.data.settings.cloud,localCloud);
+      setCloudConfigExact(finalCloud);
+      saveCache();
+      setStatus((silent?t('autoLoadedCloud'):t('syncOk'))+' · '+nowText(),'ok');
+      renderAll();
+      return true;
+    }catch(e){ setStatus(`${t('syncFailed')}: ${e.message}`,'err'); return false; }
+  }
+  async function syncToCloud(silent){
+    if(!hasCloudConfig()){ if(!silent) openSettings(); else setStatus(t('noCloud'),'warn'); return false; }
+    syncCloudMirror();
+    state.data.updatedAt=nowText();
+    state.data.version=APP_VERSION;
+    saveCache();
+    try{
+      setStatus(t('sync')+'...','warn');
+      const payload=JSON.parse(JSON.stringify(state.data));
+      const body={ data:payload, sha:state.remoteSha||'', mode:'update-existing-data-json', clientVersion:APP_VERSION };
+      const res=await fetch(cloudUrl(),{method:'POST',headers:{'Content-Type':'application/json','X-App-Password':state.data.settings.cloud.accessPassword},body:JSON.stringify(body)});
+      const json=await res.json();
+      if(!res.ok||json.ok===false) throw new Error(json.error||`HTTP ${res.status}`);
+      rememberRemoteMeta(json);
+      setStatus(t('syncOk')+' · '+nowText(),'ok');
+      return true;
+    }catch(e){ setStatus(`${t('syncFailed')}: ${e.message}`,'err'); return false; }
+  }
   async function verifyCloudConfigSaved(expected){
     try{
       await new Promise(r=>setTimeout(r,800));
