@@ -1,6 +1,6 @@
 {
   "version": "1.1.4",
-  "updatedAt": "2026-05-09 22:06:53",
+  "updatedAt": "2026-05-09 22:07:02",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -49,6 +49,13 @@
       "id": "p_1778353613625_soris8",
       "name": "刘吉成",
       "relation": "家人",
+      "group": "中国",
+      "note": ""
+    },
+    {
+      "id": "p_1778353622705_vuxuxr",
+      "name": "钟修平",
+      "relation": "朋友",
       "group": "中国",
       "note": ""
     }
