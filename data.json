@@ -1,6 +1,6 @@
 {
   "version": "1.1.4",
-  "updatedAt": "2026-05-09 22:06:40",
+  "updatedAt": "2026-05-09 22:06:53",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -41,6 +41,13 @@
     {
       "id": "p_1778353600973_8axghq",
       "name": "陈菊文",
+      "relation": "家人",
+      "group": "中国",
+      "note": ""
+    },
+    {
+      "id": "p_1778353613625_soris8",
+      "name": "刘吉成",
       "relation": "家人",
       "group": "中国",
       "note": ""
