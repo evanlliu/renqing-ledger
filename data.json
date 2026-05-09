@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:06:25",
+  "updatedAt": "2026-05-10 00:06:37",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -136,6 +136,14 @@
       "id": "p_1778360602556_c03kwq",
       "name": "刘琳",
       "relation": "姐姐",
+      "birthDate": "",
+      "birthCalendar": "solar",
+      "note": ""
+    },
+    {
+      "id": "p_1778360797090_do4vrz",
+      "name": "陈丹",
+      "relation": "表哥",
       "birthDate": "",
       "birthCalendar": "solar",
       "note": ""
