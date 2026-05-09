@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:25:00",
+  "updatedAt": "2026-05-09 23:28:35",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -220,6 +220,25 @@
       "note": "",
       "createdAt": "2026-05-09 23:25:00",
       "updatedAt": "2026-05-09 23:25:00"
+    },
+    {
+      "id": "r_1778358515777_bh9uhw",
+      "date": "2025-06-15",
+      "category": "holiday",
+      "direction": "given",
+      "eventType": "fathers_day",
+      "personId": "p_1778356571974_jphjwd",
+      "personName": "刘吉成",
+      "relation": "爸爸",
+      "ruleId": "",
+      "amount": 200,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 200,
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-09 23:28:35",
+      "updatedAt": "2026-05-09 23:28:35"
     }
   ],
   "deletedRecords": [
