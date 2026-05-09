@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-09 23:59:55",
+  "updatedAt": "2026-05-10 00:01:33",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -424,6 +424,29 @@
       "note": "",
       "createdAt": "2026-05-09 23:59:55",
       "updatedAt": "2026-05-09 23:59:55"
+    },
+    {
+      "id": "r_1778360493032_38uq2w",
+      "date": "2025-08-17",
+      "category": "received",
+      "direction": "received",
+      "eventType": "one_year_old",
+      "personId": "p_1778354442442_7qpjcj",
+      "personName": "刘建邦",
+      "relation": "朋友",
+      "ruleId": "",
+      "amount": 1000,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 1000,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-08-17",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-10 00:01:33",
+      "updatedAt": "2026-05-10 00:01:33"
     }
   ],
   "deletedRecords": [
@@ -450,5 +473,5 @@
       "exchangeRate": 1
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 23:59:25"
+  "cloudConfigSavedAt": "2026-05-10 00:01:10"
 }
