@@ -152,7 +152,9 @@
       .form-grid { grid-template-columns:1fr; gap:10px; }
       .manager-row,.event-row,.category-row,.rule-row,.option-row,.rate-row,.history-row,.trash-row { grid-template-columns:1fr; }
       .manager-row.swipe-row { position:relative; overflow:hidden; touch-action:pan-y; padding-right:8px; }
-      .manager-row.swipe-row .drag-handle { display:flex; }
+      .manager-row.swipe-row { grid-template-columns:42px minmax(0,1fr)!important; align-items:start; }
+      .manager-row.swipe-row .drag-handle { display:flex; grid-column:1; grid-row:1 / span 12; width:38px; height:38px; min-height:38px; align-self:start; }
+      .manager-row.swipe-row > :not(.drag-handle):not(.swipe-delete) { grid-column:2; min-width:0; }
       .manager-row.swipe-row.dragging { z-index:3; }
       .manager-row.swipe-row .swipe-delete { position:absolute; top:8px; bottom:8px; right:8px; width:96px; opacity:0; transform:translateX(112px); z-index:2; }
       .manager-row.swipe-row.swipe-open .swipe-delete { opacity:1; transform:translateX(0); }
@@ -172,7 +174,7 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-title"><h1 data-i18n="appTitle">人情记账本</h1><span class="version">v1.2.2</span></div>
+        <div class="brand-title"><h1 data-i18n="appTitle">人情记账本</h1><span class="version">v1.2.4</span></div>
         <div class="subtitle" data-i18n="subtitle">收人情、封人情、节日红包统一记录</div>
       </div>
       <div class="toolbar">
@@ -375,7 +377,7 @@
 <script>
 (function(){
   'use strict';
-  const APP_VERSION = '1.2.1';
+  const APP_VERSION = '1.2.4';
   const STORAGE_KEY = 'renqingLedgerData_v1';
   const CLOUD_KEY = 'renqingLedgerCloudConfig_v1';
   const DEFAULT_DATA = {
