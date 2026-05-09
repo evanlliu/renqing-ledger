@@ -1,6 +1,6 @@
 {
-  "version": "1.2.4",
-  "updatedAt": "2026-05-09 23:56:39",
+  "version": "1.2.5",
+  "updatedAt": "2026-05-09 23:59:55",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -221,7 +221,10 @@
       "note": "",
       "createdAt": "2026-05-09 22:24:15",
       "updatedAt": "2026-05-09 23:13:13",
-      "age": 53
+      "age": 53,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-05-01",
+      "exchangeRate": 1
     },
     {
       "id": "r_1778355452783_whopmc",
@@ -240,7 +243,10 @@
       "note": "",
       "createdAt": "2026-05-09 22:37:32",
       "updatedAt": "2026-05-09 23:15:41",
-      "age": 56
+      "age": 56,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-11-15",
+      "exchangeRate": 1
     },
     {
       "id": "r_1778358300770_mysqhi",
@@ -259,7 +265,10 @@
       "age": "",
       "note": "",
       "createdAt": "2026-05-09 23:25:00",
-      "updatedAt": "2026-05-09 23:25:00"
+      "updatedAt": "2026-05-09 23:25:00",
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-05-10",
+      "exchangeRate": 1
     },
     {
       "id": "r_1778358515777_bh9uhw",
@@ -278,7 +287,10 @@
       "age": "",
       "note": "",
       "createdAt": "2026-05-09 23:28:35",
-      "updatedAt": "2026-05-09 23:28:35"
+      "updatedAt": "2026-05-09 23:28:35",
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-06-15",
+      "exchangeRate": 1
     },
     {
       "id": "r_1778358606686_6m79rx",
@@ -297,7 +309,10 @@
       "age": "",
       "note": "",
       "createdAt": "2026-05-09 23:30:06",
-      "updatedAt": "2026-05-09 23:30:06"
+      "updatedAt": "2026-05-09 23:30:06",
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-02-17",
+      "exchangeRate": 1
     },
     {
       "id": "r_1778358617874_vqwjld",
@@ -316,7 +331,10 @@
       "age": "",
       "note": "",
       "createdAt": "2026-05-09 23:30:17",
-      "updatedAt": "2026-05-09 23:30:17"
+      "updatedAt": "2026-05-09 23:30:17",
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-02-17",
+      "exchangeRate": 1
     },
     {
       "id": "r_1778358686357_v3gk45",
@@ -335,7 +353,10 @@
       "age": "",
       "note": "",
       "createdAt": "2026-05-09 23:31:26",
-      "updatedAt": "2026-05-09 23:31:26"
+      "updatedAt": "2026-05-09 23:31:26",
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-02-17",
+      "exchangeRate": 1
     },
     {
       "id": "r_1778358811952_khoewf",
@@ -354,7 +375,10 @@
       "age": "",
       "note": "",
       "createdAt": "2026-05-09 23:33:31",
-      "updatedAt": "2026-05-09 23:33:31"
+      "updatedAt": "2026-05-09 23:33:31",
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-02-17",
+      "exchangeRate": 1
     },
     {
       "id": "r_1778359571948_tvhode",
@@ -373,7 +397,33 @@
       "age": "",
       "note": "",
       "createdAt": "2026-05-09 23:46:11",
-      "updatedAt": "2026-05-09 23:46:11"
+      "updatedAt": "2026-05-09 23:46:11",
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-08-17",
+      "exchangeRate": 1
+    },
+    {
+      "id": "r_1778360394674_1kqbxj",
+      "date": "2025-08-17",
+      "category": "received",
+      "direction": "received",
+      "eventType": "one_year_old",
+      "personId": "p_1778359603953_xqjaf0",
+      "personName": "黄超",
+      "relation": "朋友",
+      "ruleId": "",
+      "amount": 8190,
+      "currency": "TRY",
+      "returnAmount": 0,
+      "actualAmount": 8190,
+      "exchangeRate": 0.22,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-08-17",
+      "exchangeRateSource": "manual",
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-09 23:59:55",
+      "updatedAt": "2026-05-09 23:59:55"
     }
   ],
   "deletedRecords": [
@@ -394,8 +444,11 @@
       "note": "",
       "createdAt": "2026-05-09 22:25:38",
       "updatedAt": "2026-05-09 22:25:38",
-      "deletedAt": "2026-05-09 22:26:03"
+      "deletedAt": "2026-05-09 22:26:03",
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-05-09",
+      "exchangeRate": 1
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 23:56:20"
+  "cloudConfigSavedAt": "2026-05-09 23:59:25"
 }
