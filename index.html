@@ -20,7 +20,10 @@
     html, body { width:100%; min-height:100%; max-width:100%; overflow-x:hidden; background:var(--bg); color:var(--text); }
     body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif; touch-action:pan-y; overscroll-behavior-x:none; }
     body.modal-open { overflow:hidden; }
-    button,input,select,textarea { font:inherit; font-size:16px; min-width:0; }
+    button,input,select,textarea { font:inherit; font-size:16px; min-width:0; max-width:100%; }
+    input[type="date"], input[type="datetime-local"], input[type="month"], input[type="time"] { width:100%; min-width:0!important; max-width:100%!important; inline-size:100%; max-inline-size:100%; box-sizing:border-box; -webkit-appearance:none; appearance:none; }
+    input[type="date"]::-webkit-date-and-time-value, input[type="datetime-local"]::-webkit-date-and-time-value, input[type="month"]::-webkit-date-and-time-value, input[type="time"]::-webkit-date-and-time-value { text-align:left; min-width:0; }
+    input[type="date"]::-webkit-calendar-picker-indicator { margin-left:4px; flex-shrink:0; }
     button { border:none; cursor:pointer; }
     .app-shell { width:100%; max-width:1240px; margin:0 auto; padding:calc(14px + var(--safe-top)) 16px calc(82px + var(--safe-bottom)); overflow-x:hidden; }
     .topbar { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; position:relative; }
@@ -51,7 +54,8 @@
     .panel { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
     .filter-panel { padding:12px; margin-bottom:12px; }
     .filter-grid { display:grid; grid-template-columns:1.2fr .75fr .75fr .85fr .85fr auto; gap:8px; align-items:center; }
-    .field { display:grid; gap:5px; min-width:0; }
+    .field { display:grid; gap:5px; min-width:0; max-width:100%; }
+    .field > .input,.field > .select,.field > .textarea { min-width:0; max-width:100%; }
     .field label { color:var(--muted); font-size:12px; font-weight:850; }
     .input,.select,.textarea { width:100%; max-width:100%; border:1px solid var(--line); background:#fff; color:var(--text); border-radius:12px; padding:10px 11px; outline:none; min-height:42px; }
     .input[readonly] { color:#475569; background:#f8fafc; }
@@ -89,7 +93,8 @@
     .modal.large { width:min(1080px,100%); }
     .modal-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line); }
     .modal-title { font-size:18px; font-weight:950; }
-    .modal-body { padding:14px 16px; overflow:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; }
+    .modal-body { padding:14px 16px; overflow:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; max-width:100%; }
+    .modal-body * { max-width:100%; }
     .modal-foot { display:flex; justify-content:flex-end; gap:8px; padding:12px 16px; border-top:1px solid var(--line); background:#fbfcff; flex-wrap:wrap; }
     .form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .form-grid .full { grid-column:1/-1; }
@@ -153,7 +158,7 @@
       .manager-row.swipe-row.swipe-open .swipe-delete { opacity:1; transform:translateX(0); }
       .manager-row.swipe-row.swipe-open > :not(.swipe-delete) { transform:translateX(-104px); }
       .manager-row.swipe-row .input,.manager-row.swipe-row .select { min-width:0; }
-      .input[type="date"] { width:100%; min-width:0; max-width:100%; padding-left:10px; padding-right:6px; }
+      .input[type="date"],.input[type="datetime-local"],.input[type="month"],.input[type="time"] { width:100%!important; min-width:0!important; max-width:100%!important; padding-left:10px; padding-right:6px; }
       .float-actions { position:fixed; right:12px; bottom:calc(14px + var(--safe-bottom)); z-index:40; display:grid; gap:8px; }
       .float-actions .btn { width:46px; height:46px; min-height:46px; border-radius:16px; font-size:20px; box-shadow:var(--shadow); }
       .topbar .toolbar { display:none; }
@@ -167,7 +172,7 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-title"><h1 data-i18n="appTitle">人情记账本</h1><span class="version">v1.2.1</span></div>
+        <div class="brand-title"><h1 data-i18n="appTitle">人情记账本</h1><span class="version">v1.2.2</span></div>
         <div class="subtitle" data-i18n="subtitle">收人情、封人情、节日红包统一记录</div>
       </div>
       <div class="toolbar">
