@@ -1,6 +1,6 @@
 {
   "version": "1.1.5",
-  "updatedAt": "2026-05-09 22:20:30",
+  "updatedAt": "2026-05-09 22:20:42",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -52,6 +52,12 @@
     {
       "id": "p_1778354430339_q89vh6",
       "name": "钟修平",
+      "relation": "朋友",
+      "note": ""
+    },
+    {
+      "id": "p_1778354442442_7qpjcj",
+      "name": "刘建邦",
       "relation": "朋友",
       "note": ""
     }
