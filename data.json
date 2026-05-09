@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:47:12",
+  "updatedAt": "2026-05-09 23:47:56",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -118,6 +118,14 @@
       "name": "易联 Vinson",
       "relation": "朋友",
       "birthDate": "",
+      "birthCalendar": "solar",
+      "note": ""
+    },
+    {
+      "id": "p_1778359676740_3q5sll",
+      "name": "刘泽楠",
+      "relation": "其他",
+      "birthDate": "2026-05-09",
       "birthCalendar": "solar",
       "note": ""
     }
