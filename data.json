@@ -1,8 +1,8 @@
 {
-  "version": "1.1.5",
-  "updatedAt": "2026-05-09 22:26:03",
+  "version": "1.1.7",
+  "updatedAt": "2026-05-09 22:34:23",
   "settings": {
-    "language": "zh",
+    "language": "en",
     "defaultCurrency": "CNY",
     "baseCurrency": "CNY",
     "cloud": {
@@ -29,6 +29,32 @@
     "邻居",
     "其他",
     "奶奶"
+  ],
+  "categoryTypes": [
+    {
+      "code": "received",
+      "zh": "收人情",
+      "en": "Received Gifts",
+      "defaultDirection": "received"
+    },
+    {
+      "code": "given",
+      "zh": "封人情",
+      "en": "Given Gifts",
+      "defaultDirection": "given"
+    },
+    {
+      "code": "holiday",
+      "zh": "节日人情",
+      "en": "Holiday Gifts",
+      "defaultDirection": "given"
+    },
+    {
+      "code": "red_packet",
+      "zh": "过年红包",
+      "en": "New Year Red Packets",
+      "defaultDirection": "given"
+    }
   ],
   "people": [
     {
@@ -169,5 +195,5 @@
       "deletedAt": "2026-05-09 22:26:03"
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 22:23:21"
+  "cloudConfigSavedAt": "2026-05-09 22:33:46"
 }
