@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:21:54",
+  "updatedAt": "2026-05-09 23:21:58",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -121,7 +121,7 @@
     {
       "code": "holiday",
       "zh": "",
-      "en": "Holiday"
+      "en": "母亲节"
     },
     {
       "code": "new_year",
