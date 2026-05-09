@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:01:33",
+  "updatedAt": "2026-05-10 00:01:42",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -435,10 +435,10 @@
       "personName": "刘建邦",
       "relation": "朋友",
       "ruleId": "",
-      "amount": 1000,
+      "amount": 1750,
       "currency": "CNY",
       "returnAmount": 0,
-      "actualAmount": 1000,
+      "actualAmount": 1750,
       "exchangeRate": 1,
       "exchangeRateBase": "CNY",
       "exchangeRateDate": "2025-08-17",
@@ -446,7 +446,7 @@
       "age": "",
       "note": "",
       "createdAt": "2026-05-10 00:01:33",
-      "updatedAt": "2026-05-10 00:01:33"
+      "updatedAt": "2026-05-10 00:01:42"
     }
   ],
   "deletedRecords": [
