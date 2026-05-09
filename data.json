@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:01:42",
+  "updatedAt": "2026-05-10 00:01:49",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -447,6 +447,29 @@
       "note": "",
       "createdAt": "2026-05-10 00:01:33",
       "updatedAt": "2026-05-10 00:01:42"
+    },
+    {
+      "id": "r_1778360509766_b70x13",
+      "date": "2025-08-17",
+      "category": "received",
+      "direction": "received",
+      "eventType": "one_year_old",
+      "personId": "p_1778359632983_hr8lh9",
+      "personName": "易联 Vinson",
+      "relation": "朋友",
+      "ruleId": "",
+      "amount": 1750,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 1750,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-08-17",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-10 00:01:49",
+      "updatedAt": "2026-05-10 00:01:49"
     }
   ],
   "deletedRecords": [
