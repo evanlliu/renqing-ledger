@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:50:52",
+  "updatedAt": "2026-05-09 23:50:53",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -21,10 +21,10 @@
     "accessPassword": "1123"
   },
   "relationOptions": [
-    "妈妈",
     "爸爸",
-    "外甥女",
+    "妈妈",
     "奶奶",
+    "外甥女",
     "同学",
     "邻居",
     "朋友",
