@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:24:30",
+  "updatedAt": "2026-05-09 23:25:00",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -201,6 +201,25 @@
       "createdAt": "2026-05-09 22:37:32",
       "updatedAt": "2026-05-09 23:15:41",
       "age": 56
+    },
+    {
+      "id": "r_1778358300770_mysqhi",
+      "date": "2026-05-10",
+      "category": "holiday",
+      "direction": "given",
+      "eventType": "mothers_day",
+      "personId": "p_1778357505281_d7302t",
+      "personName": "陈菊文",
+      "relation": "妈妈",
+      "ruleId": "",
+      "amount": 200,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 200,
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-09 23:25:00",
+      "updatedAt": "2026-05-09 23:25:00"
     }
   ],
   "deletedRecords": [
@@ -224,5 +243,5 @@
       "deletedAt": "2026-05-09 22:26:03"
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 23:24:23"
+  "cloudConfigSavedAt": "2026-05-09 23:24:34"
 }
