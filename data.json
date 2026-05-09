@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:22:56",
+  "updatedAt": "2026-05-09 23:23:02",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -121,7 +121,7 @@
     {
       "code": "mothers_day",
       "zh": "母亲节",
-      "en": "母亲节"
+      "en": "Mother's Day"
     },
     {
       "code": "new_year",
