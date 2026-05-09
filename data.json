@@ -1,6 +1,6 @@
 {
   "version": "1.1.5",
-  "updatedAt": "2026-05-09 22:18:49",
+  "updatedAt": "2026-05-09 22:19:03",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -27,7 +27,8 @@
     "同事",
     "同学",
     "邻居",
-    "其他"
+    "其他",
+    "奶奶"
   ],
   "people": [],
   "eventTypes": [
