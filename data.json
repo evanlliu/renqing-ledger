@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:28:35",
+  "updatedAt": "2026-05-09 23:30:06",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -239,6 +239,25 @@
       "note": "",
       "createdAt": "2026-05-09 23:28:35",
       "updatedAt": "2026-05-09 23:28:35"
+    },
+    {
+      "id": "r_1778358606686_6m79rx",
+      "date": "2026-02-17",
+      "category": "red_packet",
+      "direction": "given",
+      "eventType": "new_year",
+      "personId": "p_1778357505281_d7302t",
+      "personName": "陈菊文",
+      "relation": "妈妈",
+      "ruleId": "",
+      "amount": 2888,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 2888,
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-09 23:30:06",
+      "updatedAt": "2026-05-09 23:30:06"
     }
   ],
   "deletedRecords": [
