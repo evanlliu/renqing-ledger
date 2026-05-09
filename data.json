@@ -1,14 +1,13 @@
 {
   "version": "1.1.4",
-  "updatedAt": "",
+  "updatedAt": "2026-05-09 22:03:55",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
     "baseCurrency": "CNY",
     "cloud": {
-      "cloudflareWorkerUrl": "",
-      "accessPassword": "",
-      "savedAt": ""
+      "cloudflareWorkerUrl": "https://renqing-ledger-data-worker.287418456.workers.dev/",
+      "accessPassword": "1123"
     },
     "exchangeRates": {
       "CNY": 1,
@@ -16,6 +15,10 @@
       "USD": 7.2,
       "EUR": 7.8
     }
+  },
+  "cloudConfig": {
+    "cloudflareWorkerUrl": "https://renqing-ledger-data-worker.287418456.workers.dev/",
+    "accessPassword": "1123"
   },
   "relationOptions": [
     "家人",
@@ -103,9 +106,5 @@
   ],
   "records": [],
   "deletedRecords": [],
-  "cloudConfig": {
-    "cloudflareWorkerUrl": "",
-    "accessPassword": ""
-  },
-  "cloudConfigSavedAt": ""
+  "cloudConfigSavedAt": "2026-05-09 22:03:55"
 }
