@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:11:03",
+  "updatedAt": "2026-05-09 23:11:06",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -57,20 +57,20 @@
   ],
   "people": [
     {
-      "id": "p_1778354430339_q89vh6",
-      "name": "钟修平",
-      "relation": "朋友",
-      "note": "",
-      "birthDate": "",
-      "birthCalendar": "solar"
-    },
-    {
       "id": "p_1778356571974_jphjwd",
       "name": "刘吉成",
       "relation": "爸爸",
       "birthDate": "1968-09-26",
       "birthCalendar": "lunar",
       "note": ""
+    },
+    {
+      "id": "p_1778354430339_q89vh6",
+      "name": "钟修平",
+      "relation": "朋友",
+      "note": "",
+      "birthDate": "",
+      "birthCalendar": "solar"
     },
     {
       "id": "p_1778354423964_qe2hhh",
