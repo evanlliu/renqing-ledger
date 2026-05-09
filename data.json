@@ -1,6 +1,6 @@
 {
   "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:03:22",
+  "updatedAt": "2026-05-10 00:03:41",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -501,6 +501,29 @@
       "note": "",
       "createdAt": "2026-05-10 00:02:42",
       "updatedAt": "2026-05-10 00:02:42"
+    },
+    {
+      "id": "r_1778360621178_eegf4u",
+      "date": "2025-08-17",
+      "category": "received",
+      "direction": "received",
+      "eventType": "marriage",
+      "personId": "p_1778360602556_c03kwq",
+      "personName": "刘琳",
+      "relation": "姐姐",
+      "ruleId": "",
+      "amount": 2000,
+      "currency": "CNY",
+      "returnAmount": 100,
+      "actualAmount": 1900,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-08-17",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-10 00:03:41",
+      "updatedAt": "2026-05-10 00:03:41"
     }
   ],
   "deletedRecords": [
