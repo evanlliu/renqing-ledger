@@ -1,6 +1,6 @@
 {
   "version": "1.1.5",
-  "updatedAt": "2026-05-09 22:22:26",
+  "updatedAt": "2026-05-09 22:22:44",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -79,7 +79,7 @@
       "en": "Full Moon"
     },
     {
-      "code": "birthday",
+      "code": "bigbirthday",
       "zh": "大生日",
       "en": "Big Birthday"
     },
