@@ -1,6 +1,6 @@
 {
   "version": "1.1.5",
-  "updatedAt": "2026-05-09 22:24:15",
+  "updatedAt": "2026-05-09 22:25:38",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -146,6 +146,24 @@
       "note": "",
       "createdAt": "2026-05-09 22:24:15",
       "updatedAt": "2026-05-09 22:24:15"
+    },
+    {
+      "id": "r_1778354738282_cn0imy",
+      "date": "2026-05-09",
+      "category": "holiday",
+      "direction": "given",
+      "eventType": "big_birthday",
+      "personId": "p_1778354410871_nnhqx9",
+      "personName": "陈菊文",
+      "relation": "妈妈",
+      "ruleId": "",
+      "amount": 1000,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 1000,
+      "note": "",
+      "createdAt": "2026-05-09 22:25:38",
+      "updatedAt": "2026-05-09 22:25:38"
     }
   ],
   "deletedRecords": [],
