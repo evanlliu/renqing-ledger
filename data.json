@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:11:50",
+  "updatedAt": "2026-05-09 23:11:53",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -65,20 +65,20 @@
       "note": ""
     },
     {
-      "id": "p_1778354423964_qe2hhh",
-      "name": "奶奶",
-      "relation": "奶奶",
-      "note": "",
-      "birthDate": "",
-      "birthCalendar": "solar"
-    },
-    {
       "id": "p_1778357505281_d7302t",
       "name": "陈菊文",
       "relation": "妈妈",
       "birthDate": "2026-05-09",
       "birthCalendar": "lunar",
       "note": ""
+    },
+    {
+      "id": "p_1778354423964_qe2hhh",
+      "name": "奶奶",
+      "relation": "奶奶",
+      "note": "",
+      "birthDate": "",
+      "birthCalendar": "solar"
     },
     {
       "id": "p_1778354430339_q89vh6",
