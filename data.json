@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:13:13",
+  "updatedAt": "2026-05-09 23:13:20",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -194,7 +194,8 @@
       "actualAmount": 500,
       "note": "",
       "createdAt": "2026-05-09 22:37:32",
-      "updatedAt": "2026-05-09 22:37:32"
+      "updatedAt": "2026-05-09 23:13:20",
+      "age": 57
     }
   ],
   "deletedRecords": [
