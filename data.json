@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:41:13",
+  "updatedAt": "2026-05-09 23:41:15",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -108,14 +108,14 @@
   ],
   "eventTypes": [
     {
-      "code": "baby_birth",
-      "zh": "宝宝出生",
-      "en": "Baby Birth"
-    },
-    {
       "code": "full_moon",
       "zh": "宝宝满月",
       "en": "Full Moon"
+    },
+    {
+      "code": "baby_birth",
+      "zh": "宝宝出生",
+      "en": "Baby Birth"
     },
     {
       "code": "marriage",
