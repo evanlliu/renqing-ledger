@@ -1,6 +1,6 @@
 {
   "version": "1.1.5",
-  "updatedAt": "2026-05-09 22:19:35",
+  "updatedAt": "2026-05-09 22:20:10",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -30,7 +30,14 @@
     "其他",
     "奶奶"
   ],
-  "people": [],
+  "people": [
+    {
+      "id": "p_1778354410871_nnhqx9",
+      "name": "陈菊文",
+      "relation": "妈妈",
+      "note": ""
+    }
+  ],
   "eventTypes": [
     {
       "code": "marriage",
