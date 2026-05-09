@@ -1,6 +1,6 @@
 {
   "version": "1.1.8",
-  "updatedAt": "2026-05-09 22:56:11",
+  "updatedAt": "2026-05-09 22:57:12",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -176,7 +176,7 @@
       "actualAmount": 500,
       "note": "",
       "createdAt": "2026-05-09 22:24:15",
-      "updatedAt": "2026-05-09 22:39:51",
+      "updatedAt": "2026-05-09 22:57:12",
       "age": ""
     },
     {
@@ -219,5 +219,5 @@
       "deletedAt": "2026-05-09 22:26:03"
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 22:55:09"
+  "cloudConfigSavedAt": "2026-05-09 22:56:40"
 }
