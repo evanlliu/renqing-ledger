@@ -1,6 +1,6 @@
 {
-  "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:50:53",
+  "version": "1.2.4",
+  "updatedAt": "2026-05-09 23:56:37",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -116,18 +116,18 @@
       "note": ""
     },
     {
-      "id": "p_1778359632983_hr8lh9",
-      "name": "易联 Vinson",
-      "relation": "朋友",
-      "birthDate": "",
-      "birthCalendar": "solar",
-      "note": ""
-    },
-    {
       "id": "p_1778359676740_3q5sll",
       "name": "刘泽楠",
       "relation": "其他",
       "birthDate": "2026-05-09",
+      "birthCalendar": "solar",
+      "note": ""
+    },
+    {
+      "id": "p_1778359632983_hr8lh9",
+      "name": "易联 Vinson",
+      "relation": "朋友",
+      "birthDate": "",
       "birthCalendar": "solar",
       "note": ""
     }
@@ -397,5 +397,5 @@
       "deletedAt": "2026-05-09 22:26:03"
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 23:45:37"
+  "cloudConfigSavedAt": "2026-05-09 23:56:20"
 }
