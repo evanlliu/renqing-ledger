@@ -1,6 +1,6 @@
 {
-  "version": "1.1.7",
-  "updatedAt": "2026-05-09 22:46:45",
+  "version": "1.1.8",
+  "updatedAt": "2026-05-09 22:53:55",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -61,31 +61,33 @@
       "id": "p_1778354410871_nnhqx9",
       "name": "陈菊文",
       "relation": "妈妈",
-      "note": ""
-    },
-    {
-      "id": "p_1778354418906_1jehfc",
-      "name": "刘吉成",
-      "relation": "爸爸",
-      "note": ""
+      "note": "",
+      "birthDate": "2026-05-09",
+      "birthCalendar": "solar"
     },
     {
       "id": "p_1778354423964_qe2hhh",
       "name": "奶奶",
       "relation": "奶奶",
-      "note": ""
+      "note": "",
+      "birthDate": "",
+      "birthCalendar": "solar"
     },
     {
       "id": "p_1778354430339_q89vh6",
       "name": "钟修平",
       "relation": "朋友",
-      "note": ""
+      "note": "",
+      "birthDate": "",
+      "birthCalendar": "solar"
     },
     {
       "id": "p_1778354442442_7qpjcj",
       "name": "刘建邦",
       "relation": "朋友",
-      "note": ""
+      "note": "",
+      "birthDate": "",
+      "birthCalendar": "solar"
     }
   ],
   "eventTypes": [
@@ -166,7 +168,8 @@
       "actualAmount": 500,
       "note": "",
       "createdAt": "2026-05-09 22:24:15",
-      "updatedAt": "2026-05-09 22:39:51"
+      "updatedAt": "2026-05-09 22:39:51",
+      "age": ""
     },
     {
       "id": "r_1778355452783_whopmc",
@@ -208,5 +211,5 @@
       "deletedAt": "2026-05-09 22:26:03"
     }
   ],
-  "cloudConfigSavedAt": "2026-05-09 22:36:56"
+  "cloudConfigSavedAt": "2026-05-09 22:53:47"
 }
