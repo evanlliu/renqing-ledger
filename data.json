@@ -1,6 +1,6 @@
 {
   "version": "1.2.1",
-  "updatedAt": "2026-05-09 23:10:56",
+  "updatedAt": "2026-05-09 23:11:02",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -65,6 +65,14 @@
       "birthCalendar": "solar"
     },
     {
+      "id": "p_1778356571974_jphjwd",
+      "name": "刘吉成",
+      "relation": "爸爸",
+      "birthDate": "1968-09-26",
+      "birthCalendar": "lunar",
+      "note": ""
+    },
+    {
       "id": "p_1778354423964_qe2hhh",
       "name": "奶奶",
       "relation": "奶奶",
@@ -79,14 +87,6 @@
       "note": "",
       "birthDate": "",
       "birthCalendar": "solar"
-    },
-    {
-      "id": "p_1778356571974_jphjwd",
-      "name": "刘吉成",
-      "relation": "爸爸",
-      "birthDate": "1968-09-26",
-      "birthCalendar": "lunar",
-      "note": ""
     }
   ],
   "eventTypes": [
