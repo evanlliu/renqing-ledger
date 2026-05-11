@@ -1,6 +1,6 @@
 {
   "version": "1.2.16",
-  "updatedAt": "2026-05-11 10:01:18",
+  "updatedAt": "2026-05-11 10:03:04",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -153,6 +153,14 @@
       "id": "p_1778360834397_o3um6b",
       "name": "刘江晶",
       "relation": "堂妹",
+      "birthDate": "",
+      "birthCalendar": "solar",
+      "note": ""
+    },
+    {
+      "id": "p_1778482984015_3v3ah5",
+      "name": "吴恒",
+      "relation": "朋友",
       "birthDate": "",
       "birthCalendar": "solar",
       "note": ""
