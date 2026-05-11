@@ -26,7 +26,7 @@
     input[type="date"]::-webkit-calendar-picker-indicator { margin-left:4px; flex-shrink:0; }
     button { border:none; cursor:pointer; }
     .app-shell { width:100%; max-width:1240px; margin:0 auto; padding:calc(14px + var(--safe-top)) 16px calc(82px + var(--safe-bottom)); overflow-x:hidden; }
-    .topbar { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; position:relative; }
+    .topbar { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:7px; position:relative; }
     .brand { min-width:0; }
     .brand-title { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
     .brand h1 { margin:0; font-size:24px; letter-spacing:-.03em; }
@@ -47,7 +47,7 @@
     .sync-dot { width:8px; height:8px; border-radius:99px; background:#94a3b8; flex:0 0 auto; }
     .sync-dot.ok{background:var(--green)} .sync-dot.warn{background:#f59e0b} .sync-dot.err{background:var(--red)}
     .sync-text { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin-bottom:10px; }
+    .cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin-bottom:6px; }
     .stat-card { background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%); border:1px solid var(--line); border-radius:var(--radius); padding:12px; box-shadow:0 8px 20px rgba(15,23,42,.05); min-height:76px; }
     .stat-label { color:var(--muted); font-size:12px; font-weight:800; margin-bottom:8px; }
     .stat-value { font-size:18px; line-height:1.2; font-weight:950; letter-spacing:-.02em; word-break:break-word; }
@@ -142,13 +142,13 @@
     @media (max-width:980px){ .cards{grid-template-columns:repeat(2,minmax(0,1fr));} .filter-grid{grid-template-columns:repeat(3,minmax(0,1fr));} .chart-grid{grid-template-columns:1fr;} }
     @media (max-width:720px){
       .app-shell { padding:calc(8px + var(--safe-top)) 10px calc(76px + var(--safe-bottom)); }
-      .topbar { align-items:flex-start; }
+      .topbar { align-items:flex-start; margin-bottom:5px; }
       .brand h1 { font-size:20px; }
       .brand-title { gap:6px; }
       .top-sync { max-width:calc(100vw - 178px); min-height:26px; padding:4px 7px; font-size:11px; }
       .filter-icon-btn { width:32px; min-width:32px; min-height:30px; }
       .toolbar .text-label { display:none; } .toolbar{gap:6px;} .btn{min-height:36px;padding:7px 9px;border-radius:11px;} .icon-btn{width:38px;min-width:38px;}
-      .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+      .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; margin-bottom:5px; }
       .stat-card { padding:9px 10px; min-height:64px; border-radius:16px; }
       .stat-value { font-size:15px; }
       .filter-panel { left:10px; right:10px; top:calc(58px + var(--safe-top)); width:auto; transform:none; padding:14px; border-radius:20px; box-shadow:0 20px 60px rgba(15,23,42,.22); }
@@ -158,7 +158,7 @@
       .desktop-table { display:none; }
       .mobile-list { display:grid; }
       .table-card { background:transparent; border:none; box-shadow:none; width:100%; overflow-x:hidden; }
-      .table-tools { background:var(--card); border:1px solid var(--line); border-radius:16px; margin-bottom:7px; padding:8px 10px; position:sticky; top:calc(6px + var(--safe-top)); z-index:20; backdrop-filter:blur(8px); }
+      .table-tools { background:var(--card); border:1px solid var(--line); border-radius:16px; margin-bottom:5px; padding:7px 10px; position:sticky; top:calc(6px + var(--safe-top)); z-index:20; backdrop-filter:blur(8px); }
       .mobile-filter-btn { display:inline-flex; }
       .modal-mask { padding:0; align-items:stretch; }
       .modal,.modal.large { width:100%; min-height:100dvh; max-height:100dvh; border-radius:0; }
@@ -196,7 +196,7 @@
       <div class="brand">
         <div class="brand-title">
           <h1 data-i18n="appTitle">人情账</h1>
-          <span class="version">v1.2.11</span>
+          <span class="version">v1.2.12</span>
           <div class="sync-line top-sync"><span class="sync-dot" id="syncDot"></span><span class="sync-text" id="syncText">Loading...</span></div>
           <button class="btn icon-btn filter-icon-btn" id="btnFilter" type="button" title="Filter">🔎</button>
         </div>
@@ -401,7 +401,7 @@
 <script>
 (function(){
   'use strict';
-  const APP_VERSION = '1.2.11';
+  const APP_VERSION = '1.2.12';
   const STORAGE_KEY = 'renqingLedgerData_v1';
   const CLOUD_KEY = 'renqingLedgerCloudConfig_v1';
   const DEFAULT_DATA = {
