@@ -7,6 +7,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="人情账" />
   <meta name="theme-color" content="#f7f8fb" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./app-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./app-icon-192.png" />
+  <link rel="manifest" href="./manifest.webmanifest" />
   <title>人情账 · Gift Ledger</title>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <style>
@@ -142,17 +145,17 @@
     #importFile { display:none; }
     @media (max-width:980px){ .cards{grid-template-columns:repeat(2,minmax(0,1fr));} .filter-grid{grid-template-columns:repeat(3,minmax(0,1fr));} .chart-grid{grid-template-columns:1fr;} }
     @media (max-width:720px){
-      .app-shell { padding:calc(0px + var(--safe-top)) 10px calc(76px + var(--safe-bottom)); }
+      .app-shell { padding:max(2px, calc(var(--safe-top) - 12px)) 10px calc(76px + var(--safe-bottom)); }
       .topbar { align-items:flex-start; margin-bottom:4px; }
       .brand h1 { font-size:20px; }
       .brand-title { gap:6px; }
       .top-sync { max-width:calc(100vw - 178px); min-height:26px; padding:4px 7px; font-size:11px; }
-      .filter-icon-btn { width:32px; min-width:32px; min-height:30px; }
+      .filter-icon-btn { width:34px; min-width:34px; height:34px; min-height:34px; padding:0; border-radius:12px; font-size:16px; align-self:center; }
       .toolbar .text-label { display:none; } .toolbar{gap:6px;} .btn{min-height:36px;padding:7px 9px;border-radius:11px;} .icon-btn{width:38px;min-width:38px;}
       .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; margin-bottom:2px; }
       .stat-card { padding:9px 10px; min-height:64px; border-radius:16px; }
       .stat-value { font-size:15px; }
-      .filter-panel { left:10px; right:10px; top:calc(50px + var(--safe-top)); width:auto; transform:none; padding:14px; border-radius:20px; box-shadow:0 20px 60px rgba(15,23,42,.22); }
+      .filter-panel { left:10px; right:10px; top:max(48px, calc(var(--safe-top) + 36px)); width:auto; transform:none; padding:14px; border-radius:20px; box-shadow:0 20px 60px rgba(15,23,42,.22); }
       .filter-backdrop { background:rgba(15,23,42,.28); }
       .filter-grid { grid-template-columns:1fr 1fr; }
       .filter-grid .filter-keyword { grid-column:1/-1; }
@@ -197,7 +200,7 @@
       <div class="brand">
         <div class="brand-title">
           <h1 data-i18n="appTitle">人情账</h1>
-          <span class="version">v1.2.17</span>
+          <span class="version">v1.2.18</span>
           <div class="sync-line top-sync"><span class="sync-dot" id="syncDot"></span><span class="sync-text" id="syncText">Loading...</span></div>
           <button class="btn icon-btn filter-icon-btn" id="btnFilter" type="button" title="Filter">🔎</button>
         </div>
@@ -402,7 +405,7 @@
 <script>
 (function(){
   'use strict';
-  const APP_VERSION = '1.2.17';
+  const APP_VERSION = '1.2.18';
   const STORAGE_KEY = 'renqingLedgerData_v1';
   const CLOUD_KEY = 'renqingLedgerCloudConfig_v1';
   const DEFAULT_DATA = {
