@@ -1,6 +1,6 @@
 {
   "version": "1.2.16",
-  "updatedAt": "2026-05-11 10:03:04",
+  "updatedAt": "2026-05-11 10:03:22",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -596,6 +596,29 @@
       "note": "",
       "createdAt": "2026-05-10 00:07:39",
       "updatedAt": "2026-05-10 00:07:39"
+    },
+    {
+      "id": "r_1778483002510_4n5swj",
+      "date": "2025-08-17",
+      "category": "received",
+      "direction": "received",
+      "eventType": "marriage",
+      "personId": "p_1778482984015_3v3ah5",
+      "personName": "吴恒",
+      "relation": "朋友",
+      "ruleId": "",
+      "amount": 666,
+      "currency": "CNY",
+      "returnAmount": 100,
+      "actualAmount": 566,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-08-17",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-11 10:03:22",
+      "updatedAt": "2026-05-11 10:03:22"
     }
   ],
   "deletedRecords": [
