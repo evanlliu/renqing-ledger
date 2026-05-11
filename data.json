@@ -1,8 +1,8 @@
 {
-  "version": "1.2.5",
-  "updatedAt": "2026-05-10 00:07:39",
+  "version": "1.2.6",
+  "updatedAt": "2026-05-11 09:06:42",
   "settings": {
-    "language": "zh",
+    "language": "en",
     "defaultCurrency": "CNY",
     "baseCurrency": "CNY",
     "cloud": {
@@ -614,5 +614,5 @@
       "exchangeRate": 1
     }
   ],
-  "cloudConfigSavedAt": "2026-05-10 00:03:08"
+  "cloudConfigSavedAt": "2026-05-11 09:06:23"
 }
