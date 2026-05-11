@@ -1,6 +1,6 @@
 {
   "version": "1.2.16",
-  "updatedAt": "2026-05-11 10:03:22",
+  "updatedAt": "2026-05-11 10:03:37",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -619,6 +619,29 @@
       "note": "",
       "createdAt": "2026-05-11 10:03:22",
       "updatedAt": "2026-05-11 10:03:22"
+    },
+    {
+      "id": "r_1778483017279_z4t1t7",
+      "date": "2025-08-17",
+      "category": "received",
+      "direction": "received",
+      "eventType": "baby_birth",
+      "personId": "p_1778482984015_3v3ah5",
+      "personName": "吴恒",
+      "relation": "朋友",
+      "ruleId": "",
+      "amount": 600,
+      "currency": "CNY",
+      "returnAmount": 100,
+      "actualAmount": 500,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2025-08-17",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "",
+      "createdAt": "2026-05-11 10:03:37",
+      "updatedAt": "2026-05-11 10:03:37"
     }
   ],
   "deletedRecords": [
