@@ -1,8 +1,8 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-05-11 13:12:48",
+  "updatedAt": "2026-05-11 13:12:52",
   "settings": {
-    "language": "zh",
+    "language": "en",
     "defaultCurrency": "CNY",
     "baseCurrency": "CNY",
     "cloud": {
