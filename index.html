@@ -196,7 +196,7 @@
       <div class="brand">
         <div class="brand-title">
           <h1 data-i18n="appTitle">人情账</h1>
-          <span class="version">v1.2.12</span>
+          <span class="version">v1.2.13</span>
           <div class="sync-line top-sync"><span class="sync-dot" id="syncDot"></span><span class="sync-text" id="syncText">Loading...</span></div>
           <button class="btn icon-btn filter-icon-btn" id="btnFilter" type="button" title="Filter">🔎</button>
         </div>
@@ -401,7 +401,7 @@
 <script>
 (function(){
   'use strict';
-  const APP_VERSION = '1.2.12';
+  const APP_VERSION = '1.2.13';
   const STORAGE_KEY = 'renqingLedgerData_v1';
   const CLOUD_KEY = 'renqingLedgerCloudConfig_v1';
   const DEFAULT_DATA = {
@@ -819,12 +819,55 @@ function renderRecords(){
     $('#btnAddRate').attr('type','button').on('click',async function(e){ e.preventDefault(); e.stopPropagation(); const c=($('#rateCurrencyInput').val()||'').trim().toUpperCase(); if(!c)return; let v=num($('#rateValueInput').val()); if(v<=0) v=await fillCurrentRateInput(); if(v<=0) v=rate(c); if(c&&v>0)state.data.settings.exchangeRates[c]=v; $('#rateCurrencyInput,#rateValueInput').val(''); renderRates(); saveAndRender(true); }); $(document).on('change','.rate-currency,.rate-value',function(){ const old=$(this).data('old'), c=($(`.rate-currency[data-old="${old}"]`).val()||old).trim().toUpperCase(), v=num($(`.rate-value[data-old="${old}"]`).val()); delete state.data.settings.exchangeRates[old]; if(c&&v>0)state.data.settings.exchangeRates[c]=v; renderRates(); saveAndRender(true); }); $(document).on('click','.btn-remove-rate',function(){ if(!confirmConfigDelete())return; delete state.data.settings.exchangeRates[$(this).data('currency')]; renderRates(); saveAndRender(true); });
     $(document).on('click','.btn-restore',function(){ const id=$(this).data('id'), i=state.data.deletedRecords.findIndex(r=>r.id===id); if(i<0)return; const [r]=state.data.deletedRecords.splice(i,1); delete r.deletedAt; state.data.records.push(r); renderTrash(); saveAndRender(true); }); $(document).on('click','.btn-permanent',function(){ if(!confirm(t('confirmPermanent')))return; const id=$(this).data('id'); state.data.deletedRecords=state.data.deletedRecords.filter(r=>r.id!==id); renderTrash(); saveAndRender(true); }); $('#btnClearTrash').on('click',()=>{ if(!confirm(t('confirmClearTrash')))return; state.data.deletedRecords=[]; renderTrash(); saveAndRender(true); });
     function updateFloatingActionsVisibility(){ const hide=window.matchMedia('(max-width:720px)').matches && $('.mobile-card.swipe-open').length>0; document.body.classList.toggle('mobile-actions-hidden', hide); }
-    let swipeStartX=0, swipeStartY=0, swipeTarget=null;
-    $(document).on('touchstart','.swipe-row',function(e){ if($(e.target).closest('.drag-handle,.mobile-card-action-btn,.swipe-delete,.btn,.mini-btn,input,select,textarea,button').length)return; const t=e.originalEvent.touches&&e.originalEvent.touches[0]; if(!t)return; swipeStartX=t.clientX; swipeStartY=t.clientY; swipeTarget=this; });
-    $(document).on('touchmove','.swipe-row',function(e){ if(!swipeTarget||swipeTarget!==this)return; const t=e.originalEvent.touches&&e.originalEvent.touches[0]; if(!t)return; const dx=t.clientX-swipeStartX, dy=t.clientY-swipeStartY; if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>18){ if(dx<0){ $('.swipe-row').not(this).removeClass('swipe-open'); $(this).addClass('swipe-open'); updateFloatingActionsVisibility(); } else if(dx>0){ $(this).removeClass('swipe-open'); updateFloatingActionsVisibility(); } } });
-    $(document).on('touchend','.swipe-row',function(e){ if(!swipeTarget||swipeTarget!==this)return; const t=e.originalEvent.changedTouches&&e.originalEvent.changedTouches[0]; if(!t){swipeTarget=null;return;} const dx=t.clientX-swipeStartX, dy=t.clientY-swipeStartY; if(Math.abs(dx)>Math.abs(dy)&&dx<-45){ $('.swipe-row').not(this).removeClass('swipe-open'); $(this).addClass('swipe-open'); } else if(Math.abs(dx)>Math.abs(dy)&&dx>30){ $(this).removeClass('swipe-open'); } updateFloatingActionsVisibility(); swipeTarget=null; });
-    $(document).on('click','.manager-row.swipe-row .input,.manager-row.swipe-row .select',function(){ $('.manager-row.swipe-row').not($(this).closest('.manager-row')).removeClass('swipe-open'); });
-    $(document).on('click','.swipe-delete,.mobile-card-action-btn',function(){ $(this).closest('.swipe-row').removeClass('swipe-open'); updateFloatingActionsVisibility(); });
+    let swipeStartX=0, swipeStartY=0, swipeTarget=null, swipeStartedOnField=false;
+    $(document).on('touchstart','.swipe-row',function(e){
+      if($(e.target).closest('.drag-handle,.mobile-card-action-btn,.swipe-delete,.btn,.mini-btn,button').length) return;
+      const t=e.originalEvent.touches&&e.originalEvent.touches[0];
+      if(!t) return;
+      swipeStartX=t.clientX;
+      swipeStartY=t.clientY;
+      swipeTarget=this;
+      swipeStartedOnField=!!$(e.target).closest('input,select,textarea').length;
+    });
+    $(document).on('touchmove','.swipe-row',function(e){
+      if(!swipeTarget||swipeTarget!==this) return;
+      const t=e.originalEvent.touches&&e.originalEvent.touches[0];
+      if(!t) return;
+      const dx=t.clientX-swipeStartX, dy=t.clientY-swipeStartY;
+      if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>18){
+        if(swipeStartedOnField && e.cancelable) e.preventDefault();
+        if(dx<0){
+          $('.swipe-row').not(this).removeClass('swipe-open');
+          $(this).addClass('swipe-open');
+        }else if(dx>0){
+          $(this).removeClass('swipe-open');
+        }
+        updateFloatingActionsVisibility();
+      }
+    });
+    $(document).on('touchend','.swipe-row',function(e){
+      if(!swipeTarget||swipeTarget!==this) return;
+      const t=e.originalEvent.changedTouches&&e.originalEvent.changedTouches[0];
+      if(!t){ swipeTarget=null; swipeStartedOnField=false; return; }
+      const dx=t.clientX-swipeStartX, dy=t.clientY-swipeStartY;
+      if(Math.abs(dx)>Math.abs(dy)&&dx<-45){
+        $('.swipe-row').not(this).removeClass('swipe-open');
+        $(this).addClass('swipe-open');
+      }else if(Math.abs(dx)>Math.abs(dy)&&dx>30){
+        $(this).removeClass('swipe-open');
+      }
+      updateFloatingActionsVisibility();
+      swipeTarget=null;
+      swipeStartedOnField=false;
+    });
+    $(document).on('click','.manager-row.swipe-row input,.manager-row.swipe-row select,.manager-row.swipe-row textarea',function(){
+      $('.manager-row.swipe-row').not($(this).closest('.manager-row')).removeClass('swipe-open');
+      updateFloatingActionsVisibility();
+    });
+    $(document).on('click','.swipe-delete,.mobile-card-action-btn',function(){
+      $(this).closest('.swipe-row').removeClass('swipe-open');
+      updateFloatingActionsVisibility();
+    });
     let sortState=null;
     $(document).on('pointerdown','.drag-handle',function(e){
       if(!window.matchMedia('(max-width:720px)').matches) return;
