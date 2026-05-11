@@ -28,10 +28,9 @@
     .app-shell { width:100%; max-width:1240px; margin:0 auto; padding:calc(14px + var(--safe-top)) 16px calc(82px + var(--safe-bottom)); overflow-x:hidden; }
     .topbar { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; position:relative; }
     .brand { min-width:0; }
-    .brand-title { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+    .brand-title { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
     .brand h1 { margin:0; font-size:24px; letter-spacing:-.03em; }
-    .version { color:var(--muted); font-size:13px; font-weight:800; }
-    .subtitle { color:var(--muted); font-size:13px; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .version { color:var(--muted); font-size:13px; font-weight:800; flex:0 0 auto; }
     .toolbar { display:flex; align-items:center; gap:8px; flex-shrink:0; }
     .btn { min-height:38px; padding:8px 12px; border-radius:12px; background:var(--solid); color:var(--text); border:1px solid var(--line); box-shadow:0 1px 0 rgba(15,23,42,.03); font-weight:800; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
     .btn.primary { background:var(--primary); color:#fff; border-color:var(--primary); }
@@ -43,6 +42,8 @@
     .more-menu.open { display:grid; gap:6px; }
     .more-menu .btn { width:100%; justify-content:flex-start; }
     .sync-line { display:flex; align-items:center; gap:8px; min-height:34px; padding:7px 10px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.75); color:var(--muted); font-size:13px; margin-bottom:10px; overflow:hidden; }
+    .top-sync { margin-bottom:0; min-height:28px; max-width:420px; padding:5px 9px; font-size:12px; background:rgba(255,255,255,.82); }
+    .filter-icon-btn { min-height:30px; width:34px; min-width:34px; border-radius:12px; font-size:15px; background:var(--primary-soft); color:var(--primary); border-color:#cfe0ff; }
     .sync-dot { width:8px; height:8px; border-radius:99px; background:#94a3b8; flex:0 0 auto; }
     .sync-dot.ok{background:var(--green)} .sync-dot.warn{background:#f59e0b} .sync-dot.err{background:var(--red)}
     .sync-text { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -52,8 +53,11 @@
     .stat-value { font-size:18px; line-height:1.2; font-weight:950; letter-spacing:-.02em; word-break:break-word; }
     .stat-card.in .stat-value{color:var(--green)} .stat-card.out .stat-value{color:var(--red)} .stat-card.net .stat-value{color:var(--primary)}
     .panel { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
-    .filter-panel { padding:12px; margin-bottom:12px; }
-    .filter-grid { display:grid; grid-template-columns:1.2fr .75fr .75fr .85fr .85fr auto; gap:8px; align-items:center; }
+    .filter-panel { display:none; position:fixed; left:50%; top:76px; transform:translateX(-50%); width:min(980px,calc(100vw - 32px)); z-index:61; padding:14px; border-radius:20px; box-shadow:0 20px 60px rgba(15,23,42,.18); }
+    .filter-panel.open { display:block; }
+    .filter-backdrop { position:fixed; inset:0; background:rgba(15,23,42,.18); z-index:60; display:none; }
+    .filter-backdrop.open { display:block; }
+    .filter-grid { display:grid; grid-template-columns:1.2fr .75fr .75fr .85fr .85fr auto; gap:8px; align-items:end; }
     .field { display:grid; gap:5px; min-width:0; max-width:100%; }
     .field > .input,.field > .select,.field > .textarea { min-width:0; max-width:100%; }
     .field label { color:var(--muted); font-size:12px; font-weight:850; }
@@ -77,7 +81,6 @@
     .mini-btn { padding:6px 8px; border-radius:10px; border:1px solid var(--line); background:#fff; color:var(--text); font-weight:850; }
     .mini-btn.danger { color:var(--red); background:var(--red-soft); border-color:#ffd6d6; }
     .mobile-list { display:none; gap:10px; width:100%; overflow-x:hidden; }
-    .filter-backdrop { display:none; }
     .mobile-card { width:100%; max-width:100%; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:12px; box-shadow:0 6px 20px rgba(15,23,42,.04); overflow:hidden; }
     .mobile-card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px; }
     .person-title { font-size:17px; font-weight:950; letter-spacing:-.02em; word-break:break-word; }
@@ -139,15 +142,15 @@
       .app-shell { padding:calc(8px + var(--safe-top)) 10px calc(76px + var(--safe-bottom)); }
       .topbar { align-items:flex-start; }
       .brand h1 { font-size:20px; }
-      .subtitle { max-width:58vw; font-size:12px; }
+      .brand-title { gap:6px; }
+      .top-sync { max-width:calc(100vw - 178px); min-height:26px; padding:4px 7px; font-size:11px; }
+      .filter-icon-btn { width:32px; min-width:32px; min-height:30px; }
       .toolbar .text-label { display:none; } .toolbar{gap:6px;} .btn{min-height:36px;padding:7px 9px;border-radius:11px;} .icon-btn{width:38px;min-width:38px;}
       .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
       .stat-card { padding:10px; min-height:72px; border-radius:16px; }
       .stat-value { font-size:15px; }
-      .filter-panel { display:none; position:fixed; left:10px; right:10px; top:calc(62px + var(--safe-top)); z-index:61; box-shadow:0 20px 60px rgba(15,23,42,.22); padding:14px; border-radius:20px; }
-      .filter-panel.open { display:block; }
-      .filter-backdrop { position:fixed; inset:0; background:rgba(15,23,42,.28); z-index:60; }
-      .filter-backdrop.open { display:block; }
+      .filter-panel { left:10px; right:10px; top:calc(58px + var(--safe-top)); width:auto; transform:none; padding:14px; border-radius:20px; box-shadow:0 20px 60px rgba(15,23,42,.22); }
+      .filter-backdrop { background:rgba(15,23,42,.28); }
       .filter-grid { grid-template-columns:1fr 1fr; }
       .filter-grid .filter-keyword { grid-column:1/-1; }
       .desktop-table { display:none; }
@@ -189,8 +192,12 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-title"><h1 data-i18n="appTitle">人情记账本</h1><span class="version">v1.2.6</span></div>
-        <div class="subtitle hidden" data-i18n="subtitle"></div>
+        <div class="brand-title">
+          <h1 data-i18n="appTitle">人情记账本</h1>
+          <span class="version">v1.2.7</span>
+          <div class="sync-line top-sync"><span class="sync-dot" id="syncDot"></span><span class="sync-text" id="syncText">Loading...</span></div>
+          <button class="btn icon-btn filter-icon-btn" id="btnFilter" type="button" title="Filter">🔎</button>
+        </div>
       </div>
       <div class="toolbar">
         <button class="btn soft" id="btnLang">🌐 <span class="text-label">中文</span></button>
@@ -214,7 +221,6 @@
       </div>
     </header>
 
-    <div class="sync-line"><span class="sync-dot" id="syncDot"></span><span class="sync-text" id="syncText">Loading...</span></div>
     <section class="cards" id="statsCards"></section>
     <div class="filter-backdrop" id="filterBackdrop"></div>
 
@@ -232,7 +238,6 @@
     <section class="table-card panel">
       <div class="table-tools">
         <div><div class="table-title" data-i18n="recordList">记录列表</div><div class="table-count" id="recordCount">0</div></div>
-        <button class="btn mobile-filter-btn" id="btnMobileFilter">🔎 <span data-i18n="filter">筛选</span></button>
       </div>
       <div class="table-wrap desktop-table">
         <table>
@@ -394,7 +399,7 @@
 <script>
 (function(){
   'use strict';
-  const APP_VERSION = '1.2.6';
+  const APP_VERSION = '1.2.7';
   const STORAGE_KEY = 'renqingLedgerData_v1';
   const CLOUD_KEY = 'renqingLedgerCloudConfig_v1';
   const DEFAULT_DATA = {
@@ -691,7 +696,7 @@ function renderRecords(){
     $('#recordsTbody').html(records.map(r=>{ const cls=r.direction==='received'?'in':'out'; return `<tr><td>${esc(r.date)}</td><td><b>${esc(r.personName)}</b></td><td>${esc(r.relation||'')}</td><td><span class="badge ${catClass(r)}">${esc(catLabel(r))}</span></td><td>${esc(eventLabel(r.eventType))}${r.age!==undefined&&r.age!==''?' · '+esc(birthdayAgeText(r.age)):''}</td><td>${esc(dirLabel(r))}</td><td class="amount ${cls}">${esc(money(r.amount,r.currency))}</td><td>${esc(money(r.returnAmount||0,r.currency))}</td><td class="amount ${cls}">${esc(money(calcActual(r),r.currency))}</td><td title="${esc(r.note||'')}">${esc(r.note||'')}</td><td><div class="row-actions"><button class="mini-btn btn-history" data-person="${esc(r.personId)}">${t('history')}</button><button class="mini-btn btn-copy" data-id="${esc(r.id)}">${t('copy')}</button><button class="mini-btn btn-edit" data-id="${esc(r.id)}">${t('edit')}</button><button class="mini-btn danger btn-delete" data-id="${esc(r.id)}">${t('delete')}</button></div></td></tr>`; }).join(''));
     $('#mobileList').html(records.map(r=>{ const cls=r.direction==='received'?'in':'out'; return `<article class="mobile-card swipe-row" data-id="${esc(r.id)}"><div class="mobile-card-body"><div class="mobile-card-top"><div><div class="person-title">${esc(r.personName)}</div><div class="mobile-meta">${esc(r.date)} · ${esc(eventLabel(r.eventType))}${r.age!==undefined&&r.age!==''?' · '+esc(birthdayAgeText(r.age)):''}</div></div><div class="mobile-amount amount ${cls}">${esc(money(calcActual(r),r.currency))}</div></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap"><span class="badge ${catClass(r)}">${esc(catLabel(r))}</span><div class="mobile-meta">${esc(r.relation||'-')}</div></div><div class="mobile-info"><div class="info-box"><div class="info-label">${t('amount')}</div><div class="info-value">${esc(money(r.amount,r.currency))}</div></div><div class="info-box"><div class="info-label">${t('returnAmount')}</div><div class="info-value">${esc(money(r.returnAmount||0,r.currency))}</div></div><div class="info-box"><div class="info-label">${t('currency')}</div><div class="info-value">${esc(r.currency||state.data.settings.defaultCurrency||'CNY')}</div></div></div>${r.note?`<div class="mobile-meta">${esc(r.note)}</div>`:''}</div><div class="mobile-card-actions"><button class="mobile-card-action-btn btn-history" data-person="${esc(r.personId)}">${t('history')}</button><button class="mobile-card-action-btn btn-copy" data-id="${esc(r.id)}">${t('copy')}</button><button class="mobile-card-action-btn btn-edit" data-id="${esc(r.id)}">${t('edit')}</button><button class="mobile-card-action-btn danger btn-delete" data-id="${esc(r.id)}">${t('delete')}</button></div></article>`; }).join(''));
   }
-  function renderI18n(){ document.documentElement.lang=state.data.settings.language==='en'?'en':'zh-CN'; $('[data-i18n]').each(function(){ $(this).text(t($(this).data('i18n'))); }); const subtitle=t('subtitle'); $('.subtitle').text(subtitle).toggleClass('hidden', !subtitle); $('#btnLang .text-label').text(state.data.settings.language==='zh'?'中文':'EN'); $('#filterCategory').html(categoryOptions($('#filterCategory').val()||'all')); $('#filterDirection').html(directionOptions($('#filterDirection').val()||'all',true)); $('#recordCategory').html(categoryFormOptions($('#recordCategory').val()||'received')); $('#recordDirection').html(directionOptions($('#recordDirection').val()||'received',false)); $('#recordEventType').html(eventOptions($('#recordEventType').val())); $('#recordRule').html(ruleOptions($('#recordRule').val())); $('#recordPersonId').html(peopleOptions($('#recordPersonId').val())); $('#personRelationInput').html(optHtml(state.data.relationOptions,$('#personRelationInput').val())); }
+  function renderI18n(){ document.documentElement.lang=state.data.settings.language==='en'?'en':'zh-CN'; $('[data-i18n]').each(function(){ $(this).text(t($(this).data('i18n'))); }); $('#btnLang .text-label').text(state.data.settings.language==='zh'?'中文':'EN'); $('#filterCategory').html(categoryOptions($('#filterCategory').val()||'all')); $('#filterDirection').html(directionOptions($('#filterDirection').val()||'all',true)); $('#recordCategory').html(categoryFormOptions($('#recordCategory').val()||'received')); $('#recordDirection').html(directionOptions($('#recordDirection').val()||'received',false)); $('#recordEventType').html(eventOptions($('#recordEventType').val())); $('#recordRule').html(ruleOptions($('#recordRule').val())); $('#recordPersonId').html(peopleOptions($('#recordPersonId').val())); $('#personRelationInput').html(optHtml(state.data.relationOptions,$('#personRelationInput').val())); }
   function closeMobileFilter(){ $('#filterPanel,#filterBackdrop').removeClass('open'); }
   function renderAll(){ renderI18n(); renderStats(); renderRecords(); }
   let lockedScrollTop=0;
@@ -783,11 +788,11 @@ function renderRecords(){
     else if(kind==='rates') renderRates();
   }
   function bindEvents(){
-    $('#btnAdd,#floatAdd').on('click',openAddRecord); $('#btnMore,#floatMore').on('click',e=>{e.stopPropagation(); closeMobileFilter(); $('#moreMenu').toggleClass('open');}); $(document).on('click',e=>{ if(!$(e.target).closest('#moreMenu,#btnMore,#floatMore').length) $('#moreMenu').removeClass('open'); if(window.matchMedia('(max-width:720px)').matches && $('#filterPanel').hasClass('open') && !$(e.target).closest('#filterPanel,#btnMobileFilter').length) closeMobileFilter(); if(window.matchMedia('(max-width:720px)').matches && !$(e.target).closest('.swipe-row').length) $('.swipe-row').removeClass('swipe-open'); });
+    $('#btnAdd,#floatAdd').on('click',openAddRecord); $('#btnMore,#floatMore').on('click',e=>{e.stopPropagation(); closeMobileFilter(); $('#moreMenu').toggleClass('open');}); $(document).on('click',e=>{ if(!$(e.target).closest('#moreMenu,#btnMore,#floatMore').length) $('#moreMenu').removeClass('open'); if($('#filterPanel').hasClass('open') && !$(e.target).closest('#filterPanel,#btnFilter').length) closeMobileFilter(); if(window.matchMedia('(max-width:720px)').matches && !$(e.target).closest('.swipe-row').length) $('.swipe-row').removeClass('swipe-open'); });
     $('#btnLang,#floatLang').on('click',()=>{state.data.settings.language=state.data.settings.language==='zh'?'en':'zh';saveAndRender(true);}); $('#btnSync,#floatSync').on('click',()=>loadCloudData(false));
     $('#btnSettings').on('click',openSettings); $('#btnPeople').on('click',()=>{renderPeopleManager();openModal('#peopleModal');}); $('#btnOptions').on('click',()=>{renderOptionsManager();openModal('#optionsModal');}); $('#btnCategories').on('click',()=>{renderCategoryManager();openModal('#categoriesModal');}); $('#btnEvents').on('click',()=>{renderEventManager();openModal('#eventsModal');}); $('#btnRules').on('click',()=>{renderRuleManager();openModal('#rulesModal');}); $('#btnRates').on('click',()=>{renderRates();openModal('#ratesModal');}); $('#btnCharts').on('click',()=>{renderCharts();openModal('#chartsModal');}); $('#btnTrash').on('click',()=>{renderTrash();openModal('#trashModal');});
     $('#btnExportCsv').on('click',exportCsv); $('#btnImportCsv').on('click',()=>$('#importFile').click()); $('#importFile').on('change',function(){ if(this.files&&this.files[0]) importCsvFile(this.files[0]); this.value=''; });
-    $('#btnMobileFilter').on('click',e=>{ e.stopPropagation(); $('#filterPanel,#filterBackdrop').toggleClass('open'); }); $('#filterBackdrop').on('click',closeMobileFilter); $('.close-modal').on('click',closeModal); $('.modal-mask').on('click',function(e){if(e.target===this)closeModal();});
+    $('#btnFilter').on('click',e=>{ e.preventDefault(); e.stopPropagation(); $('#filterPanel,#filterBackdrop').toggleClass('open'); }); $('#filterBackdrop').on('click',closeMobileFilter); $('.close-modal').on('click',closeModal); $('.modal-mask').on('click',function(e){if(e.target===this)closeModal();});
     $('#btnSaveRecord').on('click',saveRecord); $('#recordAmount,#recordReturnAmount,#recordCurrency').on('input change',calcRecordPreview); $('#recordPersonId').on('change',fillPersonReadonly); $('#recordEventType,#recordDate').on('change input',updateBirthdayAge); $('#recordCategory').on('change',function(){ syncDirectionByCategory(); if(this.value==='red_packet'&&state.data.redPacketRules.length&&!$('#recordRule').val()) $('#recordRule').val(state.data.redPacketRules[0].id).trigger('change'); }); $('#recordRule').on('change',function(){ const r=state.data.redPacketRules.find(x=>x.id===this.value); if(r){$('#recordAmount').val(r.amount);$('#recordCurrency').html(currencyOptions(r.currency||state.data.settings.defaultCurrency||'CNY')).val(String(r.currency||state.data.settings.defaultCurrency||'CNY').toUpperCase());calcRecordPreview();} });
     $('#filterKeyword,#filterCategory,#filterDirection,#filterStart,#filterEnd').on('input change',renderRecords); $('#btnClearFilter').on('click',()=>{$('#filterKeyword').val('');$('#filterCategory').val('all');$('#filterDirection').val('all');$('#filterStart').val('');$('#filterEnd').val('');renderRecords();});
     $(document).on('click','.btn-edit',function(){ openEditRecord($(this).data('id')); }); $(document).on('click','.btn-copy',function(){ openCopyRecord($(this).data('id')); }); $(document).on('click','.btn-delete',function(){ deleteRecord($(this).data('id')); }); $(document).on('click','.btn-history',function(){ openHistory($(this).data('person')); });
