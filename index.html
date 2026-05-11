@@ -47,8 +47,8 @@
     .sync-dot { width:8px; height:8px; border-radius:99px; background:#94a3b8; flex:0 0 auto; }
     .sync-dot.ok{background:var(--green)} .sync-dot.warn{background:#f59e0b} .sync-dot.err{background:var(--red)}
     .sync-text { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-bottom:12px; }
-    .stat-card { background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%); border:1px solid var(--line); border-radius:var(--radius); padding:14px; box-shadow:0 10px 24px rgba(15,23,42,.05); min-height:84px; }
+    .cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin-bottom:10px; }
+    .stat-card { background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%); border:1px solid var(--line); border-radius:var(--radius); padding:12px; box-shadow:0 8px 20px rgba(15,23,42,.05); min-height:76px; }
     .stat-label { color:var(--muted); font-size:12px; font-weight:800; margin-bottom:8px; }
     .stat-value { font-size:18px; line-height:1.2; font-weight:950; letter-spacing:-.02em; word-break:break-word; }
     .stat-card.in .stat-value{color:var(--green)} .stat-card.out .stat-value{color:var(--red)} .stat-card.net .stat-value{color:var(--primary)}
@@ -67,9 +67,9 @@
     .input:focus,.select:focus,.textarea:focus { border-color:#93b4ff; box-shadow:0 0 0 3px rgba(37,99,235,.10); }
     .table-card { overflow:hidden; }
     .table-tools { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px; border-bottom:1px solid var(--line); }
-    .table-title-line { display:flex; align-items:center; gap:6px; min-width:0; }
     .table-title { font-weight:950; }
-    .table-count { color:var(--muted); font-size:13px; font-weight:850; }
+    .record-title-row { display:flex; align-items:baseline; gap:7px; flex-wrap:wrap; }
+    .table-count { color:var(--muted); font-size:13px; }
     .table-wrap { overflow-x:auto; }
     table { width:100%; border-collapse:collapse; min-width:1100px; }
     th,td { padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:middle; white-space:nowrap; }
@@ -81,23 +81,23 @@
     .row-actions { display:flex; gap:6px; flex-wrap:wrap; }
     .mini-btn { padding:6px 8px; border-radius:10px; border:1px solid var(--line); background:#fff; color:var(--text); font-weight:850; }
     .mini-btn.danger { color:var(--red); background:var(--red-soft); border-color:#ffd6d6; }
-    .mobile-list { display:none; gap:6px; width:100%; overflow-x:hidden; }
-    .mobile-card { width:100%; max-width:100%; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:8px; box-shadow:0 4px 14px rgba(15,23,42,.035); overflow:hidden; }
+    .mobile-list { display:none; gap:7px; width:100%; overflow-x:hidden; }
+    .mobile-card { width:100%; max-width:100%; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:12px; box-shadow:0 6px 20px rgba(15,23,42,.04); overflow:hidden; }
     .mobile-card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:5px; }
-    .person-title { font-size:16px; font-weight:950; letter-spacing:-.02em; word-break:break-word; line-height:1.15; }
-    .mobile-meta { color:var(--muted); font-size:12px; margin-top:2px; word-break:break-word; line-height:1.25; }
+    .person-title { font-size:16px; font-weight:950; letter-spacing:-.02em; word-break:break-word; }
+    .mobile-meta { color:var(--muted); font-size:12px; margin-top:2px; word-break:break-word; }
     .mobile-amount { font-size:16px; font-weight:950; white-space:nowrap; }
-    .mobile-info { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; margin:6px 0; }
+    .mobile-info { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; margin:6px 0 4px; }
     .mobile-card.swipe-row { position:relative; overflow:hidden; padding:0; }
-    .mobile-card-body { padding:8px; transition:transform .18s ease; }
-    .mobile-card-actions { position:absolute; top:0; right:0; bottom:0; width:148px; display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:8px; background:linear-gradient(180deg,#f8fbff 0%,#eef4ff 100%); border-left:1px solid #dbe7ff; opacity:0; transform:translateX(148px); transition:transform .18s ease, opacity .18s ease; align-content:center; }
+    .mobile-card-body { padding:9px 10px; transition:transform .18s ease; }
+    .mobile-card-actions { position:absolute; top:0; right:0; bottom:0; width:148px; display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:9px; background:linear-gradient(180deg,#f8fbff 0%,#eef4ff 100%); border-left:1px solid #dbe7ff; opacity:0; transform:translateX(148px); transition:transform .18s ease, opacity .18s ease; align-content:center; }
     .mobile-card.swipe-open .mobile-card-body { transform:translateX(-144px); }
     .mobile-card.swipe-open .mobile-card-actions { transform:translateX(0); opacity:1; }
-    .mobile-card-action-btn { min-height:36px; border-radius:10px; border:1px solid var(--line); background:#fff; font-size:12px; font-weight:900; padding:4px 5px; }
+    .mobile-card-action-btn { min-height:34px; border-radius:10px; border:1px solid var(--line); background:#fff; font-size:12px; font-weight:900; }
     .mobile-card-action-btn.danger { color:var(--red); background:var(--red-soft); border-color:#ffd6d6; }
-    .info-box { border-radius:10px; background:#f8fafc; padding:5px 6px; min-width:0; }
-    .info-label { color:var(--muted); font-size:10px; font-weight:850; margin-bottom:1px; line-height:1.1; }
-    .info-value { font-weight:850; font-size:12px; word-break:break-word; line-height:1.15; }
+    .info-box { border-radius:12px; background:#f8fafc; padding:5px 6px; min-width:0; }
+    .info-label { color:var(--muted); font-size:10px; font-weight:850; margin-bottom:1px; }
+    .info-value { font-weight:850; font-size:12px; word-break:break-word; line-height:1.2; }
     .empty { text-align:center; padding:32px 12px; color:var(--muted); }
     .modal-mask { position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center; background:rgba(15,23,42,.45); padding:calc(16px + var(--safe-top)) 16px calc(16px + var(--safe-bottom)); }
     .modal-mask.open { display:flex; touch-action:none; overscroll-behavior:contain; }
@@ -135,6 +135,7 @@
     .bar-fill { height:100%; border-radius:99px; background:var(--primary); min-width:2px; }
     .bar-value { color:var(--muted); white-space:nowrap; }
     .float-actions { display:none; }
+    body.mobile-actions-hidden .float-actions { display:none!important; }
     .mobile-filter-btn { display:none; }
     .hidden { display:none!important; }
     #importFile { display:none; }
@@ -147,8 +148,8 @@
       .top-sync { max-width:calc(100vw - 178px); min-height:26px; padding:4px 7px; font-size:11px; }
       .filter-icon-btn { width:32px; min-width:32px; min-height:30px; }
       .toolbar .text-label { display:none; } .toolbar{gap:6px;} .btn{min-height:36px;padding:7px 9px;border-radius:11px;} .icon-btn{width:38px;min-width:38px;}
-      .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
-      .stat-card { padding:10px; min-height:72px; border-radius:16px; }
+      .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+      .stat-card { padding:9px 10px; min-height:64px; border-radius:16px; }
       .stat-value { font-size:15px; }
       .filter-panel { left:10px; right:10px; top:calc(58px + var(--safe-top)); width:auto; transform:none; padding:14px; border-radius:20px; box-shadow:0 20px 60px rgba(15,23,42,.22); }
       .filter-backdrop { background:rgba(15,23,42,.28); }
@@ -157,7 +158,7 @@
       .desktop-table { display:none; }
       .mobile-list { display:grid; }
       .table-card { background:transparent; border:none; box-shadow:none; width:100%; overflow-x:hidden; }
-      .table-tools { background:var(--card); border:1px solid var(--line); border-radius:18px; margin-bottom:10px; padding:10px; position:sticky; top:calc(6px + var(--safe-top)); z-index:20; backdrop-filter:blur(8px); }
+      .table-tools { background:var(--card); border:1px solid var(--line); border-radius:16px; margin-bottom:7px; padding:8px 10px; position:sticky; top:calc(6px + var(--safe-top)); z-index:20; backdrop-filter:blur(8px); }
       .mobile-filter-btn { display:inline-flex; }
       .modal-mask { padding:0; align-items:stretch; }
       .modal,.modal.large { width:100%; min-height:100dvh; max-height:100dvh; border-radius:0; }
@@ -175,20 +176,15 @@
       .manager-row.swipe-row.swipe-open > :not(.swipe-delete) { transform:translateX(-104px); }
       .manager-row.swipe-row .input,.manager-row.swipe-row .select { min-width:0; }
       .input[type="date"],.input[type="datetime-local"],.input[type="month"],.input[type="time"] { width:100%!important; min-width:0!important; max-width:100%!important; padding-left:10px; padding-right:6px; }
-      .float-actions { display:none!important; }
+      .float-actions { position:fixed; right:12px; bottom:calc(14px + var(--safe-bottom)); z-index:40; display:grid; gap:8px; }
       .float-actions .btn { width:46px; height:46px; min-height:46px; border-radius:16px; font-size:20px; box-shadow:var(--shadow); }
-      .topbar .toolbar { display:flex; gap:6px; flex:0 0 auto; }
-      .topbar .toolbar .btn { width:34px; height:34px; min-height:34px; padding:0; border-radius:12px; justify-content:center; font-size:16px; }
-      .topbar .toolbar .text-label { display:none; }
+      .topbar .toolbar { display:none; }
       .more-menu { position:fixed; right:12px; bottom:calc(216px + var(--safe-bottom)); top:auto; width:240px; max-height:56vh; overflow:auto; z-index:80; }
       .bar-row { grid-template-columns:88px 1fr; }
-      .mobile-card { border-radius:14px; }
+      .mobile-card { border-radius:15px; }
       .mobile-card-top { align-items:center; }
-      .mobile-amount { font-size:16px; }
-      .badge { padding:3px 7px; font-size:11px; }
-      .table-card { margin-bottom:6px; }
-      .table-tools { padding:8px 10px; }
-      .float-actions { display:none!important; }
+      .mobile-amount { font-size:15px; }
+      .float-actions { right:10px; bottom:calc(12px + var(--safe-bottom)); }
       .float-actions .btn { width:44px; height:44px; min-height:44px; border-radius:15px; }
       .bar-value { grid-column:2; }
     }
@@ -200,7 +196,7 @@
       <div class="brand">
         <div class="brand-title">
           <h1 data-i18n="appTitle">人情账</h1>
-          <span class="version">v1.2.10</span>
+          <span class="version">v1.2.11</span>
           <div class="sync-line top-sync"><span class="sync-dot" id="syncDot"></span><span class="sync-text" id="syncText">Loading...</span></div>
           <button class="btn icon-btn filter-icon-btn" id="btnFilter" type="button" title="Filter">🔎</button>
         </div>
@@ -243,7 +239,7 @@
 
     <section class="table-card panel">
       <div class="table-tools">
-        <div class="table-title-line"><span class="table-title" data-i18n="recordList">记录列表</span><span class="table-count" id="recordCount">0</span></div>
+        <div class="record-title-row"><div class="table-title" data-i18n="recordList">记录列表</div><div class="table-count" id="recordCount">0</div></div>
       </div>
       <div class="table-wrap desktop-table">
         <table>
@@ -405,7 +401,7 @@
 <script>
 (function(){
   'use strict';
-  const APP_VERSION = '1.2.10';
+  const APP_VERSION = '1.2.11';
   const STORAGE_KEY = 'renqingLedgerData_v1';
   const CLOUD_KEY = 'renqingLedgerCloudConfig_v1';
   const DEFAULT_DATA = {
@@ -431,8 +427,8 @@
     records: [], deletedRecords: []
   };
   const I18N = {
-    zh: { appTitle:'人情账', subtitle:'', sync:'同步', addRecord:'新增', editRecord:'编辑记录', settings:'设置', peopleManage:'人员管理', optionManage:'关系配置', categoryManage:'分类配置', eventManage:'类型管理', ruleManage:'红包规则', rateManage:'汇率设置', chartStats:'统计图表', trash:'回收站', exportCsv:'导出CSV', importCsv:'导入CSV', downloadData:'下载数据', keyword:'关键词', category:'分类', direction:'方向', startDate:'开始日期', endDate:'结束日期', clear:'清空', filter:'筛选', recordList:'记录列表', date:'日期', person:'姓名', relation:'关系', eventType:'事件类型', birthDate:'出生日期', birthCalendar:'日期类型', solar:'公历', lunar:'农历', age:'年龄', birthdayAge:'生日年龄', amount:'金额', returnAmount:'回礼金额', actualAmount:'实际金额', note:'备注', actions:'操作', currency:'货币', redPacketRule:'红包规则', cancel:'取消', save:'保存', close:'关闭', add:'添加', language:'语言', cloudflareUrl:'Cloudflare Worker 地址', accessPassword:'访问密码', defaultCurrency:'默认货币', baseCurrency:'折算基准货币', settingsTip:'设置会保存到 data.json，也会在本设备缓存一份。iOS 主屏幕应用和 Safari 的缓存是分开的，所以新设备/主屏幕主要依赖 data.json 中的云配置。访问密码必须和 Cloudflare Worker 变量 APP_PASSWORD 一致。', ruleName:'规则名称', newRelation:'新增关系', relationOptions:'关系配置', categoryOptions:'分类配置', newCategory:'新增分类', defaultDirection:'默认方向', rateToBase:'折算汇率', fetchCurrentRate:'获取当前汇率', rateFetchFailed:'获取汇率失败，已使用手动/默认汇率', rateAutoFilled:'已填入当前汇率', rateTip:'汇率用于统计折算：1 外币 = 多少基准货币。添加货币时可自动获取当前汇率；新增记录保存时会按记录日期+货币保存当日折算汇率。', personHistory:'个人历史', restore:'恢复', permanentDelete:'彻底删除', clearTrash:'清空回收站', all:'全部', received:'收人情', given:'封人情', holiday:'节日人情', red_packet:'过年红包', income:'收入', expense:'支出', net:'净额', totalRecords:'记录数', thisYearNet:'本年净额', convertedNet:'折算净额', noRecords:'暂无记录', edit:'编辑', copy:'复制', delete:'删除', history:'历史', confirmDelete:'确定删除这条记录吗？会放入回收站。', confirmPermanent:'确定彻底删除吗？', confirmClearTrash:'确定清空回收站吗？', confirmConfigDelete:'确定删除这个配置项吗？删除后会同步到 data.json。', saved:'已保存', syncOk:'云端同步成功', syncFailed:'云端同步失败', loadingLocal:'正在重新加载 data.json...', loadingCloud:'正在加载云端 data.json...', noCloud:'未配置 Cloudflare，同步已跳过', staticOk:'data.json 加载完成', staticFailed:'data.json 加载失败，已使用本地缓存或默认数据', countSuffix:'条记录', autoLoadedCloud:'已加载', selectRule:'不使用规则', allCategory:'全部分类', allDirection:'全部方向', directionReceived:'收入', directionGiven:'支出', selectPerson:'请选择姓名', addPeopleFirst:'请先在人员管理中添加姓名', byPerson:'按人统计', byType:'按类型统计', byYear:'按年份统计', byCurrency:'按货币统计', importDone:'导入完成', importFailed:'导入失败', noRate:'缺少汇率', savingCloudConfig:'正在保存云配置到 data.json...', cloudConfigSaved:'云配置已写入 data.json', cloudConfigSavedVerified:'云配置已写入 data.json，并验证成功', cloudConfigSavedButNotVerified:'Worker 返回成功，但未验证到远端 data.json 中的云配置，请检查 GH_REPO / DATA_PATH 是否指向当前仓库', cloudConfigVerifyFailed:'云配置验证失败', noCloudBootstrap:'未从 data.json 读取到 Cloudflare 配置；iOS 主屏幕与 Safari 缓存隔离，请先在已配置设备点一次保存/同步，且不要用空白 data.json 覆盖线上文件。' },
-    en: { appTitle:'Gift Ledger', subtitle:'', sync:'Sync', addRecord:'Add', editRecord:'Edit Record', settings:'Settings', peopleManage:'People', optionManage:'Relations', categoryManage:'Categories', eventManage:'Event Types', ruleManage:'Red Packet Rules', rateManage:'Exchange Rates', chartStats:'Charts', trash:'Trash', exportCsv:'Export CSV', importCsv:'Import CSV', downloadData:'Download Data', keyword:'Keyword', category:'Category', direction:'Direction', startDate:'Start Date', endDate:'End Date', clear:'Clear', filter:'Filter', recordList:'Records', date:'Date', person:'Name', relation:'Relation', eventType:'Event Type', birthDate:'Birth Date', birthCalendar:'Calendar', solar:'Solar', lunar:'Lunar', age:'Age', birthdayAge:'Birthday Age', amount:'Amount', returnAmount:'Return Amount', actualAmount:'Actual Amount', note:'Note', actions:'Actions', currency:'Currency', redPacketRule:'Red Packet Rule', cancel:'Cancel', save:'Save', close:'Close', add:'Add', language:'Language', cloudflareUrl:'Cloudflare Worker URL', accessPassword:'Access Password', defaultCurrency:'Default Currency', baseCurrency:'Base Currency', settingsTip:'Settings are saved to data.json and cached locally. iOS Home Screen apps use separate storage from Safari, so new devices mainly rely on the cloud config in data.json. The access password must match the Cloudflare Worker APP_PASSWORD variable.', ruleName:'Rule Name', newRelation:'New Relation', relationOptions:'Relation Options', categoryOptions:'Category Options', newCategory:'New Category', defaultDirection:'Default Direction', rateToBase:'Rate to Base', fetchCurrentRate:'Fetch Current Rate', rateFetchFailed:'Failed to fetch rate; using manual/default rate', rateAutoFilled:'Current rate filled', rateTip:'Rates are used for converted stats. You can fetch the current rate when adding a currency; records save the date+currency rate automatically.', personHistory:'Person History', restore:'Restore', permanentDelete:'Delete Forever', clearTrash:'Clear Trash', all:'All', received:'Received Gifts', given:'Given Gifts', holiday:'Holiday Gifts', red_packet:'New Year Red Packets', income:'Income', expense:'Expense', net:'Net', totalRecords:'Records', thisYearNet:'This Year Net', convertedNet:'Converted Net', noRecords:'No records', edit:'Edit', copy:'Copy', delete:'Delete', history:'History', confirmDelete:'Move this record to Trash?', confirmPermanent:'Delete forever?', confirmClearTrash:'Clear all trash?', confirmConfigDelete:'Delete this configuration item? This will sync to data.json.', saved:'Saved', syncOk:'Cloud sync successful', syncFailed:'Cloud sync failed', loadingLocal:'Reloading data.json...', loadingCloud:'Loading cloud data.json...', noCloud:'Cloudflare not configured; sync skipped', staticOk:'data.json loaded', staticFailed:'Failed to load data.json; using cache or default data', countSuffix:'records', autoLoadedCloud:'Loaded', selectRule:'No rule', allCategory:'All Categories', allDirection:'All Directions', directionReceived:'Income', directionGiven:'Expense', selectPerson:'Select a person', addPeopleFirst:'Add people first', byPerson:'By Person', byType:'By Type', byYear:'By Year', byCurrency:'By Currency', importDone:'Import completed', importFailed:'Import failed', noRate:'Missing rate', savingCloudConfig:'Saving cloud config to data.json...', cloudConfigSaved:'Cloud config saved to data.json', cloudConfigSavedVerified:'Cloud config saved to data.json and verified', cloudConfigSavedButNotVerified:'Worker returned success, but cloud config was not verified in remote data.json. Check GH_REPO / DATA_PATH.', cloudConfigVerifyFailed:'Cloud config verification failed', noCloudBootstrap:'No Cloudflare config was found in data.json. iOS Home Screen storage is separate from Safari; save/sync once on a configured device and do not overwrite the online data.json with a blank file.' }
+    zh: { appTitle:'人情账', subtitle:'', sync:'同步', addRecord:'新增', editRecord:'编辑记录', settings:'设置', peopleManage:'人员管理', optionManage:'关系配置', categoryManage:'分类配置', eventManage:'类型管理', ruleManage:'红包规则', rateManage:'汇率设置', chartStats:'统计图表', trash:'回收站', exportCsv:'导出CSV', importCsv:'导入CSV', downloadData:'下载数据', keyword:'关键词', category:'分类', direction:'方向', startDate:'开始日期', endDate:'结束日期', clear:'清空', filter:'筛选', recordList:'记录列表', date:'日期', person:'姓名', relation:'关系', eventType:'事件类型', birthDate:'出生日期', birthCalendar:'日期类型', solar:'公历', lunar:'农历', age:'年龄', birthdayAge:'生日年龄', amount:'金额', returnAmount:'回礼金额', actualAmount:'实际金额', note:'备注', actions:'操作', currency:'货币', redPacketRule:'红包规则', cancel:'取消', save:'保存', close:'关闭', add:'添加', language:'语言', cloudflareUrl:'Cloudflare Worker 地址', accessPassword:'访问密码', defaultCurrency:'默认货币', baseCurrency:'折算基准货币', settingsTip:'设置会保存到 data.json，也会在本设备缓存一份。iOS 主屏幕应用和 Safari 的缓存是分开的，所以新设备/主屏幕主要依赖 data.json 中的云配置。访问密码必须和 Cloudflare Worker 变量 APP_PASSWORD 一致。', ruleName:'规则名称', newRelation:'新增关系', relationOptions:'关系配置', categoryOptions:'分类配置', newCategory:'新增分类', defaultDirection:'默认方向', rateToBase:'折算汇率', fetchCurrentRate:'获取当前汇率', rateFetchFailed:'获取汇率失败，已使用手动/默认汇率', rateAutoFilled:'已填入当前汇率', rateTip:'汇率用于统计折算：1 外币 = 多少基准货币。添加货币时可自动获取当前汇率；新增记录保存时会按记录日期+货币保存当日折算汇率。', personHistory:'个人历史', restore:'恢复', permanentDelete:'彻底删除', clearTrash:'清空回收站', all:'全部', received:'收人情', given:'封人情', holiday:'节日人情', red_packet:'过年红包', income:'收入', expense:'支出', net:'净额', totalRecords:'记录数', thisYearNet:'本年净额', convertedNet:'折算净额', noRecords:'暂无记录', edit:'编辑', copy:'复制', delete:'删除', history:'历史', confirmDelete:'确定删除这条记录吗？会放入回收站。', confirmPermanent:'确定彻底删除吗？', confirmClearTrash:'确定清空回收站吗？', confirmConfigDelete:'确定删除这个配置项吗？删除后会同步到 data.json。', saved:'已保存', syncOk:'同步成功', syncFailed:'云端同步失败', loadingLocal:'加载中', loadingCloud:'加载中', noCloud:'未配置 Cloudflare，同步已跳过', staticOk:'已加载', staticFailed:'data.json 加载失败，已使用本地缓存或默认数据', countSuffix:'条记录', autoLoadedCloud:'已加载', selectRule:'不使用规则', allCategory:'全部分类', allDirection:'全部方向', directionReceived:'收入', directionGiven:'支出', selectPerson:'请选择姓名', addPeopleFirst:'请先在人员管理中添加姓名', byPerson:'按人统计', byType:'按类型统计', byYear:'按年份统计', byCurrency:'按货币统计', importDone:'导入完成', importFailed:'导入失败', noRate:'缺少汇率', savingCloudConfig:'正在保存云配置到 data.json...', cloudConfigSaved:'云配置已写入 data.json', cloudConfigSavedVerified:'云配置已写入 data.json，并验证成功', cloudConfigSavedButNotVerified:'Worker 返回成功，但未验证到远端 data.json 中的云配置，请检查 GH_REPO / DATA_PATH 是否指向当前仓库', cloudConfigVerifyFailed:'云配置验证失败', noCloudBootstrap:'未从 data.json 读取到 Cloudflare 配置；iOS 主屏幕与 Safari 缓存隔离，请先在已配置设备点一次保存/同步，且不要用空白 data.json 覆盖线上文件。' },
+    en: { appTitle:'Gift Ledger', subtitle:'', sync:'Sync', addRecord:'Add', editRecord:'Edit Record', settings:'Settings', peopleManage:'People', optionManage:'Relations', categoryManage:'Categories', eventManage:'Event Types', ruleManage:'Red Packet Rules', rateManage:'Exchange Rates', chartStats:'Charts', trash:'Trash', exportCsv:'Export CSV', importCsv:'Import CSV', downloadData:'Download Data', keyword:'Keyword', category:'Category', direction:'Direction', startDate:'Start Date', endDate:'End Date', clear:'Clear', filter:'Filter', recordList:'Records', date:'Date', person:'Name', relation:'Relation', eventType:'Event Type', birthDate:'Birth Date', birthCalendar:'Calendar', solar:'Solar', lunar:'Lunar', age:'Age', birthdayAge:'Birthday Age', amount:'Amount', returnAmount:'Return Amount', actualAmount:'Actual Amount', note:'Note', actions:'Actions', currency:'Currency', redPacketRule:'Red Packet Rule', cancel:'Cancel', save:'Save', close:'Close', add:'Add', language:'Language', cloudflareUrl:'Cloudflare Worker URL', accessPassword:'Access Password', defaultCurrency:'Default Currency', baseCurrency:'Base Currency', settingsTip:'Settings are saved to data.json and cached locally. iOS Home Screen apps use separate storage from Safari, so new devices mainly rely on the cloud config in data.json. The access password must match the Cloudflare Worker APP_PASSWORD variable.', ruleName:'Rule Name', newRelation:'New Relation', relationOptions:'Relation Options', categoryOptions:'Category Options', newCategory:'New Category', defaultDirection:'Default Direction', rateToBase:'Rate to Base', fetchCurrentRate:'Fetch Current Rate', rateFetchFailed:'Failed to fetch rate; using manual/default rate', rateAutoFilled:'Current rate filled', rateTip:'Rates are used for converted stats. You can fetch the current rate when adding a currency; records save the date+currency rate automatically.', personHistory:'Person History', restore:'Restore', permanentDelete:'Delete Forever', clearTrash:'Clear Trash', all:'All', received:'Received Gifts', given:'Given Gifts', holiday:'Holiday Gifts', red_packet:'New Year Red Packets', income:'Income', expense:'Expense', net:'Net', totalRecords:'Records', thisYearNet:'This Year Net', convertedNet:'Converted Net', noRecords:'No records', edit:'Edit', copy:'Copy', delete:'Delete', history:'History', confirmDelete:'Move this record to Trash?', confirmPermanent:'Delete forever?', confirmClearTrash:'Clear all trash?', confirmConfigDelete:'Delete this configuration item? This will sync to data.json.', saved:'Saved', syncOk:'Synced', syncFailed:'Cloud sync failed', loadingLocal:'Loading', loadingCloud:'Loading', noCloud:'Cloudflare not configured; sync skipped', staticOk:'Loaded', staticFailed:'Failed to load data.json; using cache or default data', countSuffix:'records', autoLoadedCloud:'Loaded', selectRule:'No rule', allCategory:'All Categories', allDirection:'All Directions', directionReceived:'Income', directionGiven:'Expense', selectPerson:'Select a person', addPeopleFirst:'Add people first', byPerson:'By Person', byType:'By Type', byYear:'By Year', byCurrency:'By Currency', importDone:'Import completed', importFailed:'Import failed', noRate:'Missing rate', savingCloudConfig:'Saving cloud config to data.json...', cloudConfigSaved:'Cloud config saved to data.json', cloudConfigSavedVerified:'Cloud config saved to data.json and verified', cloudConfigSavedButNotVerified:'Worker returned success, but cloud config was not verified in remote data.json. Check GH_REPO / DATA_PATH.', cloudConfigVerifyFailed:'Cloud config verification failed', noCloudBootstrap:'No Cloudflare config was found in data.json. iOS Home Screen storage is separate from Safari; save/sync once on a configured device and do not overwrite the online data.json with a blank file.' }
   };
   const state = { data: clone(DEFAULT_DATA), remoteSha: '', remoteMeta: null };
   function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
@@ -542,6 +538,7 @@
   }
   function birthdayAgeText(age){ return age!==''&&age!==null&&age!==undefined ? `${t('age')} ${age}` : ''; }
   function setStatus(msg,kind){ $('#syncText').text(msg); $('#syncDot').removeClass('ok warn err').addClass(kind||''); }
+  function statusWithTime(label, kind){ setStatus(label+' · '+timeOnly(), kind); }
   function saveCache(){ syncCloudMirror(); localStorage.setItem(STORAGE_KEY,JSON.stringify(state.data)); localStorage.setItem(CLOUD_KEY,JSON.stringify(state.data.settings.cloud||{})); }
   function getSavedCloudConfig(){ try{return JSON.parse(localStorage.getItem(CLOUD_KEY)||'{}')}catch(e){return{}} }
   function getUrlCloudConfig(){ const q=new URLSearchParams(location.search); return { cloudflareWorkerUrl:q.get('worker')||q.get('cloud')||'', accessPassword:q.get('password')||q.get('pwd')||'' }; }
@@ -552,7 +549,7 @@
   function hasCloudConfig(){ syncCloudMirror(); const c=state.data.settings.cloud||{}; return hasConfigObj(c); }
   function cloudUrl(){ return String((state.data.settings.cloud||{}).cloudflareWorkerUrl||'').trim().replace(/\/+$/,''); }
   async function loadStaticDataJson(){
-    setStatus(t('loadingLocal'),'warn');
+    statusWithTime(t('loadingLocal'),'warn');
     try{
       const res=await fetch(`./data.json?t=${Date.now()}`,{cache:'no-store'});
       if(!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -560,7 +557,7 @@
       state.remoteSha=''; state.remoteMeta=null;
       applySavedCloudIfEmpty();
       saveCache();
-      setStatus(t('staticOk')+' · '+nowText(),'ok');
+      statusWithTime(t('staticOk'),'ok');
       return true;
     }catch(e){
       const cached=localStorage.getItem(STORAGE_KEY);
@@ -578,7 +575,7 @@
   }
   async function loadCloudData(silent){
     if(!hasCloudConfig()){ if(!silent) setStatus(t('noCloud'),'warn'); return false; }
-    setStatus(t('loadingCloud'),'warn');
+    statusWithTime(t('loadingCloud'),'warn');
     try{
       const res=await fetch(`${cloudUrl()}?t=${Date.now()}`,{method:'GET',cache:'no-store',headers:{'X-App-Password':state.data.settings.cloud.accessPassword}});
       const json=await res.json();
@@ -591,7 +588,7 @@
       const finalCloud=mergeCloudConfig(state.data.cloudConfig,state.data.settings.cloud,localCloud);
       setCloudConfigExact(finalCloud);
       saveCache();
-      setStatus((silent?t('autoLoadedCloud')+' · '+timeOnly():t('syncOk')+' · '+nowText()),'ok');
+      statusWithTime(silent?t('autoLoadedCloud'):t('syncOk'),'ok');
       renderAll();
       if(hadLegacyGroup) syncToCloud(true);
       return true;
@@ -604,14 +601,14 @@
     state.data.version=APP_VERSION;
     saveCache();
     try{
-      setStatus(t('sync')+'...','warn');
+      statusWithTime(t('sync'),'warn');
       const payload=JSON.parse(JSON.stringify(state.data));
       const body={ data:payload, sha:state.remoteSha||'', mode:'update-existing-data-json', clientVersion:APP_VERSION };
       const res=await fetch(cloudUrl(),{method:'POST',headers:{'Content-Type':'application/json','X-App-Password':state.data.settings.cloud.accessPassword},body:JSON.stringify(body)});
       const json=await res.json();
       if(!res.ok||json.ok===false) throw new Error(json.error||`HTTP ${res.status}`);
       rememberRemoteMeta(json);
-      setStatus(t('syncOk')+' · '+nowText(),'ok');
+      statusWithTime(t('syncOk'),'ok');
       return true;
     }catch(e){ setStatus(`${t('syncFailed')}: ${e.message}`,'err'); return false; }
   }
@@ -630,7 +627,7 @@
     }
   }
   async function saveSettings(){ const inputCloud={cloudflareWorkerUrl:$('#settingCloudUrl').val().trim(),accessPassword:$('#settingPassword').val()}; setCloudConfigExact(inputCloud); state.data.settings.defaultCurrency=($('#settingCurrency').val()||'CNY').trim().toUpperCase(); state.data.settings.baseCurrency=($('#settingBaseCurrency').val()||'CNY').trim().toUpperCase(); state.data.settings.language=$('#settingLanguage').val()||'zh'; if(!state.data.settings.exchangeRates[state.data.settings.baseCurrency]) state.data.settings.exchangeRates[state.data.settings.baseCurrency]=1; closeModal(); normalizeData(state.data); setCloudConfigExact(inputCloud); state.data.updatedAt=nowText(); state.data.version=APP_VERSION; saveCache(); renderAll(); setStatus(t('savingCloudConfig'),'warn'); const ok=await syncToCloud(false); if(ok){ const verified=await verifyCloudConfigSaved(inputCloud); setStatus((verified?t('cloudConfigSavedVerified'):t('cloudConfigSavedButNotVerified'))+' · '+nowText(),verified?'ok':'warn'); } }
-  function saveAndRender(autoSync=true){ normalizeData(state.data); syncCloudMirror(); state.data.updatedAt=nowText(); state.data.version=APP_VERSION; saveCache(); renderAll(); setStatus(t('saved')+' · '+nowText(),'ok'); if(autoSync) syncToCloud(true); }
+  function saveAndRender(autoSync=true){ normalizeData(state.data); syncCloudMirror(); state.data.updatedAt=nowText(); state.data.version=APP_VERSION; saveCache(); renderAll(); statusWithTime(t('saved'),'ok'); if(autoSync) syncToCloud(true); }
   function optHtml(arr,selected,placeholder){ let html=placeholder?`<option value="">${esc(placeholder)}</option>`:''; return html+arr.map(v=>`<option value="${esc(v)}" ${selected===v?'selected':''}>${esc(v)}</option>`).join(''); }
   function categoryItems(){ return state.data.categoryTypes||DEFAULT_DATA.categoryTypes; }
   function categoryLabelByCode(code){ const lang=state.data.settings.language||'zh'; const c=categoryItems().find(x=>x.code===code); return c?(c[lang]||c.zh||c.en||c.code):(I18N[lang][code]||code||''); }
@@ -765,7 +762,7 @@ function renderRecords(){
   function csvEscape(v){ v=String(v??''); return /[",\n]/.test(v)?`"${v.replace(/"/g,'""')}"`:v; }
   function exportCsv(){ const headers=['date','personName','relation','category','direction','eventType','amount','currency','returnAmount','exchangeRate','exchangeRateBase','exchangeRateDate','note']; const rows=[headers.join(',')].concat(state.data.records.map(r=>headers.map(h=>csvEscape(r[h]||'')).join(','))); const blob=new Blob(['\ufeff'+rows.join('\n')],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='renqing-ledger-records.csv'; a.click(); URL.revokeObjectURL(a.href); }
   function parseCsv(text){ const rows=[]; let row=[], cur='', q=false; for(let i=0;i<text.length;i++){ const ch=text[i], nx=text[i+1]; if(q){ if(ch==='"'&&nx==='"'){cur+='"';i++;} else if(ch==='"') q=false; else cur+=ch; } else { if(ch==='"') q=true; else if(ch===','){row.push(cur);cur='';} else if(ch==='\n'){row.push(cur);rows.push(row);row=[];cur='';} else if(ch!=='\r') cur+=ch; } } row.push(cur); rows.push(row); return rows.filter(r=>r.some(c=>String(c).trim()!=='')); }
-  function importCsvFile(file){ const reader=new FileReader(); reader.onload=()=>{ try{ const rows=parseCsv(String(reader.result||'').replace(/^\ufeff/,'')); const head=rows.shift().map(h=>h.trim()); rows.forEach(cols=>{ const o={}; head.forEach((h,i)=>o[h]=cols[i]||''); const p=findOrCreatePersonIn(state.data,o.personName||o.name||'',o.relation||'其他'); if(!p.name)return; state.data.records.push({id:uid('r'),date:o.date||today(),personId:p.id,personName:p.name,relation:p.relation,category:o.category||'given',direction:o.direction||((o.category==='received')?'received':'given'),eventType:o.eventType||'other',amount:num(o.amount),currency:(o.currency||state.data.settings.defaultCurrency||'CNY').toUpperCase(),returnAmount:num(o.returnAmount),actualAmount:Math.max(0,num(o.amount)-num(o.returnAmount)),exchangeRate:num(o.exchangeRate)||rate(o.currency||state.data.settings.defaultCurrency),exchangeRateBase:o.exchangeRateBase||state.data.settings.baseCurrency||'CNY',exchangeRateDate:o.exchangeRateDate||o.date||today(),note:o.note||'',createdAt:nowText(),updatedAt:nowText()}); }); saveAndRender(true); setStatus(t('importDone')+' · '+nowText(),'ok'); }catch(e){ setStatus(t('importFailed')+': '+e.message,'err'); } }; reader.readAsText(file,'UTF-8'); }
+  function importCsvFile(file){ const reader=new FileReader(); reader.onload=()=>{ try{ const rows=parseCsv(String(reader.result||'').replace(/^\ufeff/,'')); const head=rows.shift().map(h=>h.trim()); rows.forEach(cols=>{ const o={}; head.forEach((h,i)=>o[h]=cols[i]||''); const p=findOrCreatePersonIn(state.data,o.personName||o.name||'',o.relation||'其他'); if(!p.name)return; state.data.records.push({id:uid('r'),date:o.date||today(),personId:p.id,personName:p.name,relation:p.relation,category:o.category||'given',direction:o.direction||((o.category==='received')?'received':'given'),eventType:o.eventType||'other',amount:num(o.amount),currency:(o.currency||state.data.settings.defaultCurrency||'CNY').toUpperCase(),returnAmount:num(o.returnAmount),actualAmount:Math.max(0,num(o.amount)-num(o.returnAmount)),exchangeRate:num(o.exchangeRate)||rate(o.currency||state.data.settings.defaultCurrency),exchangeRateBase:o.exchangeRateBase||state.data.settings.baseCurrency||'CNY',exchangeRateDate:o.exchangeRateDate||o.date||today(),note:o.note||'',createdAt:nowText(),updatedAt:nowText()}); }); saveAndRender(true); statusWithTime(t('importDone'),'ok'); }catch(e){ setStatus(t('importFailed')+': '+e.message,'err'); } }; reader.readAsText(file,'UTF-8'); }
 
   function reorderConfigByKeys(kind, keys){
     const unique=Array.from(new Set(keys.filter(Boolean)));
@@ -795,8 +792,8 @@ function renderRecords(){
     else if(kind==='rates') renderRates();
   }
   function bindEvents(){
-    $('#btnAdd,#floatAdd').on('click',openAddRecord); $('#btnMore,#floatMore').on('click',e=>{e.stopPropagation(); closeMobileFilter(); $('#moreMenu').toggleClass('open');}); $(document).on('click',e=>{ if(!$(e.target).closest('#moreMenu,#btnMore,#floatMore').length) $('#moreMenu').removeClass('open'); if($('#filterPanel').hasClass('open') && !$(e.target).closest('#filterPanel,#btnFilter').length) closeMobileFilter(); if(window.matchMedia('(max-width:720px)').matches && !$(e.target).closest('.swipe-row').length) $('.swipe-row').removeClass('swipe-open'); });
-    $('#btnLang,#floatLang').on('click',()=>{state.data.settings.language=state.data.settings.language==='zh'?'en':'zh';saveAndRender(true);}); $('#btnSync,#floatSync').on('click',()=>loadCloudData(false));
+    $('#btnAdd,#floatAdd').on('click',openAddRecord); $('#btnMore,#floatMore').on('click',e=>{e.stopPropagation(); closeMobileFilter(); $('#moreMenu').toggleClass('open');}); $(document).on('click',e=>{ if(!$(e.target).closest('#moreMenu,#btnMore,#floatMore').length) $('#moreMenu').removeClass('open'); if($('#filterPanel').hasClass('open') && !$(e.target).closest('#filterPanel,#btnFilter').length) closeMobileFilter(); if(window.matchMedia('(max-width:720px)').matches && !$(e.target).closest('.swipe-row').length) $('.swipe-row').removeClass('swipe-open'); updateFloatingActionsVisibility(); });
+    $('#btnLang,#floatLang').on('click',()=>{state.data.settings.language=state.data.settings.language==='zh'?'en':'zh';saveAndRender(true);}); $('#btnSync,#floatSync').on('click',()=>refreshDataFromSource(false));
     $('#btnSettings').on('click',openSettings); $('#btnPeople').on('click',()=>{renderPeopleManager();openModal('#peopleModal');}); $('#btnOptions').on('click',()=>{renderOptionsManager();openModal('#optionsModal');}); $('#btnCategories').on('click',()=>{renderCategoryManager();openModal('#categoriesModal');}); $('#btnEvents').on('click',()=>{renderEventManager();openModal('#eventsModal');}); $('#btnRules').on('click',()=>{renderRuleManager();openModal('#rulesModal');}); $('#btnRates').on('click',()=>{renderRates();openModal('#ratesModal');}); $('#btnCharts').on('click',()=>{renderCharts();openModal('#chartsModal');}); $('#btnTrash').on('click',()=>{renderTrash();openModal('#trashModal');});
     $('#btnExportCsv').on('click',exportCsv); $('#btnImportCsv').on('click',()=>$('#importFile').click()); $('#importFile').on('change',function(){ if(this.files&&this.files[0]) importCsvFile(this.files[0]); this.value=''; });
     $('#btnFilter').on('click',e=>{ e.preventDefault(); e.stopPropagation(); $('#filterPanel,#filterBackdrop').toggleClass('open'); }); $('#filterBackdrop').on('click',closeMobileFilter); $('.close-modal').on('click',closeModal); $('.modal-mask').on('click',function(e){if(e.target===this)closeModal();});
@@ -817,16 +814,17 @@ function renderRecords(){
     $('#btnAddEventType').on('click',()=>{ const zh=$('#eventZhInput').val().trim(), en=$('#eventEnInput').val().trim(); let code=$('#eventCodeInput').val().trim()||'event_'+Date.now(); if(!zh&&!en)return; state.data.eventTypes.push({code,zh:zh||code,en:en||zh||code}); $('#eventCodeInput,#eventZhInput,#eventEnInput').val(''); renderEventManager(); saveAndRender(true); });
     $(document).on('change','.event-code,.event-zh,.event-en',function(){ const old=$(this).data('code'), e=state.data.eventTypes.find(x=>x.code===old); if(!e)return; const newCode=$(`.event-code[data-code="${old}"]`).val().trim()||old; if(newCode!==old){ state.data.records.forEach(r=>{if(r.eventType===old)r.eventType=newCode;}); e.code=newCode; } e.zh=$(`.event-zh[data-code="${old}"]`).val(); e.en=$(`.event-en[data-code="${old}"]`).val(); renderEventManager(); saveAndRender(true); }); $(document).on('click','.btn-remove-event',function(){ if(!confirmConfigDelete())return; const code=$(this).data('code'); state.data.eventTypes=state.data.eventTypes.filter(e=>e.code!==code); renderEventManager(); saveAndRender(true); });
     $('#btnAddRule').on('click',()=>{ const name=$('#ruleNameInput').val().trim(); if(!name)return; state.data.redPacketRules.push({id:uid('rp'),name,amount:num($('#ruleAmountInput').val()),currency:($('#ruleCurrencyInput').val()||state.data.settings.defaultCurrency||'CNY').toUpperCase()}); $('#ruleNameInput,#ruleAmountInput,#ruleCurrencyInput').val(''); renderRuleManager(); saveAndRender(true); }); $(document).on('input change','.rule-name,.rule-amount,.rule-currency',function(){ const id=$(this).data('id'), r=state.data.redPacketRules.find(x=>x.id===id); if(!r)return; r.name=$(`.rule-name[data-id="${id}"]`).val(); r.amount=num($(`.rule-amount[data-id="${id}"]`).val()); r.currency=($(`.rule-currency[data-id="${id}"]`).val()||'CNY').toUpperCase(); saveAndRender(false); }); $(document).on('click','.btn-remove-rule',function(){ if(!confirmConfigDelete())return; const id=$(this).data('id'); state.data.redPacketRules=state.data.redPacketRules.filter(r=>r.id!==id); renderRuleManager(); saveAndRender(true); });
-    async function fillCurrentRateInput(){ const c=($('#rateCurrencyInput').val()||'').trim().toUpperCase(); if(!c)return 0; try{ const v=await fetchFrankfurterRate(c,'latest'); if(v>0){ $('#rateValueInput').val(v); setStatus(t('rateAutoFilled')+' · '+c+' · '+nowText(),'ok'); return v; } }catch(e){ setStatus(t('rateFetchFailed')+': '+e.message,'warn'); } return 0; }
+    async function fillCurrentRateInput(){ const c=($('#rateCurrencyInput').val()||'').trim().toUpperCase(); if(!c)return 0; try{ const v=await fetchFrankfurterRate(c,'latest'); if(v>0){ $('#rateValueInput').val(v); statusWithTime(t('rateAutoFilled')+' · '+c,'ok'); return v; } }catch(e){ setStatus(t('rateFetchFailed')+': '+e.message,'warn'); } return 0; }
     $('#btnFetchRate').attr('type','button').on('click',function(e){ e.preventDefault(); e.stopPropagation(); fillCurrentRateInput(); }); $('#rateCurrencyInput').on('change blur',function(){ if(($('#rateCurrencyInput').val()||'').trim()&&!num($('#rateValueInput').val())) fillCurrentRateInput(); });
     $('#btnAddRate').attr('type','button').on('click',async function(e){ e.preventDefault(); e.stopPropagation(); const c=($('#rateCurrencyInput').val()||'').trim().toUpperCase(); if(!c)return; let v=num($('#rateValueInput').val()); if(v<=0) v=await fillCurrentRateInput(); if(v<=0) v=rate(c); if(c&&v>0)state.data.settings.exchangeRates[c]=v; $('#rateCurrencyInput,#rateValueInput').val(''); renderRates(); saveAndRender(true); }); $(document).on('change','.rate-currency,.rate-value',function(){ const old=$(this).data('old'), c=($(`.rate-currency[data-old="${old}"]`).val()||old).trim().toUpperCase(), v=num($(`.rate-value[data-old="${old}"]`).val()); delete state.data.settings.exchangeRates[old]; if(c&&v>0)state.data.settings.exchangeRates[c]=v; renderRates(); saveAndRender(true); }); $(document).on('click','.btn-remove-rate',function(){ if(!confirmConfigDelete())return; delete state.data.settings.exchangeRates[$(this).data('currency')]; renderRates(); saveAndRender(true); });
     $(document).on('click','.btn-restore',function(){ const id=$(this).data('id'), i=state.data.deletedRecords.findIndex(r=>r.id===id); if(i<0)return; const [r]=state.data.deletedRecords.splice(i,1); delete r.deletedAt; state.data.records.push(r); renderTrash(); saveAndRender(true); }); $(document).on('click','.btn-permanent',function(){ if(!confirm(t('confirmPermanent')))return; const id=$(this).data('id'); state.data.deletedRecords=state.data.deletedRecords.filter(r=>r.id!==id); renderTrash(); saveAndRender(true); }); $('#btnClearTrash').on('click',()=>{ if(!confirm(t('confirmClearTrash')))return; state.data.deletedRecords=[]; renderTrash(); saveAndRender(true); });
+    function updateFloatingActionsVisibility(){ const hide=window.matchMedia('(max-width:720px)').matches && $('.mobile-card.swipe-open').length>0; document.body.classList.toggle('mobile-actions-hidden', hide); }
     let swipeStartX=0, swipeStartY=0, swipeTarget=null;
     $(document).on('touchstart','.swipe-row',function(e){ if($(e.target).closest('.drag-handle,.mobile-card-action-btn,.swipe-delete,.btn,.mini-btn,input,select,textarea,button').length)return; const t=e.originalEvent.touches&&e.originalEvent.touches[0]; if(!t)return; swipeStartX=t.clientX; swipeStartY=t.clientY; swipeTarget=this; });
-    $(document).on('touchmove','.swipe-row',function(e){ if(!swipeTarget||swipeTarget!==this)return; const t=e.originalEvent.touches&&e.originalEvent.touches[0]; if(!t)return; const dx=t.clientX-swipeStartX, dy=t.clientY-swipeStartY; if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>18){ if(dx<0){ $('.swipe-row').not(this).removeClass('swipe-open'); $(this).addClass('swipe-open'); } else if(dx>0){ $(this).removeClass('swipe-open'); } } });
-    $(document).on('touchend','.swipe-row',function(e){ if(!swipeTarget||swipeTarget!==this)return; const t=e.originalEvent.changedTouches&&e.originalEvent.changedTouches[0]; if(!t){swipeTarget=null;return;} const dx=t.clientX-swipeStartX, dy=t.clientY-swipeStartY; if(Math.abs(dx)>Math.abs(dy)&&dx<-45){ $('.swipe-row').not(this).removeClass('swipe-open'); $(this).addClass('swipe-open'); } else if(Math.abs(dx)>Math.abs(dy)&&dx>30){ $(this).removeClass('swipe-open'); } swipeTarget=null; });
+    $(document).on('touchmove','.swipe-row',function(e){ if(!swipeTarget||swipeTarget!==this)return; const t=e.originalEvent.touches&&e.originalEvent.touches[0]; if(!t)return; const dx=t.clientX-swipeStartX, dy=t.clientY-swipeStartY; if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>18){ if(dx<0){ $('.swipe-row').not(this).removeClass('swipe-open'); $(this).addClass('swipe-open'); updateFloatingActionsVisibility(); } else if(dx>0){ $(this).removeClass('swipe-open'); updateFloatingActionsVisibility(); } } });
+    $(document).on('touchend','.swipe-row',function(e){ if(!swipeTarget||swipeTarget!==this)return; const t=e.originalEvent.changedTouches&&e.originalEvent.changedTouches[0]; if(!t){swipeTarget=null;return;} const dx=t.clientX-swipeStartX, dy=t.clientY-swipeStartY; if(Math.abs(dx)>Math.abs(dy)&&dx<-45){ $('.swipe-row').not(this).removeClass('swipe-open'); $(this).addClass('swipe-open'); } else if(Math.abs(dx)>Math.abs(dy)&&dx>30){ $(this).removeClass('swipe-open'); } updateFloatingActionsVisibility(); swipeTarget=null; });
     $(document).on('click','.manager-row.swipe-row .input,.manager-row.swipe-row .select',function(){ $('.manager-row.swipe-row').not($(this).closest('.manager-row')).removeClass('swipe-open'); });
-    $(document).on('click','.swipe-delete,.mobile-card-action-btn',function(){ $(this).closest('.swipe-row').removeClass('swipe-open'); });
+    $(document).on('click','.swipe-delete,.mobile-card-action-btn',function(){ $(this).closest('.swipe-row').removeClass('swipe-open'); updateFloatingActionsVisibility(); });
     let sortState=null;
     $(document).on('pointerdown','.drag-handle',function(e){
       if(!window.matchMedia('(max-width:720px)').matches) return;
@@ -857,7 +855,8 @@ function renderRecords(){
       saveManagerOrder(list);
     });
   }
-  async function init(){ bindEvents(); await loadStaticDataJson(); renderAll(); if(hasCloudConfig()) await loadCloudData(true); else { renderAll(); setStatus(t('noCloudBootstrap'),'warn'); } }
+  async function refreshDataFromSource(silent){ await loadStaticDataJson(); renderAll(); if(hasCloudConfig()) return await loadCloudData(!!silent); renderAll(); if(!silent) setStatus(t('noCloud'),'warn'); else setStatus(t('noCloudBootstrap'),'warn'); return false; }
+  async function init(){ bindEvents(); await refreshDataFromSource(true); }
   init();
 })();
 </script>
