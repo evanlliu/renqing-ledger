@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-06-20 21:56:00",
+  "updatedAt": "2026-06-20 21:56:19",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -648,7 +648,7 @@
       "date": "2026-06-21",
       "category": "holiday",
       "direction": "given",
-      "eventType": "other",
+      "eventType": "fathers_day",
       "personId": "p_1778356571974_jphjwd",
       "personName": "刘吉成",
       "relation": "爸爸",
@@ -664,7 +664,7 @@
       "age": "",
       "note": "",
       "createdAt": "2026-06-20 21:56:00",
-      "updatedAt": "2026-06-20 21:56:00"
+      "updatedAt": "2026-06-20 21:56:19"
     }
   ],
   "deletedRecords": [
