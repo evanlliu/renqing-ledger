@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-05-12 18:45:28",
+  "updatedAt": "2026-06-20 21:56:00",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -642,6 +642,29 @@
       "note": "",
       "createdAt": "2026-05-11 10:03:37",
       "updatedAt": "2026-05-11 10:03:37"
+    },
+    {
+      "id": "r_1782014160888_a4axla",
+      "date": "2026-06-21",
+      "category": "holiday",
+      "direction": "given",
+      "eventType": "other",
+      "personId": "p_1778356571974_jphjwd",
+      "personName": "刘吉成",
+      "relation": "爸爸",
+      "ruleId": "",
+      "amount": 200,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 200,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-06-21",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "",
+      "createdAt": "2026-06-20 21:56:00",
+      "updatedAt": "2026-06-20 21:56:00"
     }
   ],
   "deletedRecords": [
@@ -668,5 +691,5 @@
       "exchangeRate": 1
     }
   ],
-  "cloudConfigSavedAt": "2026-05-12 18:45:23"
+  "cloudConfigSavedAt": "2026-06-20 21:54:55"
 }
