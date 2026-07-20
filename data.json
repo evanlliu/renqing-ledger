@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-07-20 00:05:59",
+  "updatedAt": "2026-07-20 00:06:34",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -679,6 +679,29 @@
       "note": "",
       "createdAt": "2026-06-20 21:56:00",
       "updatedAt": "2026-06-20 21:56:19"
+    },
+    {
+      "id": "r_1784527594407_gindym",
+      "date": "2026-08-17",
+      "category": "received",
+      "direction": "received",
+      "eventType": "daughter_birthday",
+      "personId": "p_1784527559240_uze5p4",
+      "personName": "刘艾妮娅",
+      "relation": "女儿",
+      "ruleId": "",
+      "amount": 1000,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 1000,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-08-17",
+      "exchangeRateSource": "base",
+      "age": 2,
+      "note": "",
+      "createdAt": "2026-07-20 00:06:34",
+      "updatedAt": "2026-07-20 00:06:34"
     }
   ],
   "deletedRecords": [],
