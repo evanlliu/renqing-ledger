@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-07-20 00:03:59",
+  "updatedAt": "2026-07-20 00:04:47",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -218,14 +218,14 @@
       "en": "One year old"
     },
     {
-      "code": "other",
-      "zh": "其他",
-      "en": "Other"
-    },
-    {
       "code": "daughter_birthday",
       "zh": "女儿生日",
       "en": "Daughter Birthday"
+    },
+    {
+      "code": "other",
+      "zh": "其他",
+      "en": "Other"
     }
   ],
   "redPacketRules": [
@@ -673,5 +673,5 @@
     }
   ],
   "deletedRecords": [],
-  "cloudConfigSavedAt": "2026-07-20 00:02:23"
+  "cloudConfigSavedAt": "2026-07-20 00:04:12"
 }
