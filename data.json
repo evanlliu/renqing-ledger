@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-07-20 00:06:51",
+  "updatedAt": "2026-07-20 00:06:59",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -699,9 +699,9 @@
       "exchangeRateDate": "2026-08-17",
       "exchangeRateSource": "base",
       "age": 2,
-      "note": "父母给女儿的",
+      "note": "我父母给女儿的",
       "createdAt": "2026-07-20 00:06:34",
-      "updatedAt": "2026-07-20 00:06:51"
+      "updatedAt": "2026-07-20 00:06:59"
     }
   ],
   "deletedRecords": [],
