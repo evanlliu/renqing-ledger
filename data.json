@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-07-20 00:05:27",
+  "updatedAt": "2026-07-20 00:05:59",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -163,6 +163,14 @@
       "name": "吴恒",
       "relation": "朋友",
       "birthDate": "",
+      "birthCalendar": "solar",
+      "note": ""
+    },
+    {
+      "id": "p_1784527559240_uze5p4",
+      "name": "刘艾妮娅",
+      "relation": "女儿",
+      "birthDate": "2024-08-17",
       "birthCalendar": "solar",
       "note": ""
     }
