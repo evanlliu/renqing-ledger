@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-07-23 07:55:10",
+  "updatedAt": "2026-07-23 07:55:45",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -717,7 +717,7 @@
       "date": "2026-07-22",
       "category": "received",
       "direction": "received",
-      "eventType": "other",
+      "eventType": "birthday",
       "personId": "p_1784814836389_azbfxs",
       "personName": "GONCAGUL LIU",
       "relation": "老婆",
@@ -730,10 +730,10 @@
       "exchangeRateBase": "CNY",
       "exchangeRateDate": "2026-07-22",
       "exchangeRateSource": "base",
-      "age": "",
+      "age": 27,
       "note": "妈妈给的红包",
       "createdAt": "2026-07-23 07:55:10",
-      "updatedAt": "2026-07-23 07:55:10"
+      "updatedAt": "2026-07-23 07:55:45"
     }
   ],
   "deletedRecords": [],
