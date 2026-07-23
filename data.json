@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-07-20 00:07:04",
+  "updatedAt": "2026-07-23 07:53:56",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -171,6 +171,14 @@
       "name": "刘艾妮娅",
       "relation": "女儿",
       "birthDate": "2024-08-17",
+      "birthCalendar": "solar",
+      "note": ""
+    },
+    {
+      "id": "p_1784814836389_azbfxs",
+      "name": "GONCAGUL LIU",
+      "relation": "爸爸",
+      "birthDate": "1999-07-22",
       "birthCalendar": "solar",
       "note": ""
     }
@@ -705,5 +713,5 @@
     }
   ],
   "deletedRecords": [],
-  "cloudConfigSavedAt": "2026-07-20 00:04:12"
+  "cloudConfigSavedAt": "2026-07-23 07:52:43"
 }
