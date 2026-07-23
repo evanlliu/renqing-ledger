@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-07-23 07:54:15",
+  "updatedAt": "2026-07-23 07:55:10",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -178,7 +178,7 @@
     {
       "id": "p_1784814836389_azbfxs",
       "name": "GONCAGUL LIU",
-      "relation": "爸爸",
+      "relation": "老婆",
       "birthDate": "1999-07-22",
       "birthCalendar": "solar",
       "note": ""
@@ -711,6 +711,29 @@
       "note": "我父母给我女儿的",
       "createdAt": "2026-07-20 00:06:34",
       "updatedAt": "2026-07-20 00:07:04"
+    },
+    {
+      "id": "r_1784814910507_xwhczc",
+      "date": "2026-07-22",
+      "category": "received",
+      "direction": "received",
+      "eventType": "other",
+      "personId": "p_1784814836389_azbfxs",
+      "personName": "GONCAGUL LIU",
+      "relation": "老婆",
+      "ruleId": "",
+      "amount": 300,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 300,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-07-22",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "妈妈给的红包",
+      "createdAt": "2026-07-23 07:55:10",
+      "updatedAt": "2026-07-23 07:55:10"
     }
   ],
   "deletedRecords": [],
