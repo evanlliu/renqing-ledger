@@ -1,8 +1,8 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-07-23 11:03:03",
+  "updatedAt": "2026-08-03 23:28:58",
   "settings": {
-    "language": "zh",
+    "language": "en",
     "defaultCurrency": "CNY",
     "baseCurrency": "CNY",
     "cloud": {
@@ -737,5 +737,5 @@
     }
   ],
   "deletedRecords": [],
-  "cloudConfigSavedAt": "2026-07-23 11:02:55"
+  "cloudConfigSavedAt": "2026-08-03 23:28:55"
 }
