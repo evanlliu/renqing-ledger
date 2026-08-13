@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-08-03 23:28:59",
+  "updatedAt": "2026-08-12 22:16:03",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -734,8 +734,31 @@
       "note": "我妈妈给的红包",
       "createdAt": "2026-07-23 07:55:10",
       "updatedAt": "2026-07-23 07:57:37"
+    },
+    {
+      "id": "r_1786594563239_jqy3nh",
+      "date": "2026-08-12",
+      "category": "given",
+      "direction": "given",
+      "eventType": "other",
+      "personId": "p_1778358769716_csj92r",
+      "personName": "王淼",
+      "relation": "外甥女",
+      "ruleId": "",
+      "amount": 500,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 500,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-08-12",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "王淼 10 岁生日",
+      "createdAt": "2026-08-12 22:16:03",
+      "updatedAt": "2026-08-12 22:16:03"
     }
   ],
   "deletedRecords": [],
-  "cloudConfigSavedAt": "2026-08-03 23:28:55"
+  "cloudConfigSavedAt": "2026-08-12 22:15:27"
 }
