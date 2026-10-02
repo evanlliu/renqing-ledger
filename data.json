@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-10-01 20:25:16",
+  "updatedAt": "2026-10-01 20:25:27",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -786,9 +786,9 @@
       "exchangeRateDate": "2026-10-01",
       "exchangeRateSource": "base",
       "age": 0,
-      "note": "",
+      "note": "60 岁生日",
       "createdAt": "2026-10-01 20:25:16",
-      "updatedAt": "2026-10-01 20:25:16"
+      "updatedAt": "2026-10-01 20:25:26"
     }
   ],
   "deletedRecords": [],
