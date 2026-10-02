@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-10-01 20:24:45",
+  "updatedAt": "2026-10-01 20:24:55",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -181,6 +181,14 @@
       "name": "GONCAGUL LIU",
       "relation": "老婆",
       "birthDate": "1999-07-22",
+      "birthCalendar": "solar",
+      "note": ""
+    },
+    {
+      "id": "p_1790907895806_uwxhx2",
+      "name": "陈菊平",
+      "relation": "阿姨",
+      "birthDate": "2026-10-01",
       "birthCalendar": "solar",
       "note": ""
     }
