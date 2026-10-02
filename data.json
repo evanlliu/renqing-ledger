@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-10-01 20:24:55",
+  "updatedAt": "2026-10-01 20:25:16",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -766,6 +766,29 @@
       "note": "王淼 10 岁生日",
       "createdAt": "2026-08-12 22:16:03",
       "updatedAt": "2026-08-12 22:16:03"
+    },
+    {
+      "id": "r_1790907916512_t9ev2g",
+      "date": "2026-10-01",
+      "category": "given",
+      "direction": "given",
+      "eventType": "birthday",
+      "personId": "p_1790907895806_uwxhx2",
+      "personName": "陈菊平",
+      "relation": "阿姨",
+      "ruleId": "",
+      "amount": 368,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 368,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-10-01",
+      "exchangeRateSource": "base",
+      "age": 0,
+      "note": "",
+      "createdAt": "2026-10-01 20:25:16",
+      "updatedAt": "2026-10-01 20:25:16"
     }
   ],
   "deletedRecords": [],
