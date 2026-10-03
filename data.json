@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-10-01 20:25:27",
+  "updatedAt": "2026-10-03 08:23:10",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -779,8 +779,8 @@
       "ruleId": "",
       "amount": 368,
       "currency": "CNY",
-      "returnAmount": 0,
-      "actualAmount": 368,
+      "returnAmount": 100,
+      "actualAmount": 268,
       "exchangeRate": 1,
       "exchangeRateBase": "CNY",
       "exchangeRateDate": "2026-10-01",
@@ -788,9 +788,9 @@
       "age": 0,
       "note": "60 岁生日",
       "createdAt": "2026-10-01 20:25:16",
-      "updatedAt": "2026-10-01 20:25:26"
+      "updatedAt": "2026-10-03 08:23:10"
     }
   ],
   "deletedRecords": [],
-  "cloudConfigSavedAt": "2026-10-01 20:23:19"
+  "cloudConfigSavedAt": "2026-10-03 08:22:50"
 }
