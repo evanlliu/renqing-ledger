@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-11-02 20:00:42",
+  "updatedAt": "2026-11-02 20:01:10",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -789,6 +789,29 @@
       "note": "60 岁生日",
       "createdAt": "2026-10-01 20:25:16",
       "updatedAt": "2026-10-03 08:23:10"
+    },
+    {
+      "id": "r_1793620870829_9kf24k",
+      "date": "2026-11-02",
+      "category": "holiday",
+      "direction": "given",
+      "eventType": "other",
+      "personId": "p_1778354442442_7qpjcj",
+      "personName": "刘建邦",
+      "relation": "朋友",
+      "ruleId": "",
+      "amount": 0,
+      "currency": "CNY",
+      "returnAmount": 0,
+      "actualAmount": 0,
+      "exchangeRate": 1,
+      "exchangeRateBase": "CNY",
+      "exchangeRateDate": "2026-11-02",
+      "exchangeRateSource": "base",
+      "age": "",
+      "note": "测试",
+      "createdAt": "2026-11-02 20:01:10",
+      "updatedAt": "2026-11-02 20:01:10"
     }
   ],
   "deletedRecords": [],
