@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-11-04 08:06:10",
+  "updatedAt": "2026-11-04 08:06:21",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -793,7 +793,7 @@
     {
       "id": "r_1793801170280_f1w0hr",
       "date": "2026-11-04",
-      "category": "received",
+      "category": "holiday",
       "direction": "given",
       "eventType": "birthday",
       "personId": "p_1778356571974_jphjwd",
@@ -811,7 +811,7 @@
       "age": 57,
       "note": "",
       "createdAt": "2026-11-04 08:06:10",
-      "updatedAt": "2026-11-04 08:06:10"
+      "updatedAt": "2026-11-04 08:06:21"
     }
   ],
   "deletedRecords": [
