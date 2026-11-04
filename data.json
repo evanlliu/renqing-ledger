@@ -1,6 +1,6 @@
 {
   "version": "1.2.19",
-  "updatedAt": "2026-11-02 20:01:10",
+  "updatedAt": "2026-11-03 19:52:23",
   "settings": {
     "language": "zh",
     "defaultCurrency": "CNY",
@@ -789,7 +789,9 @@
       "note": "60 岁生日",
       "createdAt": "2026-10-01 20:25:16",
       "updatedAt": "2026-10-03 08:23:10"
-    },
+    }
+  ],
+  "deletedRecords": [
     {
       "id": "r_1793620870829_9kf24k",
       "date": "2026-11-02",
@@ -811,9 +813,9 @@
       "age": "",
       "note": "测试",
       "createdAt": "2026-11-02 20:01:10",
-      "updatedAt": "2026-11-02 20:01:10"
+      "updatedAt": "2026-11-02 20:01:10",
+      "deletedAt": "2026-11-03 19:52:23"
     }
   ],
-  "deletedRecords": [],
-  "cloudConfigSavedAt": "2026-11-02 19:59:42"
+  "cloudConfigSavedAt": "2026-11-03 19:52:20"
 }
